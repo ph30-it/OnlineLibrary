@@ -28,18 +28,17 @@ class LoginController extends Controller
         return view('admin.login');
     }
 
-     public function login(Request $request)
+    public function login(Request $request)
     {
         $data = $request->only('email', 'password');
-        dd($data);
         if (\Auth::attempt($data)) {
-        	// dd(\Auth::user());
-        	//if (\Auth::user()->role_id == 1) {
-        	//	return redirect()->route('admin-home');
-         	//}
-             // $request->session()->regenerate();
-            return redirect()->route('home');
+        	//dd(\Auth::user());
+        	if (\Auth::user()->roles == 1) {
+        		return redirect()->route('admin-home'); //return to admin page
+         	}
+            //$request->session()->regenerate();
+            return redirect()->route('home'); //return to home page
         }
-        return redirect()->route('admin-form-login');
+        return redirect()->route('form-login'); // todo:  make error when login
     }
 }
