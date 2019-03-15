@@ -14,6 +14,7 @@
 
     <!-- Main css -->
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/material-design-iconic-font.min.css') }}">
 </head>
 <body>
     <!-- Todo : add header and footer-->

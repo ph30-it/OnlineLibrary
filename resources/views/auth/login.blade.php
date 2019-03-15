@@ -4,7 +4,7 @@
     <div class="signin-content">
         <div class="signin-image">
             <figure><img src="{{ asset('images/signin-image.jpg') }}" alt="sing up image"></figure>
-            <a href="" class="signup-image-link">Create an account</a>
+            <a href="{{ route('register') }}" class="signup-image-link">Create an account</a>
         </div>
 
         <div class="signin-form">
@@ -12,8 +12,8 @@
             <form method="POST" class="register-form" id="login-form" action="{{route('login')}}">
                 @csrf
                 <div class="form-group">
-                    <label for="email"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                    <label for="email"><i class="zmdi zmdi-email"></i></label>
+                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus placeholder="Your E-Mail">
 
                     @if ($errors->has('email'))
                     <span class="invalid-feedback" role="alert">
@@ -21,20 +21,22 @@
                     </span>
                     @endif
                 </div>
+
                 <div class="form-group">
                     <label for="password"><i class="zmdi zmdi-lock"></i></label>
-                    <input type="password" name="password" id="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required/>
+                    <input type="password" name="password" id="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required placeholder="Your Password">
                     @if ($errors->has('password'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
                     @endif
                 </div>
+
                 <div class="form-group">
-                    <input type="checkbox" name="remember" id="remember" class="agree-term" />
-                    <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
-                    
+                    <input type="checkbox" name="remember" id="agree-term" class="agree-term" />
+                    <label for="agree-term" class="label-agree-term"><span><span></span></span>Remember Me</label>
                 </div>
+
                 <div class="form-group form-button">
                     <input type="submit" name="signin" id="signin" class="form-submit" value=" {{ __('Login') }}"/>
                     @if (Route::has('password.request'))
@@ -43,7 +45,6 @@
                     </a>
                     @endif
                 </div>
-
             </form>
             <!-- 
             <div class="social-login">

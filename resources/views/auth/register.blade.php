@@ -6,7 +6,7 @@
             <h2 class="form-title">Register</h2>
 
             <form method="POST" class="register-form" id="register-form" action="{{ route('register') }}">
-
+                @csrf
                 <div class="form-group">
                     <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required placeholder="E-Mail">
@@ -36,22 +36,32 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="lastname"><i class="zmdi zmdi-lock-outline"></i></label>
+                    <label for="lastname"><i class="zmdi zmdi-assignment-account"></i></label>
                     <input id="lastname" type="text" class="form-control" name="lastname" required placeholder="Your LastName">
                 </div>
 
                 <div class="form-group">
-                    <label for="firstname"><i class="zmdi zmdi-lock-outline"></i></label>
+                    <label for="firstname"><i class="zmdi zmdi-assignment-o"></i></label>
                     <input id="firstname" type="text" class="form-control" name="firstname" required placeholder="Your FirstName">
                 </div>
-
+                <div class="form-group"> 
+                    <p>
+                        <input type="radio" id="test1" name="male"/>
+                        <label for="test1">Male</label>
+                    </p>
+                    <p>
+                        <input type="radio" id="test2" name="female"/>
+                        <label for="test2">Female</label>
+                    </p>
+                </div>
+                
                 <div class="form-group">
-                    <label for="address"><i class="zmdi zmdi-lock-outline"></i></label>
+                    <label for="address"><i class="zmdi zmdi-home"></i></label>
                     <input id="address" type="text" class="form-control" name="address" required placeholder="Your Address">
                 </div>
 
                 <div class="form-group">
-                    <label for="phone"><i class="zmdi zmdi-lock-outline"></i></label>
+                    <label for="phone"><i class="zmdi zmdi-phone"></i></label>
                     <input id="phone" type="text" class="form-control" name="phone" required placeholder="Your Phone Number">
                 </div>
 
@@ -66,7 +76,7 @@
         </div>
         <div class="signup-image">
             <figure><img src="images/signup-image.jpg" alt="sing up image"></figure>
-            <a href="" class="signup-image-link">I am already member</a>
+            <a href="{{ route('login') }}" class="signup-image-link">I am already member</a>
         </div>
     </div>
 </div>
