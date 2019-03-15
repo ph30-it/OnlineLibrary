@@ -41,4 +41,9 @@ class LoginController extends Controller
         }
         return redirect()->route('form-login'); // todo:  make error when login
     }
+
+    public function logout(){
+        \Auth::logout();
+        return redirect()->route('form-login');
+    }
 }
