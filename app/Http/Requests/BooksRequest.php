@@ -30,17 +30,18 @@ class BooksRequest extends FormRequest
             'published_year'=>'required|integer',
             'price'=>'required|integer|min:0',
             'quantity'=>'required|integer|min:1',
-            'img'=>'required|mimes:jpeg,jpg,png,gif'
+            'img'=>'mimes:jpeg,jpg,png,gif'
         ];
     }
 
     public function messages(){
         return [
-            'name.required' => 'Please enter the title of the book',
-            'author.required' => 'Please enter the author\'s name',
-            'published_year.required' => 'Please enter the publication year',
-            'quantity.min' => 'Invalid Quantity',
-            'price.min' => 'Invalid Price'
+            'name.required' => 'Tên sách không được trống.',
+            'author.required' => 'Tên tác giả không được trống.',
+            'published_year.required' => 'Năm xuất bản không được trống.',
+            'quantity.min' => 'Số lượng tối thiểu là 1.',
+            'price.min' => 'Giá tối thiểu là 0đ.',
+            'img.mimes' => 'File tải lên phải là một hình ảnh.'
         ];
     }
 }

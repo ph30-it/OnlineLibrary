@@ -1,27 +1,56 @@
-<!--/. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-                    <li>
-                        <a class="active-menu waves-effect waves-dark" href="{{ route('admin-home') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#" class="waves-effect waves-dark"><i class="fa fa-book"></i>Books Manager<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{ route('admin-add-books') }}"><i class="fa fa-plus"></i>Add books</a>
+<div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li class="sidebar-search">
+                                <div class="input-group custom-search-form">
+                                    <input type="text" class="form-control" placeholder="Search...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                </span>
+                                </div>
+                                <!-- /input-group -->
                             </li>
                             <li>
-                                <a href="{{ route('admin-list-books') }}"><i class="fa fa-list"></i>List of books</a>
+                                <a href="{{ route('admin-home') }}" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-folder-open"></i> Danh Mục<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="{{ route('showaddCategory') }}">Thêm danh mục</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('listCategory') }}">Danh sách danh mục</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-book"></i> Sách<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="{{ route('showaddBooks') }}">Thêm sách</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('listBooks') }}">Sách trên thư viện</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-users"></i> Thành viên<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="{{ route('showaddUsers') }}">Thêm thành viên</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('listUsers') }}">Danh sách thành viên</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="empty.html" class="waves-effect waves-dark"><i class="fa fa-fw fa-file"></i> Empty Page</a>
-                    </li>
-                </ul>
-
-            </div>
-
-        </nav>
-        <!-- /. NAV SIDE  -->
+                    </div>
+                </div>

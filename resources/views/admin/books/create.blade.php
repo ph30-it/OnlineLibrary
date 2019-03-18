@@ -1,87 +1,105 @@
 @extends('admin.layouts.master')
-@section('header')
-<div class="header">
-    <h1 class="page-header">
-      Form Inputs Page
-    </h1>
-    <ol class="breadcrumb">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Books Manager</a></li>
-      <li class="active">Add Books</li>
-    </ol>
-</div>
-@endsection
 @section('content')
-<div class="row">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="card-action">
-            Add Books
-          </div>
-          <div class="card-content">
-            @if($errors->any())
-            <div class="alert alert-danger">
-              @foreach($errors->all() as $err)
-              <li>{{$err}}</li>
-              @endforeach
-            </div>
-            @endif
-            @if(session('class'))
-            <div class="alert alert-{{session('class')}}">
-              <li>{{session('message')}}</li>
-            </div>
-            @endif
-            <form action="{{ route('create-books') }}" method="POST" enctype="multipart/form-data" class="col s12">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="name" name="name" value="{{ old('name') }}" type="text" class="validate">
-                  <label for="name">Book title</label>
+<div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">Quản lý sách</h1>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Thêm sách vào thư viện
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <form action="{{ route('createBooks') }}" method="POST" enctype="multipart/form-data">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <div class="col-lg-3">
+                                                <img id="showImage" src="{{ asset('uploads/default.jpg') }}" style="width: 270px;height: 364px">
+                                                <div class="form-group">
+                                                    <label>Hình ảnh</label>
+                                                    <input id="fileimg" name="img" type="file">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                
+                                                @if($errors->any())
+                                                <div class="alert alert-danger alert-dismissible">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                    @foreach($errors->all() as $err)
+                                                    <li>{{$err}}</li>
+                                                    @endforeach
+                                                </div>
+                                                @endif
+                                                @if(session('class'))
+                                                <div class="alert alert-{{session('class')}}">
+                                                  <li>{{session('message')}}</li>
+                                                </div>
+                                                @endif
+                                                <div class="form-group">
+                                                    <label>Tên sách</label>
+                                                    <input name="name" type="text" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Tên tác giả</label>
+                                                    <input name="author" type="text" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Năm xuất bản</label>
+                                                    <input name="published_year" type="text" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Danh mục</label>
+                                                    <select name="categories_id" class="form-control">
+                                                        @foreach($categories as $row)
+                                                        <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Số lượng</label>
+                                                    <input name="quantity" type="number" class="form-control" min="1" value="1">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Giá cho thuê</label>
+                                                    <input name="price" type="number" class="form-control" min="0" value="0">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Mô tả</label>
+                                                    <textarea name="describes" class="form-control" rows="3"></textarea>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary btn-lg btn-block">Thêm sách</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- /.row (nested) -->
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
                 </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s6">
-                  <input id="author" name="author" value="{{ old('author') }}" type="text" class="validate">
-                  <label for="author">Author</label>
-                </div>
-                <div class="input-field col s6">
-                  <input id="published_year" name="published_year" value="{{ old('published_year') }}" type="text" class="validate">
-                  <label for="published_year">Publishing year</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s6">
-                  <input id="price" name="price" value="{{ old('price') }}" type="text" class="validate">
-                  <label for="price">Price</label>
-                </div>
-                <div class="input-field col s6">
-                  <input id="quantity" name="quantity" value="{{ old('quantity') }}" type="text" class="validate">
-                  <label for="quantity">Quantity</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col s12">
-                  <div class="input-field inline">
-                    <input id="img" name="img" value="{{ old('img') }}" type="file" class="validate">
-                    <label for="img" data-error="wrong" data-success="right"></label>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <textarea id="describes" name="describes" value="{{ old('describes') }}" class="materialize-textarea"></textarea>
-                  <label for="describes">Describes</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col s12">
-                  <button type="submit" class="waves-effect waves-light btn">Add Books</button>
-                </div>
-              </div>
-            </form>
-            <div class="clearBoth"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+@endsection
+@section('javascript')
+<script type="text/javascript">
+    $(function () {
+        $("#fileimg").change(function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = imageIsLoaded;
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    });
+    function imageIsLoaded(e) {
+        $('#showImage').attr('src', e.target.result);
+    };
+</script>
 @endsection

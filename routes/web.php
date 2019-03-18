@@ -24,15 +24,37 @@ Route::get('/register','Admin\RegisterController@showRegistrationForm')->name('f
 Route::post('/register','Admin\RegisterController@register')->name('register');
 Route::get('/logout', 'Admin\LoginController@logout')->name('admin-logout');
 
-// Route::get('/admin/home','Admin\HomeController@index')->name('admin-home');
 Route::group(['prefix' => 'admin'], function(){
 	Route::get('/', 'Admin\DashboardController@index')->name('admin-home');
+
+	Route::group(['prefix' => 'users'], function(){
+		Route::get('/list', 'Admin\UsersController@index')->name('listUsers');
+		Route::delete('/list', 'Admin\UsersController@delete')->name('deleteUsers');
+		Route::get('/create', 'Admin\UsersController@showCreateUser')->name('showaddUsers');
+		Route::post('/create', 'Admin\UsersController@create')->name('createUsers');
+		Route::get('/{id}/edit', 'Admin\UsersController@showEditUser')->name('showeditUsers');
+		Route::post('/{id}/edit', 'Admin\UsersController@update')->name('updateUsers');
+	});
+
+	Route::group(['prefix' => 'categories'], function(){
+		Route::get('/list', 'Admin\CategoriesController@index')->name('listCategory');
+		Route::delete('/list', 'Admin\CategoriesController@delete')->name('deleteCategory');
+		Route::get('/create', 'Admin\CategoriesController@showCreateCategory')->name('showaddCategory');
+		Route::post('/create', 'Admin\CategoriesController@create')->name('createCategory');
+		Route::get('/{id}/edit', 'Admin\CategoriesController@showEdit')->name('showeditCategory');
+		Route::post('/{id}/edit', 'Admin\CategoriesController@update')->name('updateCategory');
+	});
+
 	Route::group(['prefix' => 'books'], function(){
-		Route::get('/list', 'Admin\BooksController@index')->name('admin-list-books');
-		Route::get('/create', 'Admin\BooksController@showCreateBooks')->name('admin-add-books');
-		Route::post('/create', 'Admin\BooksController@create')->name('create-books');
+		Route::get('/list', 'Admin\BooksController@index')->name('listBooks');
+		Route::get('/create', 'Admin\BooksController@showCreateBooks')->name('showaddBooks');
+		Route::post('/create', 'Admin\BooksController@create')->name('createBooks');
+		Route::get('/{id}/edit', 'Admin\BooksController@showEditBooks')->name('showeditBooks');
+		Route::post('/{id}/edit', 'Admin\BooksController@update')->name('updateBooks');
+		Route::delete('/list', 'Admin\BooksController@delete')->name('deleteBooks');
 	});
 });
+
 
 
 
