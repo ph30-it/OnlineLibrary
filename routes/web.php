@@ -11,9 +11,23 @@
 |
 */
 
+/*
 Route::get('/', function () {
     return view('welcome');
 })->middleware('verified');
+*/
+
+Route::get('/', 'HomePageController@ShowHomePage');
+
+Route::get('/category={id}','BookController@ShowCategoryPageByID');
+
+Route::get('/get_book={id}','BookController@ShowBookDetailPage');
+
+Route::get('/get_this_book_with_id={id}','PaymentController@GetBookWithAuth');
+Route::get('/confirm_ordered_book','UserPageController@ConfirmOrderedBooks');
+
+Route::get('/user','UserPageController@ShowUserPage');
+Route::get('/loading_sub_page={section_id}','UserPageController@LoadSubPage');
 
 Auth::routes();
 Auth::routes(['verify' => true]);

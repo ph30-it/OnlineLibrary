@@ -1,5 +1,15 @@
-@extends('layouts.auth')
-@section('content')
+@extends('layouts.main')
+
+@section('page-title')
+Login
+@endsection
+
+@section('custom-css')
+<link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+<link rel="stylesheet" href="{{ asset('css/material-design-iconic-font.min.css') }}">
+@endsection
+
+@section('page-content')
 <div class="container">
     <div class="signin-content">
         <div class="signin-image">
@@ -59,3 +69,7 @@
     </div>
 </div>
 @endsection 
+
+@section('custom-js')
+<script src="{{ asset('js/app.js') }}" defer></script>
+@endsection

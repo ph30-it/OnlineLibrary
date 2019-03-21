@@ -1,0 +1,144 @@
+.profile-field-name{
+	width: 100%;
+	height: 50px;
+	border-top-left-radius: 25px;
+	border-bottom-left-radius: 25px;
+	background-color: #2ecc71;
+	color: white;
+	font-size: 1.1em;
+	font-weight: 900;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	margin-left: 15px;
+}
+
+.profile-content{
+	height: 50px;
+	width: 100%;
+	margin-left: -15px;
+	border-radius: 0px 25px 25px 0px;
+	background-color: transparent;
+	border-top: 2px solid #2ecc71;
+	border-bottom: 2px solid #2ecc71;
+	border-right: 2px solid #2ecc71;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.profile-content input{
+	border: 0;
+	height: 38px;
+	font-size: 1.2em;
+	font-weight: 900;
+	text-align: center;
+	transition: .5s;
+	margin-top: 19px;
+}
+
+.profile-content input:focus{
+	border-radius: 0px 25px 25px 0px;
+	border: 2px solid #e74c3c;
+}
+
+#profile-submit-btt{
+	width: 150px;
+	height: 50px;
+	border-radius: 25px;
+	background-color: #2ecc71;
+	border: 0;
+	color: white;
+	font-size: 1.1em;
+	font-weight: 900;
+}
+
+.order-cart-container{
+	width: 100%;
+	position: relative;
+}
+
+.cart-status-name-bar{
+	width: 100%;
+	height: 40px;
+	border-radius: 25px 25px 0px 0px;
+	background-color: #3498db;
+	position: relative;
+}
+
+.cart-status-name-bar .cart-status-name{
+	position: absolute;
+	top: 8px;
+	left: 20px;
+	color: white;
+	font-size: 1.2em;
+	font-weight: 500;
+}
+
+.ordered-book-list{
+	min-height: 200px;
+	max-height: 400px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	background-color: white;
+}
+
+.ordered-book-list .ordered-book-container{
+	height: 200px;
+	background-color: white;
+	border-bottom: 2px solid gray;
+	position: relative;
+}
+
+.ordered-book-container .book-cover{
+	width: 110px;
+	height: 150px;
+	object-fit: cover;
+}
+
+.ordered-book-container .book-name{
+	font-size: 2em;
+	color: black;
+	font-weight: 900;
+}
+
+.ordered-book-container .book-detail-1 .book-author,.book-published-year{
+	font-size: 1.2em;
+	color: black;
+	font-weight: 500;
+}
+
+.ordered-book-container .book-price{
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	color: #e74c3c;
+	font-size: 1.5em;
+	font-weight: 900;
+}
+
+.ordered-book-container .remove-cart{
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	cursor: pointer;
+}
+
+.ordered-book-container .remove-cart i{
+	font-size: 1.2em;
+}
+
+.order-cart-container #confirm-ordered-books{
+	width: 100%;
+	height: 40px;
+	background-color: #3498db;
+	border: 0;
+	border-radius: 0px 0px 25px 25px;
+	color: white;
+	font-size: 1.3em;
+	font-weight: 900;
+}
+
