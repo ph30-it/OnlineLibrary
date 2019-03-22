@@ -13,9 +13,10 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('verified');
 
-/*Auth::routes();*/
+Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/login', 'Admin\LoginController@showLoginForm')->name('form-login');
@@ -54,7 +55,6 @@ Route::group(['prefix' => 'admin'], function(){
 		Route::delete('/list', 'Admin\BooksController@delete')->name('deleteBooks');
 	});
 });
-
 
 
 
