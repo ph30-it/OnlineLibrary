@@ -22,6 +22,8 @@
                                                 <tr>
                                                     <th>Mã Sách</th>
                                                     <th>Tên Sách</th>
+                                                    <th>Tác Giả</th>
+                                                    <th>Năm Xuất Bản</th>
                                                     <th>Danh Mục</th>
                                                     <th>Chỉnh Sửa</th>
                                                     <th>Xóa</th>
@@ -32,6 +34,8 @@
                                                 <tr>
                                                     <td>{{ $row->id }}</td>
                                                     <td>{{ $row->name }}</td>
+                                                    <td>{{ $row->author }}</td>
+                                                    <td>{{ $row->published_year }}</td>
                                                     <td>{{ $row->categories->name }}</td>
                                                     <td><a href="{{ route('showeditBooks', $row->id) }}" class="btn btn-info">Chỉnh sửa</a></td>
                                                     <td>

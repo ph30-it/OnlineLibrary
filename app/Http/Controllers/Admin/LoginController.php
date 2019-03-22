@@ -30,6 +30,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        $this->validate($request, ['email' => 'required|email', 'password' => 'required'], ['email.required' => 'Email không được trống.', 'password.required' => 'Mật khẩu không được trống.']);
         $data = $request->only('email', 'password');
         if (\Auth::attempt($data)) {
         	//dd(\Auth::user());
@@ -39,11 +40,11 @@ class LoginController extends Controller
             //$request->session()->regenerate();
             return redirect()->route('home'); //return to home page
         }
-        return redirect()->route('form-login'); // todo:  make error when login
+        return redirect()->back()->with(['class' => 'danger', 'message' => 'Đăng nhập thất bại.']); // todo:  make error when login
     }
 
     public function logout(){
         \Auth::logout();
-        return redirect()->route('form-login');
+        return redirect()->route('AdminLoginForm');
     }
 }

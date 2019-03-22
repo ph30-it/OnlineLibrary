@@ -56,8 +56,11 @@ class BooksController extends Controller
         $data = $request->only('name','author', 'published_year', 'price', 'quantity', 'img', 'categories_id', 'describes');
         if($request->hasFile('img')){
             $file = $request->file('img');
-            $filename = $book->img;
-            $file->move(public_path('/uploads/'), $filename);
+            $data['img'] = $book->img;
+            if($data['img'] == 'default.jpg'){
+                $data['img'] = md5(time()).'.jpg';
+            }
+            $file->move(public_path('/uploads/'), $data['img']);
         }
         if($book){
             if($book->update($data)){

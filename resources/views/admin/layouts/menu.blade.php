@@ -40,6 +40,15 @@
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
+                                <a href="#"><i class="fa fa-clone"></i> Đơn hàng<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="{{ route('listOrder') }}">Danh sách đơn hàng</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
                                 <a href="#"><i class="fa fa-users"></i> Thành viên<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>

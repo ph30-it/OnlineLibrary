@@ -19,13 +19,12 @@ Auth::routes();
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/login', 'Admin\LoginController@showLoginForm')->name('form-login');
-Route::post('/login', 'Admin\LoginController@login')->name('login');
-Route::get('/register','Admin\RegisterController@showRegistrationForm')->name('form-register');
-Route::post('/register','Admin\RegisterController@register')->name('register');
-Route::get('/logout', 'Admin\LoginController@logout')->name('admin-logout');
 
-Route::group(['prefix' => 'admin'], function(){
+Route::get('admin/login', 'Admin\LoginController@showLoginForm')->name('AdminLoginForm');
+Route::post('admin/login', 'Admin\LoginController@login')->name('AdminLogin');
+Route::get('admin/logout', 'Admin\LoginController@logout')->name('AdminLogout');
+
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 	Route::get('/', 'Admin\DashboardController@index')->name('admin-home');
 
 	Route::group(['prefix' => 'users'], function(){
@@ -53,6 +52,12 @@ Route::group(['prefix' => 'admin'], function(){
 		Route::get('/{id}/edit', 'Admin\BooksController@showEditBooks')->name('showeditBooks');
 		Route::post('/{id}/edit', 'Admin\BooksController@update')->name('updateBooks');
 		Route::delete('/list', 'Admin\BooksController@delete')->name('deleteBooks');
+	});
+
+	Route::group(['prefix' => 'order'], function(){
+		Route::get('/list', 'Admin\OrderController@index')->name('listOrder');
+		Route::post('/list', 'Admin\OrderController@updateStatus')->name('updateStatus');
+		Route::get('/detail', 'Admin\OrderController@ViewDetail')->name('detail');
 	});
 });
 
