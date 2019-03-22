@@ -10,6 +10,10 @@ class OrderDetail extends Model
 {
     protected $table = 'detail_order';
 
+    protected $fillable = [
+    	'order_id', 'books_id', 'quantity', 'created_at', 'updated_at'
+    ];
+
     public function order(){
     	return $this->belongsTo(Order::class,'order_id');
     }

@@ -14,7 +14,7 @@
 	<div class="row d-flex justify-content-center">
 		<div class="col-10">
 			<div class="category-name">
-				<a href="/category={{$data[0]->categories_id}}">{{$data[0]->category->name}}</a>
+				<a href="{{ route('category', $data[0]->category->id) }}">{{$data[0]->category->name}}</a>
 			</div>
 			<div class="all-products-container">
 
@@ -29,7 +29,7 @@
 						<div class="col-md-6 col-12">
 							<div class="product-info">
 								<div class="book-name">
-									<a href="/get_book={{$book->id}}"><b></b>{{$book->name}}</a>
+									<a href="{{ route('book',$book->id) }}"><b></b>{{$book->name}}</a>
 								</div>
 								<div class="book-info-panel">
 									<div class="book-quantity">

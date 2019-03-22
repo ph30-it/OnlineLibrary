@@ -19,7 +19,7 @@ Trang chủ - Home
 					<li class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Categories</li>
 					@foreach($categories as $category)
 					<li class="list-group-item cat-item">
-						<a href="/category={{$category->id}}">
+						<a href="{{ route('category', $category->id) }}">
 							{{$category->name}}
 						</a>
 					</li>
@@ -47,7 +47,7 @@ Trang chủ - Home
 			@for ($i = 0; $i < count($categories); $i++)
 			<div class="product-by-category-container">
 				<div class="category-name">
-					<a href="/category={{$books[$i][0]->category->id}}">{{$books[$i][0]->category->name}}</a>
+					<a href="{{ route('category', $books[$i][0]->category->id) }}">{{$books[$i][0]->category->name}}</a>
 				</div>
 				<div class="book-container">
 					<div class="row d-flex justify-content-center">
@@ -59,7 +59,7 @@ Trang chủ - Home
 								</div>
 								<div class="book-info">
 									<div class="book-name">
-										<a href="get_book={{$book->id}}">{{$book->name}}</a>
+										<a href="{{ route('book',$book->id) }}">{{$book->name}}</a>
 									</div>
 									<div class="book-quantity">
 										Remaining: {{$book->quantity}} books

@@ -23,8 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 
-Route::get('/category/{id}','CategoryController@listBooksById');
-Route::get('/book/{id}','BookController@showBookDetailByID');
+Route::get('/book/{id}','BookController@showBookDetailByID')->name('book');
 
+Route::get('/category/{id}','CategoryController@listBooksById')->name('category');;
 
 Route::get('/admin/home','Admin\HomeController@index')->name('admin-home');
