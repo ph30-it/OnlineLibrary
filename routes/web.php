@@ -17,7 +17,7 @@ Route::get('/', function () {
 })->middleware('verified');
 */
 
-Route::get('/', 'HomePageController@ShowHomePage');
+Route::get('/', 'HomePageController@ShowHomePage')->name('home');
 
 Route::get('/category={id}','BookController@ShowCategoryPageByID');
 
@@ -32,5 +32,4 @@ Route::get('/loading_sub_page={section_id}','UserPageController@LoadSubPage');
 Auth::routes();
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/home','Admin\HomeController@index')->name('admin-home');
