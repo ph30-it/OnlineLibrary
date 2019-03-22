@@ -11,12 +11,20 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-})->middleware('verified');
+})->middleware('verified');*/
 
 Auth::routes();
 Auth::routes(['verify' => true]);
 
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+Route::get('/category/{id}','CategoryController@listBooksById');
+Route::get('/book/{id}','BookController@showBookDetailByID');
+
+
 Route::get('/admin/home','Admin\HomeController@index')->name('admin-home');
