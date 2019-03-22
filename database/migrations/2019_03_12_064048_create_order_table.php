@@ -20,7 +20,7 @@ class CreateOrderTable extends Migration
             $table->integer('price')->default(0);
             $table->dateTime('date_borrow');
             $table->dateTime('date_give_back');
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
