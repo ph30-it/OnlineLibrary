@@ -45,7 +45,7 @@
 						</li>
 						@if(Auth::check())
 						<li>
-							<a href="/user">User</a>
+							<a href="{{ route('account_profile') }}">User</a>
 						</li>
 						<li>
 							<a href="/logout">Logout</a>
@@ -71,17 +71,21 @@
 				</a>
 
 				<ul class="navbar-nav ml-auto">
+					
+					@if(Auth::check())
 					<li class="nav-item">
 						<a href="/" class="nav-link nav-btt">Home</a>
 					</li>
-					@if(Auth::check())
 					<li class="nav-item">
-						<a href="/user" class="nav-link nav-btt">User</a>
+						<a href="{{ route('account_profile') }}" class="nav-link nav-btt">Hello , <?php echo Auth::user()->firstname ?></a>
 					</li>
 					<li class="nav-item">
 						<a href="/logout" class="nav-link nav-btt">Logout</a>
 					</li>
 					@else
+					<li class="nav-item">
+						<a href="/" class="nav-link nav-btt">Home</a>
+					</li>
 					<li class="nav-item">
 						<a href="/login" class="nav-link nav-btt">Login</a>
 					</li>
