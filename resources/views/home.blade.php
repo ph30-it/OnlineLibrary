@@ -54,22 +54,23 @@ Trang chủ - Home
 						<div class="col-md-11 col-12 book-list">
 							@foreach ($books[$i] as $book)
 							<div class="book-item">
-								<div class="book-cover">
-									<img src="{{$book->img}}">
-								</div>
+								<figure class="book-cover">
+									<a href="{{ route('book',$book->id) }}"><img src="{{$book->img}}" alt="Book Image" hr></a>
+								</figure>
+
 								<div class="book-info">
 									<div class="book-name">
 										<a href="{{ route('book',$book->id) }}">{{$book->name}}</a>
 									</div>
 									<div class="book-quantity">
-										Remaining: {{$book->quantity}} books
+										<p>Remaining: {{$book->quantity}} books</p>
 									</div>
 									<div class="book-price">
-										{{number_format($book->price)}} VND
+										<p>{{number_format($book->price)}} VND</p>
 									</div>
 									<div class="book-buy">
 										<button class="get-book-btt" data-book-id="{{$book->id}}">Get it now</button>
-									</div>
+									</div> 
 								</div>
 							</div>
 							@endforeach
@@ -82,7 +83,6 @@ Trang chủ - Home
 			@endfor
 		</div>
 	</div>
-
 	
 </div>
 @endsection

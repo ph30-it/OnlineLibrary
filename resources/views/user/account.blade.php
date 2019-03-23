@@ -56,15 +56,6 @@ Account
                 <hr />
                 <div class="row">
                     <div class="col-sm-3 col-md-2 col-5">
-                        <label style="font-weight:bold;">Address</label>
-                    </div>
-                    <div class="col-md-8 col-6">
-                        {{Auth::user()->address}}
-                    </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-3 col-md-2 col-5">
                         <label style="font-weight:bold;">Gender</label>
                     </div>
                     <div class="col-md-8 col-6">

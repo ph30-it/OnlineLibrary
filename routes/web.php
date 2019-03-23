@@ -27,7 +27,9 @@ Route::get('/book/{id}','BookController@showBookDetailByID')->name('book');
 Route::get('/category/{id}','CategoryController@listBooksById')->name('category');;
 
 
-Route::get('/account','UserController@account')->name('account_profile');
-Route::get('/account/edit','UserController@edit')->name('account_edit');
-
+Route::group(['prefix' => 'account'], function(){
+	Route::get('/','UserController@account')->name('account_profile');
+	Route::get('/edit','UserController@edit_show')->name('account_edit');
+	Route::post('/edit','UserController@update')->name('account_update');
+});
 Route::get('/admin/home','Admin\HomeController@index')->name('admin-home');

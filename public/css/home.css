@@ -91,7 +91,7 @@ body{
 	border-left: 1px solid #ecf0f1;
 }
 
-.book-list .book-item .book-cover{
+.book-list .book-item .book-cover a{
 	width: 100%;
 	height: 250px;
 	display: flex;
@@ -100,12 +100,15 @@ body{
 }
 
 .book-list .book-item .book-cover img{
+	border-radius: 0.25em;
 	width: 60%;
 	height: 200px;
 	object-fit: cover;
+	align-items: center;
 }
 
 .book-list .book-item .book-info{
+	padding-top: 60px;
 	position: absolute;
 	bottom: 0;
 	left: 10%;
@@ -118,30 +121,29 @@ body{
 .book-info *{
 	width: 100%;
 	text-align: center;
-	color: black;
+  	color: inherit;
 }
 
 .book-info .book-name{
-	font-size: 1.4em;
-	height: 80px;
+	font-size: 130%;
 }
 
 .book-info .book-quantity{
-	font-size: 1.2em;
+	font-size: 95%;
 }
 
 .book-info .book-price{
-	font-size: 1.2em;
+	font-size: 95%;
 }
 
 .book-info .book-buy{
+	padding-top: 0.5em;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
 .book-info .book-buy .get-book-btt{
-	font-size: 90%;
 	background: #e74c3c;
 	color: white;
 	width: 100px;

@@ -41,21 +41,21 @@
 				<div class="container-fluid">
 					<ul class="navbar-mobile__list list-unstyled">
 						<li>
-							<a href="/">Home</a>
+							<a href="{{ route('home') }}">Home</a>
 						</li>
 						@if(Auth::check())
 						<li>
 							<a href="{{ route('account_profile') }}">User</a>
 						</li>
 						<li>
-							<a href="/logout">Logout</a>
+							<a href="{{ route('logout') }}">Logout</a>
 						</li>
 						@else
 						<li>
-							<a href="/login">Login</a>
+							<a href="{{ route('login') }}">Login</a>
 						</li>
 						<li>
-							<a href="/register">Register</a>
+							<a href="{{ route('register') }}">Register</a>
 						</li>
 						@endif
 					</ul>
@@ -74,23 +74,23 @@
 					
 					@if(Auth::check())
 					<li class="nav-item">
-						<a href="/" class="nav-link nav-btt">Home</a>
+						<a href="{{ route('home') }}" class="nav-link nav-btt">Home</a>
 					</li>
 					<li class="nav-item">
 						<a href="{{ route('account_profile') }}" class="nav-link nav-btt">Hello , <?php echo Auth::user()->firstname ?></a>
 					</li>
 					<li class="nav-item">
-						<a href="/logout" class="nav-link nav-btt">Logout</a>
+						<a href="{{ route('logout') }}" class="nav-link nav-btt">Logout</a>
 					</li>
 					@else
 					<li class="nav-item">
 						<a href="/" class="nav-link nav-btt">Home</a>
 					</li>
 					<li class="nav-item">
-						<a href="/login" class="nav-link nav-btt">Login</a>
+						<a href="{{ route('login') }}" class="nav-link nav-btt">Login</a>
 					</li>
 					<li class="nav-item">
-						<a href="/register" class="nav-link nav-btt">Register</a>
+						<a href="{{ route('register') }}" class="nav-link nav-btt">Register</a>
 					</li>
 					@endif
 				</ul>
