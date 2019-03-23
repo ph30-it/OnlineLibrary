@@ -16,10 +16,15 @@ class UserController extends Controller
 		return view('user.edit');
 	}
 
-	public function update(Request $request){
-    	//TODO: Validate
+	public function update(EditUserRequest $request){
     	$data = $request->only('gender', 'phone', 'firstname', 'lastname', 'address');
     	$user = User::where('email',$request->email);
-    	//TODO: udpate user
+
+    	if ($user->update($data)) {
+    		return redirect()->back()->with(['class' => 'success', 'message' => 'Update Success.']);
+    	}else{
+    		return redirect()->back()->with(['class' => 'danger', 'message' => 'Error Database.']);
+    	}
+    	
 	}
 }

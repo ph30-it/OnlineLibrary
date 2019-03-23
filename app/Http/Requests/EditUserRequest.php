@@ -13,7 +13,7 @@ class EditUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,19 @@ class EditUserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'phone' => 'required',
+            'address' => 'required|string'
+        ];
+    }
+
+    public function messages(){
+        return [
+            'firstname.required' => 'Firstname must be filled !.',
+            'lastname.required' => 'Lastname must be filled.',
+            'phone.required' => 'Phone must be filled',
+            'address.required' => 'Address must be filled',
         ];
     }
 }
