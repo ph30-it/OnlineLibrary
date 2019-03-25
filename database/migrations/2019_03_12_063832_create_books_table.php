@@ -18,12 +18,12 @@ class CreateBooksTable extends Migration
             $table->string('name');
             $table->string('img');
             $table->string('author');
-            $table->string('published_year');
-            $table->string('describes');
+            $table->string('published_year')->default(0);
+            $table->string('describes')->nullable();
             $table->integer('price')->default(0);
             $table->integer('quantity')->default(1);
             $table->integer('categories_id')->unsigned();
-            $table->foreign('categories_id')->references('id')->on('categories');
+            $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
