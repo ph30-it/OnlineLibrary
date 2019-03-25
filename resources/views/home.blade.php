@@ -1,8 +1,6 @@
 @extends('layouts.main')
 
-@section('page-title')
-Trang chủ - Home
-@endsection
+@section('page-title','Home')
 
 @section('custom-css')
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
@@ -13,7 +11,7 @@ Trang chủ - Home
 @section('page-content')
 <div class="category-container">
 	<div class="row">
-		<div class="col-md-3 col-12">
+		<div class="col-lg-3 col-sm-12col-12">
 			<div class="category-list">
 				<ul class="list-group">
 					<li class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Categories</li>
@@ -28,13 +26,17 @@ Trang chủ - Home
 				</ul>
 			</div>
 		</div>
-		<div class="col-md-9 d-none d-lg-block">
+		<div class="col-lg-9 d-none d-lg-block">
 			<div class="picture-slider-container">
 				<div>
-					<img src="https://images.pexels.com/photos/1252869/pexels-photo-1252869.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="slide-item">
+					<img src="https://www.houseofbots.com/images/news/4594/cover.png" class="slide-item">
+					<div class="carousel-caption d-none d-md-block">
+						<h5>MORE BOOK FOR YOU.</h5>
+						<p>Have Fun !</p>
+					</div>
 				</div>
 				<div>
-					<img src="https://images.unsplash.com/photo-1534448177492-6d698f12a59a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" class="slide-item">
+					<img src="http://dasaptaerwin.net/wp/wp-content/uploads/2016/02/best-books-book-youll-ever-read.jpg" class="slide-item">
 				</div>
 			</div>
 		</div>
@@ -43,7 +45,7 @@ Trang chủ - Home
 
 <div class="product-container">
 	<div class="row d-flex justify-content-center">
-		<div class="col-10">
+		<div class="col-12">
 			@for ($i = 0; $i < count($categories); $i++)
 			<div class="product-by-category-container">
 				<div class="category-name">
@@ -89,4 +91,6 @@ Trang chủ - Home
 @section('custom-js')
 <script type="text/javascript" src="{{ asset('js/home.js') }}"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 @endsection

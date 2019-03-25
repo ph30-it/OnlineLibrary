@@ -4,6 +4,9 @@ Auth::routes();
 Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home',function(){
+	return redirect()->route('home');
+});
 
 Route::get('/book/{id}','BookController@showBookDetailByID')->name('book')->where('id', '[0-9]+');
 Route::get('/category/{id}','CategoryController@listBooksById')->name('category')->where('id', '[0-9]+');

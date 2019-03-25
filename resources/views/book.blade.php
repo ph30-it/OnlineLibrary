@@ -1,8 +1,6 @@
 @extends('layouts.main')
 
-@section('page-title')
-{{$book->name}}
-@endsection
+@section('page-title','{{$book->name}}')
 
 @section('custom-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/book.css') }}">
@@ -11,12 +9,12 @@
 @section('page-content')
 <div class="book-detail-container container">
 	<div class="row">
-		<div class="col-md-5 col-12">
+		<div class="col-12">
 			<div class="book-cover">
 				<img src="{{$book->img}}">
 			</div>
 		</div>
-		<div class="col-md-7 col-12">
+		<div class="col-12">
 			<div class="book-info-container">
 				<div class="book-name">
 					<b>{{$book->name}}</b>

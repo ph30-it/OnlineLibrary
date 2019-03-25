@@ -1,8 +1,6 @@
 @extends('user.layouts.master')
 
-@section('page-title')
-{{Auth::user()->firstname}} - Edit Account
-@endsection
+@section('page-title','Edit Account')
 
 @section('link')
 Account / Edit

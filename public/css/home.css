@@ -1,17 +1,14 @@
-body{
-	background-color: #ecf0f1;
-	font-size: 85%;
-}
-
 .category-container{
-	min-height: 500px;
+	padding-top: 30px;
+	min-height: 450px;
 	height: auto;
 	justify-content: center;
 }
 
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 992px){
 	.category-container{
 		min-height: initial;
+		width: 100%;
 	}
 }
 .category-list{

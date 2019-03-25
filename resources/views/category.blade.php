@@ -1,8 +1,6 @@
 @extends('layouts.main')
 
-@section('page-title')
-{{$data[0]->category->name}}
-@endsection
+@section('page-title','{{$data[0]->category->name}}')
 
 @section('custom-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/category.css') }}">
