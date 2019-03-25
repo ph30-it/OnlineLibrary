@@ -3,21 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Category;
 
 class Book extends Model
 {
-    protected $table = 'books';
+    protected $table = "books";
 
     protected $fillable = [
     	'name', 'img', 'author', 'published_year', 'describes', 'price', 'quantity', 'categories_id'
     ];
 
-    public function category(){
-    	return $this->belongsTo(Category::class,'categories_id');
+    public function categories(){
+        return $this->belongsTo('App\Categories');
     }
 
-    public function order(){
+    public function Order(){
         return $this->belongstoMany('App\Order', 'detail_order', 'order_id', 'books_id');
     }
 }
