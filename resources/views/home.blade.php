@@ -47,7 +47,7 @@ Trang chủ - Home
 			@for ($i = 0; $i < count($categories); $i++)
 			<div class="product-by-category-container">
 				<div class="category-name">
-					<a href="{{ route('category', $books[$i][0]->category->id) }}">{{$books[$i][0]->category->name}}</a>
+					<a href="{{ route('category', $books[$i][0]->categories->id) }}">{{$books[$i][0]->categories->name}}</a>
 				</div>
 				<div class="book-container">
 					<div class="row d-flex justify-content-center">
@@ -65,9 +65,9 @@ Trang chủ - Home
 									<div class="book-quantity">
 										<p>Remaining: {{$book->quantity}} books</p>
 									</div>
-									<div class="book-price">
+									<!-- <div class="book-price">
 										<p>{{number_format($book->price)}} VND</p>
-									</div>
+									</div> -->
 									<div class="book-buy">
 										<button class="get-book-btt" data-book-id="{{$book->id}}">Get it now</button>
 									</div> 
@@ -83,7 +83,6 @@ Trang chủ - Home
 			@endfor
 		</div>
 	</div>
-	
 </div>
 @endsection
 

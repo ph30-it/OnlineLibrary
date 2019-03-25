@@ -105,12 +105,12 @@ a:hover,a:focus,a:active{
 }
 
 @media (max-width: 991px) {
-    .cart-nav-bar {
-        position: absolute;
-        top: 105px;
-        left: 0;
-        right: 0;
-    }
+	.cart-nav-bar {
+		position: absolute;
+		top: 105px;
+		left: 0;
+		right: 0;
+	}
 }
 
 .search-bar-container{
@@ -169,4 +169,9 @@ a:hover,a:focus,a:active{
 	#search-field{
 		color: black;
 	}
+}
+.newsletter{
+	background:#FA1818;
+	padding: 3em;
+	width: 100%;
 }

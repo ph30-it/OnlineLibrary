@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         $categories = Category::all();
         $booksData = array();
-        foreach($categories as $category){
+        foreach($categories as $key => $category ){
             $book = Book::where('categories_id','=',$category->id)->take(7)->get();
             array_push($booksData,$book);
         }
