@@ -7,9 +7,11 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Newsletter extends Mailable
+class MailNewsletter extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public $id, $name, $img;
 
     /**
      * Create a new message instance.
@@ -18,7 +20,9 @@ class Newsletter extends Mailable
      */
     public function __construct($data)
     {
-        
+        $this->id = $data['id'];
+        $this->name = $data['name'];
+        $this->img = $data['img'];
     }
 
     /**
@@ -28,6 +32,6 @@ class Newsletter extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('admin.mails.newsletter');
     }
 }

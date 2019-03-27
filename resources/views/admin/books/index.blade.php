@@ -52,7 +52,7 @@
 								<td>{{ number_format($book->price) }}đ</td>
 								<td>
 									<a href="{{ route('showEditBook', $book->id) }}" class="btn btn-sm btn-primary">Chỉnh sửa</a>
-									<a href="javascript:trash({{$book->id}});" class="btn btn-sm btn-danger">Xóa</a>
+									<a href="javascript:trashBook({{$book->id}});" class="btn btn-sm btn-danger">Xóa</a>
 								</td>
 							</tr>
 							@endforeach
@@ -72,24 +72,8 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-	function trash(id){
-		alertify.confirm('Xác nhận xóa', 'Nếu bạn xóa, các đơn hàng của sách này cũng xóa theo!', function(){
-			$.ajax({
-				url: "{{ route('deleteBook') }}",
-				method: "DELETE",
-				data: {
-					_token: "{!! csrf_token() !!}",
-					id: id
-				},
-				dataType: "json",
-				success: function(data){
-					if(data.error == 0){
-						$('#book-'+id).hide('slow');
-					}
-				}
-			});
-		}, function(){
-		});
-	}
+    var api_domain = "{{ url('') }}";
+    var api_atk = "{{ csrf_token() }}";
 </script>
+<script type="text/javascript" src="{{ asset('admin_assets/js/bhome.js') }}"></script>
 @endsection

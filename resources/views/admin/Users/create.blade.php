@@ -117,18 +117,4 @@
 </div>	<!--/.main-->
 @endsection
 @section('javascript')
-<script type="text/javascript">
-	$(document).ready(function(){
-        $('#changepass').click(function(){
-        	if($(this).is(':checked')){
-        		$('#newpass input').removeAttr('disabled');
-        		$('#newpass').show('slow');
-        	}
-        	else{
-        		$('#newpass').hide('slow');
-        		$('#newpass input').attr('disabled', '');
-        	}
-        });
-    });
-</script>
 @endsection

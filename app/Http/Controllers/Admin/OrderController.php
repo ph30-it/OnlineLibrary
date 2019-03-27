@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Order;
+use App\Book;
 
 class OrderController extends Controller
 {
@@ -19,11 +20,17 @@ class OrderController extends Controller
             return response()->json([
                 'readers' => $order->user->firstname.' '.$order->user->lastname,
                 'created_time' => date($order->created_at),
+                'price' => number_format($order->price),
                 'count' => $order->book->count(),
                 'status' => $order->status,
                 'book' => $order->book
             ],200);
         }
+    }
+
+    public function showAddOrder(){
+        $books = Book::all();
+        return view('admin.orders.create', compact('books'));
     }
 
     public function update(request $request){

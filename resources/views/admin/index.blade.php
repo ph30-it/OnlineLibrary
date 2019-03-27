@@ -93,6 +93,7 @@
 			<div class="panel panel-default articles">
 				<div class="panel-heading">Latest comments</div>
 				<div class="panel-body articles-container">
+					@if($comments->count() > 0)
 					@foreach($comments->take(3) as $comment)
 					<div class="article border-bottom">
 						<div class="col-xs-12">
@@ -110,7 +111,9 @@
 						<div class="clear"></div>
 					</div><!--End .article-->
 					@endforeach
-
+					@else
+					<p>Không có bình luận nào</p>
+					@endif
 				</div>
 			</div><!--End .articles-->
 		</div>

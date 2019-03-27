@@ -59,6 +59,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 		Route::get('/list', 'Admin\OrderController@index')->name('ListOrder');
 		Route::post('/updated', 'Admin\OrderController@update')->name('updateOrder');
 		Route::get('/detail', 'Admin\OrderController@ViewDetail')->name('detailOrder');
+		Route::get('/create', 'Admin\OrderController@showAddOrder')->name('showAddOrder');
 		Route::get('/search', 'Admin\OrderController@search')->name('searchOrder');
 	});
 
@@ -67,9 +68,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 		Route::delete('/deleted', 'Admin\CommentController@delete')->name('deleteComment');
 		Route::get('/search', 'Admin\CommentController@search')->name('searchComment');
 	});
-
-	// Route::group(['prefix' => 'sendmail'], function(){
-	// 	route::get('/',);
-	// });
 });
 

@@ -68,7 +68,19 @@
 					</a></li>
 				</ul>
 			</li>
-			<li><a href="{{ route('ListOrder') }}"><em class="fa fa-clipboard">&nbsp;</em> Orders</a></li>
+			<li class="parent "><a data-toggle="collapse" href="#order-item">
+				<em class="fa fa-clipboard">&nbsp;</em> Order <span data-toggle="collapse" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				</a>
+				<ul class="children collapse" id="order-item">
+					<!-- <li><a class="" href="{{ route('showAddOrder') }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> Add Order
+					</a></li> -->
+					<li><a class="" href="{{ route('ListOrder') }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> List Orders
+					</a></li>
+				</ul>
+			</li>
+			
 			<li><a href="{{ route('ListComment') }}"><em class="fa fa-comment">&nbsp;</em> Comments</a></li>
 			<li><a href="{{route('AdminLogout')}}"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>

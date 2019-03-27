@@ -102,8 +102,7 @@
     <div class="modal-content">
     	<div class="panel panel-default">
 			<div class="panel-heading">Xem Chi Tiết Đơn Đặt Hàng</div>
-			<div class="panel-body">
-			</div>
+			<div class="panel-body"></div>
 		</div>
     </div>
   </div>
