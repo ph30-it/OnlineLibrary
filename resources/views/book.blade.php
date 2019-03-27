@@ -23,7 +23,7 @@
 		</div>
 		<div class="col-4">
 			<div class="book-cover">
-				<img src="<!-- {{$book->img}} -->">
+				<img src="{{$book->img}}">
 			</div>
 		</div>
 		<div class="col-8">
