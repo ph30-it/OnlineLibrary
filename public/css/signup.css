@@ -1,0 +1,36 @@
+.signup-content{
+	top: 50%;
+	padding: 20px;
+	padding-top: 50px;
+	padding-bottom: 87px;
+}
+
+.form-title{
+	font-weight: bold;
+	padding-bottom: 30px;
+}
+
+.signup-image-link{
+	color: black;
+}
+
+.signup-image-link:hover{
+	font-weight: bold;
+	color: #e74c3c;
+}
+
+.label{
+	font-weight: bold;
+	font-size: 110%;
+}
+
+i{
+	padding-right: 10px;
+}
+figure{
+	padding-top: 100px;
+}
+input:focus:not([readonly]) {
+    border: 1px solid #e74c3c;
+    box-shadow: 0 0 0 1px #e74c3c;
+}

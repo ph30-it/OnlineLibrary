@@ -1,0 +1,193 @@
+.category-container{
+	padding-top: 10px;
+	min-height: 450px;
+	height: auto;
+	justify-content: center;
+}
+
+@media only screen and (max-width: 992px){
+	.category-container{
+		min-height: initial;
+		width: 100%;
+	}
+}
+.category-list{
+	width: 100%;
+	min-height: 500px;
+	overflow-y: auto;
+}
+
+.category-list li{
+	transition: 1s;
+}
+
+.category-list li a{
+	color: black;
+}
+
+.category-list li:hover{
+	background-color: #34495e;
+}
+
+.category-list li:hover a{
+	color: white;
+}
+
+.cat-item{
+	padding-left: 20px;
+}
+
+.picture-slider-container{
+
+}
+
+.slide-item{
+	width: 100%;
+	height: 500px;
+	object-fit: cover;
+}
+
+.product-container{
+	margin-top: 20px;
+}
+
+.product-by-category-container{
+	height: 400px;
+}
+
+.product-by-category-container .category-name{
+	height: 45px;
+	width: 100%;
+	background-color: #e74c3c;
+	position: relative;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+}
+
+.product-by-category-container .category-name a{
+	position: absolute;
+	top: 12px;
+	left: 20px;
+	color: white;
+}
+
+.product-by-category-container .book-container{
+	height: 350px;
+	background-color: white;
+}
+
+.product-by-category-container .book-container .book-list{
+	height: 100%;
+	width: 80%;
+}
+
+.product-by-category-container .book-container .book-list .book-item{
+	width: 250px;
+	height: 350px;
+	position: relative;
+	border-left: 1px solid #ecf0f1;
+}
+
+.book-list .book-item .book-cover a{
+	width: 100%;
+	height: 250px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.book-list .book-item .book-cover img{
+	border-radius: 0.25em;
+	width: 60%;
+	height: 200px;
+	object-fit: cover;
+	align-items: center;
+}
+
+.book-list .book-item .book-info{
+	padding-top: 60px;
+	position: absolute;
+	bottom: 0;
+	left: 10%;
+	right: 10%;
+	top: 50%;
+	/* background-color: #e74c3c;
+	opacity: 0.8; */
+}
+
+.book-info *{
+	width: 100%;
+	text-align: center;
+  	color: inherit;
+}
+
+.book-info .book-name{
+	font-size: 130%;
+}
+
+.book-info .book-quantity{
+	font-size: 95%;
+}
+
+.book-info .book-price{
+	font-size: 95%;
+}
+
+.book-info .book-buy{
+	padding-top: 0.5em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.book-info .book-buy .get-book-btt{
+	background: #e74c3c;
+	color: white;
+	width: 100px;
+	height: 30px;
+	border-radius: 15px;
+	transition: .5s;
+}
+
+.book-info .book-buy .get-book-btt:hover{
+	color: white;
+	background-color: #F7941E;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.div:hover .image {
+  opacity: 0.3;
+}
+
+.div:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+figure{
+  position: relative;
+}
