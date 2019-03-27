@@ -10,9 +10,15 @@
   display: block;
   text-align: center; 
 }
+
+.signup-image-link:hover{
+  font-weight: bold;
+  color: #e74c3c;
+}
+
 .form-title {
-    font-weight: bold;
-	padding-bottom: 30px;
+  font-weight: bold;
+  padding-bottom: 30px;
 }
 
 i{
@@ -20,6 +26,6 @@ i{
 }
 
 input:focus:not([readonly]) {
-    border: 1px solid #e74c3c;
-    box-shadow: 0 0 0 1px #e74c3c;
+  border: 1px solid #e74c3c;
+  box-shadow: 0 0 0 1px #e74c3c;
 }
