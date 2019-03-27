@@ -18,6 +18,10 @@ Route::group(['prefix' => 'account'], function(){
 	Route::post('/edit','UserController@update')->name('account_update');
 });
 
+Route::get('logout', 'Auth\LoginController@logout', function () {
+    return abort(404);
+});
+
 Route::get('admin/login', 'Admin\LoginController@showLoginForm')->name('AdminLoginForm');
 Route::post('admin/login', 'Admin\LoginController@login')->name('AdminLogin');
 Route::get('admin/logout', 'Admin\LoginController@logout')->name('AdminLogout');

@@ -12,6 +12,8 @@ $(".picture-slider-container").slick({
 		arrows:true,
 		infinite:true,
 		variableWidth:true,
+		autoplay: true,
+		autoplaySpeed: 3000,
 		responsive:[
 		{
 			breakpoint: 768,

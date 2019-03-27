@@ -23,11 +23,15 @@
 			<div class="col-md-8 col-11">
 				<div class="d-sm-flex justify-content-between">
 					<ul>
-						<li><a href="tel:+01432152323"><span class="align-middle"><i class="ti-mobile"></i></span>+0963523490</a></li>
-						<li><a href="mailto:info@example.com"><span class="align-middle"><i class="ti-email"></i></span>onlinelibrary@gmail.comn</a></li>
+						<li><a href="tel:+01432152323"><span class="align-middle"><i class="ti-mobile"></i></span>+01432152323</a></li>
+						<li><a href="mailto:info@example.com"><span class="align-middle"><i class="ti-email"></i></span>info@example.com</a></li>
 					</ul>
 					<ul>
 						@if(Auth::check())
+
+						@if(Auth::user()->roles == 1)
+						<li><a href="{{ route('admin-home') }}">Admin Controll </a></li>
+						@endif
 						<li><a href="{{ route('account_profile') }}">Hello , <?php echo Auth::user()->firstname ?></a></li>
 						<li><a href="{{ route('logout') }}">Logout</a></li>
 						@else
@@ -44,7 +48,7 @@
 			<div class="col-md-8 col-11">
 				<div class="row">
 					<div class="col-md-2 col-2">
-						<img src="https://upload.wikimedia.org/wikipedia/en/b/b8/Mid-Continent_Public_Library_logo.png" alt="" height="100px">
+						<a href="{{ route('home') }}"><img src="https://upload.wikimedia.org/wikipedia/en/b/b8/Mid-Continent_Public_Library_logo.png" alt="" height="100px"></a>
 					</div>
 					<div class="col-md-8 col-sm-7">
 						<div class="wrap">
@@ -63,7 +67,7 @@
 			</div>
 		</div>
 	</div>
-
+	<hr>
 
 	<div class="row d-flex justify-content-center">
 		<div class="col-md-8 col-11">
@@ -149,10 +153,11 @@
 
 	<!-- JS-->
 	<!-- Bootstrap JS-->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 	<!-- Custom JS-->
 	@yield('custom-js')	
