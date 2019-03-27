@@ -1,105 +1,110 @@
 @extends('admin.layouts.master')
 @section('content')
-<div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header">Quản lý sách</h1>
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Chỉnh sửa sách "{{ $book->name }}"
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <form action="{{ route('updateBooks', $book->id) }}" method="POST" enctype="multipart/form-data">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <div class="col-lg-3">
-                                                <img id="showImage" src="{{ asset('uploads/'.$book->img) }}" style="width: 270px;height: 364px">
-                                                <div class="form-group">
-                                                    <label>Hình ảnh</label>
-                                                    <input id="fileimg" name="img" type="file">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-9">
-                                                
-                                                @if($errors->any())
-                                                <div class="alert alert-danger alert-dismissible">
-                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                    @foreach($errors->all() as $err)
-                                                    <li>{{$err}}</li>
-                                                    @endforeach
-                                                </div>
-                                                @endif
-                                                @if(session('class'))
-                                                <div class="alert alert-{{session('class')}}">
-                                                  <li>{{session('message')}}</li>
-                                                </div>
-                                                @endif
-                                                <div class="form-group">
-                                                    <label>Tên sách</label>
-                                                    <input name="name" value="{{ $book->name }}" type="text" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Tên tác giả</label>
-                                                    <input name="author" value="{{ $book->author }}" type="text" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Năm xuất bản</label>
-                                                    <input name="published_year" value="{{ $book->published_year }}" type="text" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Danh mục</label>
-                                                    <select name="categories_id" class="form-control">
-                                                        @foreach($categories as $row)
-                                                        <option value="{{ $row->id }}" {{ $row->id == $book->categories_id ? 'selected' : ''  }}>{{ $row->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Số lượng</label>
-                                                    <input name="quantity" type="number" class="form-control" min="1" value="{{ $book->quantity }}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Giá cho thuê</label>
-                                                    <input name="price" type="number" class="form-control" min="0" value="{{ $book->price }}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Mô tả</label>
-                                                    <textarea name="describes" class="form-control" rows="3">{{ $book->describes }}</textarea>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary btn-lg btn-block">Sửa sách</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <!-- /.row (nested) -->
-                                </div>
-                                <!-- /.panel-body -->
-                            </div>
-                            <!-- /.panel -->
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">
+                <em class="fa fa-home"></em>
+            </a></li>
+            <li>Books Manager</li>
+            <li class="active">Edit Book</li>
+        </ol>
+    </div><!--/.row-->
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Book Manager</h1>
+        </div>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Thay đổi thông tin sách
                 </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            @if(session('class'))
+                            <div class="alert bg-{{session('class')}}" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>{{session('message')}}</div>
+                            @endif
+                            <form action="{{ route('updateBook', $book->id) }}" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="input-file">Hình Ảnh</label>
+                                        <input type="file" id="input-file" name="img" class="dropify" data-height="364px" data-default-file="{{asset('uploads')}}/{{ $book->img }}" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                                        <label>Tên sách</label>
+                                        <input class="form-control" type="text" name="name" value="{{$book->name}}" placeholder="Tên sách (V/d: Tây du ký">
+                                        @if ($errors->has('name'))
+                                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group {{ $errors->has('author') ? 'has-error' : '' }}">
+                                        <label>Tên tác giả</label>
+                                        <input class="form-control" type="text" name="author" value="{{$book->author}}" placeholder="Tên của tác giả (V/d: Ngô Thừa Ân)">
+                                        @if ($errors->has('author'))
+                                        <span class="text-danger">{{ $errors->first('author') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group {{ $errors->has('published_year') ? 'has-error' : '' }}">
+                                        <label>Năm xuất bản</label>
+                                        <input class="form-control" type="text" name="published_year" value="{{$book->published_year}}" placeholder="Năm phát hành (V/d: 1950)">
+                                        @if ($errors->has('published_year'))
+                                        <span class="text-danger">{{ $errors->first('published_year') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group {{ $errors->has('category') ? 'has-error' : '' }}">
+                                        <label>Danh mục</label>
+                                        <select name="category" class="form-control">
+                                            @foreach($categories as $category)
+                                            <option value="{{$category->id}}" {{$book->categories_id == $category->id ? 'selected' : ''}}>{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if ($errors->has('category'))
+                                        <span class="text-danger">{{ $errors->first('category') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group {{ $errors->has('quantity') ? 'has-error' : '' }}">
+                                        <label>Số lượng</label>
+                                        <input class="form-control" type="number" name="quantity" min="1" value="{{$book->quantity}}">
+                                        @if ($errors->has('quantity'))
+                                        <span class="text-danger">{{ $errors->first('quantity') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group {{ $errors->has('price') ? 'has-error' : '' }}">
+                                        <label>Giá cho thuê</label>
+                                        <input class="form-control" type="number" name="price" min="0" value="{{$book->price}}">
+                                        @if ($errors->has('price'))
+                                        <span class="text-danger">{{ $errors->first('price') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mô tả thêm</label>
+                                        <textarea class="form-control" name="describes" rows="3">{{ $book->describes }}</textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Thay đổi</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/.col-->
+
+    </div><!--/.row-->
+</div>  <!--/.main-->
 @endsection
 @section('javascript')
 <script type="text/javascript">
-    $(function () {
-        $("#fileimg").change(function () {
-            if (this.files && this.files[0]) {
-                var reader = new FileReader();
-                reader.onload = imageIsLoaded;
-                reader.readAsDataURL(this.files[0]);
-            }
-        });
+    $(document).ready(function(){
+        // Basic
+        $('.dropify').dropify();
     });
-    function imageIsLoaded(e) {
-        $('#showImage').attr('src', e.target.result);
-    };
 </script>
 @endsection

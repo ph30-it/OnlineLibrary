@@ -37,7 +37,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function Order(){
+    public function order(){
         return $this->hasMany('App\Order', 'users_id', 'id');
+    }
+
+    public function Comment(){
+        return $this->hasMany('App\Comment', 'users_id', 'id');
     }
 }

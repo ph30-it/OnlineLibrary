@@ -9,54 +9,43 @@ use App\Order;
 class OrderController extends Controller
 {
     public function index(){
-    	$order = Order::all();
-    	return view('admin.orders.index', compact('order'));
+    	$orders = Order::where('status', '!=', 3)->orderBy('status', 'ASC')->paginate(50);
+    	return view('admin.orders.index', compact('orders'));
     }
 
     public function ViewDetail(request $request){
         $id = $request->orderid;
         if($order = Order::find($id)){
-
-            $html = '<div class="row">
-             <div class="col-lg-12">
-             <p>Tên thành viên: '.$order->user->firstname.' '.$order->user->lastname.'</p>
-             <p>Số điện thoại: '.$order->user->phone.'</p>
-             <p>Đặt ngày: '.$order->created_at.'</p>
-             <table class="table table-striped table-bordered table-hover">
-             <thead>
-             <tr>
-             <th>Tên sách</th>
-             <th>Số lượng</th>
-             <th>Giá tiền</th>
-             </tr>
-             </thead>
-             <tbody>';
-             foreach ($order->Book as $row) {
-                $html .= '<tr>
-                <td>'.$row->name.'</td>
-                <td>'.$row->quantity.'</td>
-                <td>'.$row->price.'</td>
-                </tr>';
-             }
-             $html .= '</tbody>
-             </table>
-             </div>
-             </div>';
-             return $html;
+            return response()->json([
+                'readers' => $order->user->firstname.' '.$order->user->lastname,
+                'created_time' => date($order->created_at),
+                'count' => $order->book->count(),
+                'status' => $order->status,
+                'book' => $order->book
+            ],200);
         }
     }
 
-    public function updateStatus(request $request){
+    public function update(request $request){
     	$data = $request->only('id', 'status');
     	if($order = Order::find($data['id'])){
             if($data['status'] == 4){
                 $data['date_borrow'] = date("Y-m-d h:i:s");
             }
-    		if($data['status'] >= 5){
+            else if($data['status'] > 4){
     			$data['date_give_back'] = date("Y-m-d h:i:s");
     		}
-    		$order->update($data);
+            if($order->update($data)){
+                return response()->json(['error' => 0], 200);
+            }
     	}
-    	return redirect()->back();
+    	return response()->json(['error' => 1], 200);
+    }
+
+    public function search(request $request){
+        $orders = Order::whereHas('user', function ($query) use ($request){
+            return $query->WhereRaw("concat(firstname, ' ', lastname) like '%$request->key%' ");
+        })->Where('status', '!=', 3)->orWhere('id', 'like', "%$request->key%")->Where('status', '!=', 3)->orderBy('status', 'ASC')->paginate(50);
+        return view('admin.orders.index', compact('orders'));
     }
 }

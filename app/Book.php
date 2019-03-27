@@ -13,11 +13,15 @@ class Book extends Model
     	'name', 'img', 'author', 'published_year', 'describes', 'price', 'quantity', 'categories_id'
     ];
 
-    public function categories(){
-        return $this->belongsTo('App\Categories');
+    public function Category(){
+        return $this->belongsTo('App\Category', 'categories_id', 'id');
     }
 
     public function Order(){
         return $this->belongstoMany('App\Order', 'detail_order', 'order_id', 'books_id');
+    }
+
+    public function Comment(){
+        return $this->hasMany('App\Comment', 'books_id', 'id');
     }
 }

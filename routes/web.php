@@ -28,36 +28,48 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 	Route::get('/', 'Admin\DashboardController@index')->name('admin-home');
 
 	Route::group(['prefix' => 'users'], function(){
-		Route::get('/list', 'Admin\UsersController@index')->name('listUsers');
-		Route::delete('/list', 'Admin\UsersController@delete')->name('deleteUsers');
-		Route::get('/create', 'Admin\UsersController@showCreateUser')->name('showaddUsers');
-		Route::post('/create', 'Admin\UsersController@create')->name('createUsers');
-		Route::get('/{id}/edit', 'Admin\UsersController@showEditUser')->name('showeditUsers');
-		Route::post('/{id}/edit', 'Admin\UsersController@update')->name('updateUsers');
+		Route::get('/list', 'Admin\UsersController@index')->name('ListUser');
+		Route::delete('/deleted', 'Admin\UsersController@delete')->name('deleteUser');
+		Route::get('/{id}/detail', 'Admin\UsersController@detail')->name('detailUser');
+		Route::get('/{id}/edit', 'Admin\UsersController@showEditUser')->name('showEditUser');
+		Route::post('/{id}/edit', 'Admin\UsersController@update')->name('updateUser');
+		Route::get('/search', 'Admin\UsersController@search')->name('searchUser');
+		Route::get('/create', 'Admin\UsersController@showAddUser')->name('showAddUser');
+		Route::post('/create', 'Admin\UsersController@create')->name('createUser');
 	});
 
-	Route::group(['prefix' => 'categories'], function(){
-		Route::get('/list', 'Admin\CategoriesController@index')->name('listCategory');
-		Route::delete('/list', 'Admin\CategoriesController@delete')->name('deleteCategory');
-		Route::get('/create', 'Admin\CategoriesController@showCreateCategory')->name('showaddCategory');
-		Route::post('/create', 'Admin\CategoriesController@create')->name('createCategory');
-		Route::get('/{id}/edit', 'Admin\CategoriesController@showEdit')->name('showeditCategory');
-		Route::post('/{id}/edit', 'Admin\CategoriesController@update')->name('updateCategory');
+	Route::group(['prefix' => 'category'], function(){
+		Route::get('/list', 'Admin\CategoryController@index')->name('ListCategory');
+		Route::post('/list', 'Admin\CategoryController@create')->name('addCategory');
+		Route::delete('/deleted', 'Admin\CategoryController@delete')->name('deleteCategory');
+		Route::post('/updated', 'Admin\CategoryController@update')->name('updateCategory');
 	});
 
 	Route::group(['prefix' => 'books'], function(){
-		Route::get('/list', 'Admin\BooksController@index')->name('listBooks');
-		Route::get('/create', 'Admin\BooksController@showCreateBooks')->name('showaddBooks');
-		Route::post('/create', 'Admin\BooksController@create')->name('createBooks');
-		Route::get('/{id}/edit', 'Admin\BooksController@showEditBooks')->name('showeditBooks');
-		Route::post('/{id}/edit', 'Admin\BooksController@update')->name('updateBooks');
-		Route::delete('/list', 'Admin\BooksController@delete')->name('deleteBooks');
+		Route::get('/list', 'Admin\BookController@index')->name('ListBook');
+		Route::delete('/list', 'Admin\BookController@delete')->name('deleteBook');
+		Route::get('/create', 'Admin\BookController@showAddBook')->name('showAddBook');
+		Route::post('/create', 'Admin\BookController@create')->name('addBook');
+		Route::get('/{id}/edit', 'Admin\BookController@showEditBook')->name('showEditBook');
+		Route::post('/{id}/edit', 'Admin\BookController@update')->name('updateBook');
+		Route::get('/search', 'Admin\BookController@search')->name('searchBook');
 	});
 
 	Route::group(['prefix' => 'order'], function(){
-		Route::get('/list', 'Admin\OrderController@index')->name('listOrder');
-		Route::post('/list', 'Admin\OrderController@updateStatus')->name('updateStatus');
-		Route::get('/detail', 'Admin\OrderController@ViewDetail')->name('detail');
+		Route::get('/list', 'Admin\OrderController@index')->name('ListOrder');
+		Route::post('/updated', 'Admin\OrderController@update')->name('updateOrder');
+		Route::get('/detail', 'Admin\OrderController@ViewDetail')->name('detailOrder');
+		Route::get('/search', 'Admin\OrderController@search')->name('searchOrder');
 	});
+
+	Route::group(['prefix' => 'comment'], function(){
+		Route::get('/list', 'Admin\CommentController@index')->name('ListComment');
+		Route::delete('/deleted', 'Admin\CommentController@delete')->name('deleteComment');
+		Route::get('/search', 'Admin\CommentController@search')->name('searchComment');
+	});
+
+	// Route::group(['prefix' => 'sendmail'], function(){
+	// 	route::get('/',);
+	// });
 });
 

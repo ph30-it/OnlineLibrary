@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\LoginRequest;
 class LoginController extends Controller
 {
     
@@ -28,10 +28,9 @@ class LoginController extends Controller
         return view('admin.login');
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $this->validate($request, ['email' => 'required|email', 'password' => 'required'], ['email.required' => 'Email không được trống.', 'password.required' => 'Mật khẩu không được trống.']);
-        $data = $request->only('email', 'password');
+        $data = $request->except('_token');
         if (\Auth::attempt($data)) {
         	//dd(\Auth::user());
         	if (\Auth::user()->roles == 1) {
