@@ -4,7 +4,7 @@
             <img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
         </div><br>
         <div class="profile-usertitle">
-            <div class="profile-usertitle-name">{{ Auth::user()->firstname . Auth::user()->lastname }}</div>
+            <div class="profile-usertitle-name">{{ Auth::user()->lastname ." ".Auth::user()->firstname}}</div>
             <div class="profile-usertitle-status"><i class="fa fa-circle"></i>Online</div>
         </div>
         <div class="clear"></div>
