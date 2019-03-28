@@ -14,19 +14,19 @@
 	<div class="row">
 		<div class="col-12">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{{ route('home') }}">
-					<i class="fas fa-home"></i>
+				<li><a href="{{ route('home') }}">
+					<i class="ti-home"></i>
 				</a></li>
-				<li class="breadcrumb-item"><a href="{{ route('category', $book->categories->id) }}">{{$book->categories->name}}</a></li>
-				<li class="breadcrumb-item active">{{$book->name}}</li>
+				<li class="active"><a href="{{ route('category', $book->categories->id) }}">{{$book->categories->name}}</a></li>
+				<li><a href="">{{$book->name}}</a></li>
 			</ol>
 		</div>
-		<div class="col-5">
+		<div class="col-4">
 			<div class="book-cover">
 				<img src="{{$book->img}}">
 			</div>
 		</div>
-		<div class="col-7">
+		<div class="col-8">
 			<div class="book-info-container">
 				<div class="book-name">
 					<b>{{$book->name}}</b>
@@ -83,5 +83,4 @@
 @endsection
 
 @section('custom-js')
-<script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
 @endsection

@@ -1,19 +1,19 @@
-@extends('layouts.main')
+@extends('user.layouts.master')
 
 @section('page-title','Info Account')
 
-@section('custom-css')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/user.css') }}">
+@section('link')
+Account
 @endsection
 
-@section('page-content')
-<div class="row accountcontainer">
-    <div class="col-4">
-        <?php $current = 1 ?>
-        @include('user.layouts.menu')
+@section('content')
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Info Account - {{Auth::user()->firstname}}</h1>
     </div>
-    <div class="col-8 infocontainer">
-        <h1>Info Account - {{Auth::user()->firstname}}</h1>
+</div><!--/.row-->
+<div class="row">
+    <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="tab-content ml-1" id="myTabContent">
                 <div class="row">
@@ -59,14 +59,14 @@
                     <div class="col-md-8 col-6">
                         <?php if (Auth::user()->gender == 1): ?>
                             Male
-                            <?php else: ?>
-                                Female
-                            <?php endif ?>
-                        </div>
+                        <?php else: ?>
+                            FeMale
+                        <?php endif ?>
                     </div>
-                    <hr/>
                 </div>
+                <hr />
             </div>
         </div>
     </div>
-    @endsection
+</div>
+@endsection

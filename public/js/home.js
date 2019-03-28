@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$(".picture-slider-container").slick({
+$(".picture-slider-container").slick({
 		slidesToShow:1,
 		slidesToScroll:1,
 		autoplay: true,
@@ -7,7 +7,7 @@ $(document).ready(function(){
 		arrows: false,
 	});
 	$(".book-list").slick({
-		slidesToShow:5,
+		slidesToShow:6,
 		slidesToScroll:2,
 		arrows:true,
 		infinite:true,

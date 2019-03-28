@@ -16,11 +16,11 @@
 				<ul class="list-group">
 					<li class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Categories</li>
 					@foreach($categories as $category)
-					<a href="{{ route('category', $category->id) }}">
-						<li class="list-group-item cat-item">
+					<li class="list-group-item cat-item">
+						<a href="{{ route('category', $category->id) }}">
 							{{$category->name}}
-						</li>
-					</a>
+						</a>
+					</li>
 					@endforeach
 
 				</ul>
@@ -46,7 +46,7 @@
 <div class="product-container">
 	<div class="row d-flex justify-content-center">
 		<div class="col-12">
-			@for ($i = 0; $i < 2; $i++)
+			@for ($i = 0; $i < count($categories); $i++)
 			<div class="product-by-category-container">
 				<div class="category-name">
 					<a href="{{ route('category', $books[$i][0]->categories->id) }}">{{$books[$i][0]->categories->name}}</a>
@@ -89,7 +89,6 @@
 @endsection
 
 @section('custom-js')
-<script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/home.js') }}"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
