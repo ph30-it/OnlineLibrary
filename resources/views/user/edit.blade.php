@@ -65,8 +65,8 @@
 				<div class="form-group">
 					<label>Gender</label>
 					<label class="checkbox-inline">
-						<input type="radio" name="gender"value="1" {{ Auth::user()->gender == 0 ? 'checked' : '' }}>Male
-						<input type="radio" name="gender" value="0" {{ Auth::user()->gender == 0 ? 'checked' : '' }}>Female
+						<input type="radio" name="gender"value="0" {{ Auth::user()->gender == 0 ? 'checked' : '' }}>Male
+						<input type="radio" name="gender" value="1" {{ Auth::user()->gender == 1 ? 'checked' : '' }}>Female
 					</label>
 				</div>
 
