@@ -149,3 +149,14 @@ p{
 	color: #FA1818;
 	background-color: white !important;
 }
+.carticon{
+	font-size: 250%;
+	color: #e74c3c;
+	padding-left: 10px;
+}
+.carticon:hover{
+	color: black;
+}
+.cartt{
+	margin-top: 40px;
+}

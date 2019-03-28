@@ -60,7 +60,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-2 col-sm-3">
+					<div class="col-md-2 col-sm-3 cartt">
+						<a href="{{ route('cart') }}"><i class="fas fa-shopping-cart carticon"></i></a>
 					</div>
 				</div>
 			</div>

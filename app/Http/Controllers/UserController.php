@@ -17,14 +17,13 @@ class UserController extends Controller
 	}
 
 	public function update(EditUserRequest $request){
-    	$data = $request->only('gender', 'phone', 'firstname', 'lastname', 'address');
-    	$user = User::where('email',$request->email);
+		$data = $request->only('gender', 'phone', 'firstname', 'lastname', 'address');
+		$user = User::where('email',$request->email);
+		if ($user->update($data)) {
+			return redirect()->back()->with(['class' => 'success', 'message' => 'Update Success.']);
+		}else{
+			return redirect()->back()->with(['class' => 'danger', 'message' => 'Error Database.']);
+		}
 
-    	if ($user->update($data)) {
-    		return redirect()->back()->with(['class' => 'success', 'message' => 'Update Success.']);
-    	}else{
-    		return redirect()->back()->with(['class' => 'danger', 'message' => 'Error Database.']);
-    	}
-    	
 	}
 }

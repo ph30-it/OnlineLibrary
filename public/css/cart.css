@@ -24,3 +24,10 @@ button.cart{
 	margin-top: 50px;
 	margin-bottom: 100px;
 }
+.nomargin{
+	color: #e74c3c;
+}
+.nomargin:hover{
+	color: #e74c3c;
+	font-weight: bold;
+}

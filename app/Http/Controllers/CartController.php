@@ -31,6 +31,7 @@ class cartcontroller extends controller
 					"price" => $book->price,
 					"photo" => $book->img,
 					"id" => $book_id,
+					"category_id" => $book->categories->id,
 					"category" => $book->categories->name,
 					"des" => $book->describes
 				]
@@ -41,6 +42,7 @@ class cartcontroller extends controller
 				"price" => $book->price,
 				"photo" => $book->img,
 				"id" => $book_id,
+				"category_id" => $book->categories->id,
 				"category" => $book->categories->name,
 				"des" => $book->describes
 			];
@@ -88,7 +90,7 @@ class cartcontroller extends controller
 
 		DB::beginTransaction();
 		try {
-            $order = DB::table('Order')->insertGetId(['status' => 1,'price' => '0','users_id' => \Auth::user()->id,'created_at' => now(),'updated_at' => now()]);
+			$order = DB::table('Order')->insertGetId(['status' => 1,'price' => '0','users_id' => \Auth::user()->id,'created_at' => now(),'updated_at' => now()]);
 			foreach($cart as $c){
 				DB::table('Detail_Order')->insert(['order_id' => $order,'books_id' => $c["id"],'created_at' => now(),'updated_at' => now()]);
 				DB::table('Order')->increment('price' ,$c['price']);

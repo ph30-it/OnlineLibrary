@@ -36,9 +36,9 @@ Cart
 	<thead>
 		<tr>
 			<th style="width:50%">Book</th>
-			<th style="width:15%">Category</th>
-			<th style="width:10%">Price</th>
-			<th style="width:10%">Quantity</th>
+			<th style="width:10%">Category</th>
+			<th style="width:15%" class="text-center">Price</th>
+			<th style="width:10%" class="text-center">Quantity</th>
 			<th style="width:15%"></th>
 		</tr>
 	</thead>
@@ -49,17 +49,15 @@ Cart
 				<div class="row">
 					<div class="col-sm-2 hidden-xs"><img src="{{$book['photo']}}" alt="..." class="img-responsive" height="100px" width="70px"/></div>
 					<div class="col-sm-10">
-						<h4 class="nomargin">{{ $book['name'] }}</h4>
-						<p>{{ $book['des'] }}</p>
+						<h4><a class="nomargin" href="{{ route('book',$book['id']) }}">{{ $book['name'] }}</a></h4>
+						<p>Describes : {{substr($book['des'],0,90)}} ...</p>
 					</div>
 				</div>
 			</td>
-			<td>{{$book['category']}}</td>
-			<td data-th="Quantity">
-				<input type="number" class="form-control text-center" value="1">
-			</td>
-			<td data-th="Subtotal" class="text-center">1.99</td>
-			<td>
+			<td><a href="{{ route('category',$book['category_id']) }}">{{$book['category']}}</a></td>
+			<td class="text-center">{{number_format($book['price'])}} VND</td>
+			<td class="text-center">1</td>
+			<td class="text-center">
 				<form onsubmit="openModal()" id="myForm">
 					<button type="submit" class="btn btn-danger">Delete</button>
 				</form>
@@ -77,7 +75,7 @@ Cart
 								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 								<form action="{{ route('remove-cart') }}" method="post">
 									@csrf
-									<input type="hidden" name="id" value="{{ $key }}">
+									<input type="hidden" name="id" value="{{ $book['id'] }}">
 									<input type="hidden" name="_method" value="delete" />
 									<button type="submit" class="btn btn-danger">Submit Delete</button>
 								</form>
