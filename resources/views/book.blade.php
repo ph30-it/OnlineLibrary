@@ -14,11 +14,11 @@
 	<div class="row">
 		<div class="col-12">
 			<ol class="breadcrumb">
-				<li><a href="{{ route('home') }}">
+				<li class="breadcrumb-item"><a href="{{ route('home') }}">
 					<i class="fas fa-home"></i>
 				</a></li>
-				<li class="active"><a href="{{ route('category', $book->categories->id) }}">{{$book->categories->name}}</a></li>
-				<li><a href="">{{$book->name}}</a></li>
+				<li class="breadcrumb-item"><a href="{{ route('category', $book->categories->id) }}">{{$book->categories->name}}</a></li>
+				<li class="breadcrumb-item active">{{$book->name}}</li>
 			</ol>
 		</div>
 		<div class="col-5">
@@ -83,4 +83,5 @@
 @endsection
 
 @section('custom-js')
+<script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
 @endsection

@@ -29,7 +29,7 @@ class HomeController extends Controller
         $list_category = Categories::take(2)->get();
         $booksData = array();
         foreach($list_category as $key => $category ){
-            $book = Book::where('categories_id','=',$category->id)->take(7)->get();
+            $book = Book::where('categories_id','=',$category->id)->where('quantity','>',0)->take(7)->get();
             array_push($booksData,$book);
         }
         return view('home', [

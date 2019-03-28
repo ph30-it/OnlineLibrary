@@ -1,19 +1,25 @@
 .breadcrumb {
+	padding-left: 20px;
 	border-radius: 0;
-	padding: 10px 15px 10px 15px;
 	background: #e74c3c;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
 	height: 50px;
 }
-.breadcrumb a{
+
+.breadcrumb li,a{
 	color: white;
-	padding-left: 10px;
-	padding-right: 10px;
 }
-.breadcrumb a:hover{
-	font-weight: bold;
+
+.active{
+	color: white !important;
 }
+
+.breadcrumb-item a:hover{
+	font-size: 110%;
+	color: white;
+}
+
 button.cart{
 	margin-top: 50px;
 	margin-bottom: 100px;

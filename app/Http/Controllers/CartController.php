@@ -51,7 +51,7 @@ class cartcontroller extends controller
 		return 1;
 	}
 
-	function remove(request $request){
+	public function remove(request $request){
 		if($request->id){
 			$cart = session()->get('cart');
 			if(isset($cart[$request->id])){
@@ -65,7 +65,7 @@ class cartcontroller extends controller
 		return redirect()->back()->with(['class' => 'danger', 'message' => 'something wrong.']);
 	}
 
-	function submit_cart(){
+	public function submit_cart(){
 		$cart = session()->get('cart');
 		if(!$cart) return redirect()->back()->with(['class' => 'danger', 'message' => 'something wrong.']);
 		//Dang muon sach theo mot don hang khac

@@ -6,25 +6,26 @@
 
 @section('custom-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/category.css') }}">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 @endsection
 
 @section('page-content')
 <div class="product-container">
-	<div class="row d-flex justify-content-center">
+	<div class="row">
 		<div class="col-12">
 			<div>
 				<ol class="breadcrumb">
-					<li><a href="{{ route('home') }}">
+					<li class="breadcrumb-item"><a href="{{ route('home') }}">
 						<i class="fas fa-home"></i>
 					</a></li>
-					<li><a href="">Category / </a></li>
-					<li class="active"><a href="{{ route('category', $data[0]->categories->id) }}">{{$data[0]->categories->name}}</a></li>
+					<li class="breadcrumb-item"><a href="">Category</a></li>
+					<li class="breadcrumb-item active">{{$data[0]->categories->name}}</li>
 				</ol>
 			</div>
 			<div class="all-products-container">
 
 				@foreach ($data as $book)
-				<div class="product-container container shadow-hover">
+				<div class="product-container container shadow-hover" id="#example">
 					<div class="row">
 						<div class="col-md-6 col-12">
 							<div class="product-image">
@@ -62,5 +63,13 @@
 @endsection
 
 @section('custom-js')
-<!-- <script type="text/javascript" src="{{ asset('js/category.js') }}"></script> -->
+<script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+<script>
+	$(document).ready(function() {
+		$('#example').DataTable( {
+			"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+		} );
+	} );
+</script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 @endsection

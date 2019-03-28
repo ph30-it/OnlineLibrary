@@ -10,8 +10,6 @@
 
 	<!-- Main Page CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	
-	<link rel="stylesheet" href="{{ asset('css/hamburgers') }}">
 	<link rel="stylesheet" href="{{ asset('css/main.css') }}">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<!-- Custom CSS -->
@@ -19,7 +17,7 @@
 </head>
 <body>
 	<div class="header-top">
-		<div class="row d-flex justify-content-center">
+		<div class="row justify-content-center">
 			<div class="col-md-8 col-11">
 				<div class="d-sm-flex justify-content-between">
 					<ul>
@@ -44,13 +42,13 @@
 		</div>
 	</div>
 	<div class="header-middle">
-		<div class="row d-flex justify-content-center">
+		<div class="row justify-content-center">
 			<div class="col-md-8 col-11">
 				<div class="row">
-					<div class="col-md-2 col-2">
+					<div class="col-md-3 col-2">
 						<a href="{{ route('home') }}"><img src="https://upload.wikimedia.org/wikipedia/en/b/b8/Mid-Continent_Public_Library_logo.png" alt="" height="100px"></a>
 					</div>
-					<div class="col-md-8 col-sm-7">
+					<div class="col-md-7 col-sm-7">
 						<div class="wrap">
 							<div class="search">
 								<input type="text" class="searchTerm" placeholder="What are you looking for?">

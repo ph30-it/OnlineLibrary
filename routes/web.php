@@ -16,6 +16,7 @@ Route::group(['prefix' => 'account','middleware' => 'auth'], function(){
 	Route::get('/','UserController@account')->name('account_profile');
 	Route::get('/edit','UserController@edit_show')->name('account_edit');
 	Route::post('/edit','UserController@update')->name('account_update');
+	Route::get('/order/{status?}','OrderController@listOrderByStatus')->name('order_by_status');
 });
 
 Route::group(['prefix' => 'cart'], function(){

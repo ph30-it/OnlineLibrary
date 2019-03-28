@@ -11,10 +11,10 @@ Cart
 @section('page-content')
 <div>
 	<ol class="breadcrumb">
-		<li><a href="{{ route('home') }}">
+		<li class="breadcrumb-item"><a href="{{ route('home') }}">
 			<i class="fas fa-home"></i>
 		</a></li>
-		<li><a href="{{ route('cart') }}">Cart</a></li>
+		<li class="breadcrumb-item active">Cart</li>
 	</ol>
 </div>
 @if(session('class'))

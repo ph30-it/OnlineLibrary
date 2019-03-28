@@ -16,11 +16,11 @@
 				<ul class="list-group">
 					<li class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Categories</li>
 					@foreach($categories as $category)
-					<li class="list-group-item cat-item">
-						<a href="{{ route('category', $category->id) }}">
+					<a href="{{ route('category', $category->id) }}">
+						<li class="list-group-item cat-item">
 							{{$category->name}}
-						</a>
-					</li>
+						</li>
+					</a>
 					@endforeach
 
 				</ul>
@@ -89,6 +89,7 @@
 @endsection
 
 @section('custom-js')
+<script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/home.js') }}"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
