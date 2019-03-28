@@ -46,7 +46,7 @@
 <div class="product-container">
 	<div class="row d-flex justify-content-center">
 		<div class="col-12">
-			@for ($i = 0; $i < count($categories); $i++)
+			@for ($i = 0; $i < 2; $i++)
 			<div class="product-by-category-container">
 				<div class="category-name">
 					<a href="{{ route('category', $books[$i][0]->categories->id) }}">{{$books[$i][0]->categories->name}}</a>

@@ -15,18 +15,18 @@
 		<div class="col-12">
 			<ol class="breadcrumb">
 				<li><a href="{{ route('home') }}">
-					<i class="ti-home"></i>
+					<i class="fas fa-home"></i>
 				</a></li>
 				<li class="active"><a href="{{ route('category', $book->categories->id) }}">{{$book->categories->name}}</a></li>
 				<li><a href="">{{$book->name}}</a></li>
 			</ol>
 		</div>
-		<div class="col-4">
+		<div class="col-5">
 			<div class="book-cover">
 				<img src="{{$book->img}}">
 			</div>
 		</div>
-		<div class="col-8">
+		<div class="col-7">
 			<div class="book-info-container">
 				<div class="book-name">
 					<b>{{$book->name}}</b>

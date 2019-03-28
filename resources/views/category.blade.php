@@ -15,7 +15,7 @@
 			<div>
 				<ol class="breadcrumb">
 					<li><a href="{{ route('home') }}">
-						<i class="ti-home"></i>
+						<i class="fas fa-home"></i>
 					</a></li>
 					<li><a href="">Category / </a></li>
 					<li class="active"><a href="{{ route('category', $data[0]->categories->id) }}">{{$data[0]->categories->name}}</a></li>
@@ -62,4 +62,5 @@
 @endsection
 
 @section('custom-js')
+<!-- <script type="text/javascript" src="{{ asset('js/category.js') }}"></script> -->
 @endsection

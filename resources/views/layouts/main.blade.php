@@ -13,7 +13,7 @@
 	
 	<link rel="stylesheet" href="{{ asset('css/hamburgers') }}">
 	<link rel="stylesheet" href="{{ asset('css/main.css') }}">
-	<link rel="stylesheet" href="{{ asset('vendor/themify-icons/themify-icons.css') }}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<!-- Custom CSS -->
 	@yield('custom-css')
 </head>
@@ -23,8 +23,8 @@
 			<div class="col-md-8 col-11">
 				<div class="d-sm-flex justify-content-between">
 					<ul>
-						<li><a href="tel:+01432152323"><span class="align-middle"><i class="ti-mobile"></i></span>+01432152323</a></li>
-						<li><a href="mailto:info@example.com"><span class="align-middle"><i class="ti-email"></i></span>info@example.com</a></li>
+						<li><a href="tel:+01432152323"><span class="align-middle"><i class="fas fa-mobile-alt"></i></span>+01432152323</a></li>
+						<li><a href="mailto:info@example.com"><span class="align-middle"><i class="fas fa-envelope-open-text"></i></span>info@example.com</a></li>
 					</ul>
 					<ul>
 						@if(Auth::check())
@@ -55,13 +55,12 @@
 							<div class="search">
 								<input type="text" class="searchTerm" placeholder="What are you looking for?">
 								<button type="submit" class="searchButton">
-									<i class="ti-search"></i>
+									<i class="fas fa-search"></i>
 								</button>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-2 col-sm-3">
-						
 					</div>
 				</div>
 			</div>
@@ -76,17 +75,19 @@
 		</div>
 	</div>
 
-	<!-- <div class="newsletter">
+	<div class="newsletter">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-5 col-12">
-					<p class="h3 text-white">Sign up for our newsletter</p>
-				</div>
-				<div class="col-md-7">
-					<div class="input-group">
-						<input type="email" class="form-control" name="Email" value="Input your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-						<div class="input-group-append">
-							<button class="btn btn-danger" type="submit">Submit</button> 
+			<div class="row" style="display: flex;justify-content: center;align-items: center;height: 120px">
+				<div class="col-10">
+					<div class="row">
+						<div class="col-md-5 col-12">
+							<p class="h2 text-white">Sign up for our newsletter</p>
+						</div>
+						<div class="col-md-7">
+							<form class="input-group">
+								<input type="email" class="form-control" name="Email" value="Input your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
+								<button class="btn btn-default" type="submit">Submit</button> 
+							</form>
 						</div>
 					</div>
 				</div>
@@ -94,62 +95,6 @@
 		</div>
 	</div>
 	
-	
-	<section id="footer">
-		<div class="container">
-			<div class="row text-center text-xs-center text-sm-left text-md-left">
-				<div class="col-xs-12 col-sm-4 col-md-4">
-					<h5>Quick links</h5>
-					<ul class="list-unstyled quick-links">
-						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
-						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
-						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
-						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Videos</a></li>
-					</ul>
-				</div>
-				<div class="col-xs-12 col-sm-4 col-md-4">
-					<h5>Quick links</h5>
-					<ul class="list-unstyled quick-links">
-						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
-						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
-						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
-						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Videos</a></li>
-					</ul>
-				</div>
-				<div class="col-xs-12 col-sm-4 col-md-4">
-					<h5>Quick links</h5>
-					<ul class="list-unstyled quick-links">
-						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
-						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
-						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
-						<li><a href="https://wwwe.sunlimetech.com" title="Design and developed by"><i class="fa fa-angle-double-right"></i>Imprint</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
-					<ul class="list-unstyled list-inline social text-center">
-						<li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-facebook"></i></a></li>
-						<li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-twitter"></i></a></li>
-						<li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-instagram"></i></a></li>
-						<li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-google-plus"></i></a></li>
-						<li class="list-inline-item"><a href="javascript:void();" target="_blank"><i class="fa fa-envelope"></i></a></li>
-					</ul>
-				</div></hr>
-			</div>	
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
-					<p><u><a href="https://www.nationaltransaction.com/">National Transaction Corporation</a></u> is a Registered MSP/ISO of Elavon, Inc. Georgia [a wholly owned subsidiary of U.S. Bancorp, Minneapolis, MN]</p>
-					<p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="https://www.sunlimetech.com" target="_blank">Sunlimetech</a></p>
-				</div>
-			</hr>
-		</div>
-	</section> -->
-	<!-- Footer-->
-
 
 	<!-- JS-->
 	<!-- Bootstrap JS-->
