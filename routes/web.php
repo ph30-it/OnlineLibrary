@@ -12,14 +12,22 @@ Route::get('/book/{id}','BookController@showBookDetailByID')->name('book')->wher
 Route::get('/category/{id}','CategoryController@listBooksById')->name('category')->where('id', '[0-9]+');
 
 
-Route::group(['prefix' => 'account'], function(){
+Route::group(['prefix' => 'account','middleware' => 'auth'], function(){
 	Route::get('/','UserController@account')->name('account_profile');
 	Route::get('/edit','UserController@edit_show')->name('account_edit');
 	Route::post('/edit','UserController@update')->name('account_update');
+	Route::get('/order/{status?}','OrderController@listOrderByStatus')->name('order_by_status');
+});
+
+Route::group(['prefix' => 'cart'], function(){
+	Route::get('/', 'CartController@cart')->name('cart');
+	Route::get('/add_to_cart/{id}','CartController@addToCart');
+	Route::delete('/remove_from_cart','CartController@remove')->name('remove-cart');
+	Route::get('submit','CartController@submit_cart')->name('submit_cart')->middleware('auth');
 });
 
 Route::get('logout', 'Auth\LoginController@logout', function () {
-    return abort(404);
+	return abort(404);
 });
 
 Route::get('admin/login', 'Admin\LoginController@showLoginForm')->name('AdminLoginForm');
