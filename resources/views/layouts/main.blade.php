@@ -73,31 +73,91 @@
 			@yield('page-content')
 		</div>
 	</div>
-
-	<div class="newsletter">
-		<div class="container">
-			<div class="row" style="display: flex;justify-content: center;align-items: center;height: 120px">
-				<div class="col-10">
-					<div class="row">
-						<div class="col-md-5 col-12">
-							<p class="h2 text-white">Sign up for our newsletter</p>
-						</div>
-						<div class="col-md-7">
-							<form class="input-group">
-								<input type="email" class="form-control" name="Email" value="Input your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-								<button class="btn btn-default" type="submit">Submit</button> 
-							</form>
+	
+	<!-- Footer -->
+	<footer class="page-footer font-small unique-color-dark">
+		<div style="background-color: #e74c3c;">
+			<div class="container">
+				<div class="row" style="display: flex;justify-content: center;align-items: center;height: 120px">
+					<div class="col-10">
+						<div class="row">
+							<div class="col-md-5 col-12">
+								<p class="h2 text-white">Sign up for our newsletter</p>
+							</div>
+							<div class="col-md-7">
+								<form class="input-group" method="post" action="{{ route('newsletter_subscribe') }}">
+									 {{ csrf_field() }}
+									<input type="email" class="form-control" name="email" value="Input your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
+									<button class="btn btn-default" type="submit">Submit</button> 
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	
 
+		<div class="container text-center text-md-left mt-5">
+			<div class="row mt-3">
+				<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+					<h6 class="text-uppercase font-weight-bold title">Online Library</h6>
+					<p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
+					adipisicing elit.</p>
+				</div>
+
+				<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+					<h6 class="text-uppercase font-weight-bold title">Products</h6>
+					<!-- <p>
+						<a href="#!">MDBootstrap</a>
+					</p>
+					<p>
+						<a href="#!">MDWordPress</a>
+					</p>
+					<p>
+						<a href="#!">BrandFlow</a>
+					</p>
+					<p>
+						<a href="#!">Bootstrap Angular</a>
+					</p> -->
+				</div>
+
+				<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+					<h6 class="text-uppercase font-weight-bold title">Useful links</h6>
+					<p>
+						<a href="{{ route('account_profile') }}">Your Account</a>
+					</p>
+					<p>
+						<a href="{{ route('cart') }}">Cart</a>
+					</p>
+					<!-- <p>
+						<a href="#!">Shipping Rates</a>
+					</p>
+					<p>
+						<a href="#!">Help</a>
+					</p> -->
+				</div>
+
+				<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+					<h6 class="text-uppercase font-weight-bold title">Contact</h6>
+					<p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+					<p><i class="fas fa-envelope mr-3"></i> info@example.com</p>
+					<p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+					<p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-3">© 2018 Copyright:
+			<a href="{{ route('home') }}"> OnlineLibrary.com</a>
+		</div>
+		<!-- Copyright -->
+
+	</footer>
+	<!-- Footer -->
 	<!-- JS-->
 	<!-- Bootstrap JS-->
-	
+
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

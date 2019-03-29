@@ -1,0 +1,64 @@
+@extends('layouts.main')
+
+@section('page-title')
+Cart
+@endsection
+
+@section('custom-css')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/user.css') }}">
+@endsection
+
+@section('page-content')
+<div class="row accountcontainer">
+	<div class="col-3">
+		@include('user.layouts.menu')
+	</div>
+	<div class="col-9 infocontainer">
+		<h2>Borrowing Books</h2>
+		@if($result == 0)
+		<h4>Nothing to show</h4>
+		@else
+		<h4>Order number :{{ $order->id }}</h4>
+		<div class="alert alert-success">
+			<p>When you real complete, go to library and order new books !</p>
+		</div>
+		<table id="cart" class="table table-hover table-condensed">
+			<thead>
+				<tr>
+					<th style="width:60%">Book</th>
+					<th style="width:20%">Category</th>
+					<th style="width:20%" class="text-center">Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+				@foreach ($data as $book)
+				<tr>
+					<td>
+						<div class="row">
+							<div class="col-sm-2 hidden-xs"><img src="{{ $book->img }}" alt="..." class="img-responsive" height="100px" width="70px"/></div>
+							<div class="col-sm-10">
+								<h4><a class="nomargin" href="{{ route('book',$book->id) }}">{{ $book->name }}</a></h4>
+								<p>Describes : {{substr($book->describes,0,90)}} ...</p>
+							</div>
+						</div>
+					</td>
+					<td><a href="">{{$book->categories->name}}</a></td>
+					<td class="text-center">{{number_format($book->price)}} VND</td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
+		@endif
+	</div>
+</div>
+@endsection
+
+@section('custom-js')
+<script>
+	$('#myForm').on('submit', function(e){
+		$('#myModal').modal('show');
+		e.preventDefault();
+	});
+</script>
+@endsection

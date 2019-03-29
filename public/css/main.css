@@ -164,3 +164,31 @@ p{
 .cartt{
 	margin-top: 40px;
 }
+footer{
+	background-color: #1c2331!important;
+	color: white;
+	line-height: 2em;
+}
+footer a{
+	color: white;
+}
+
+footer a:hover{
+	color: white;
+	font-weight: bold;
+}
+footer .title{
+	padding-bottom: 20px;
+	width: 70%;
+	border-bottom: 2px solid #e74c3c;
+	margin-bottom: 35px;
+}
+
+footer.page-footer .footer-copyright {
+    overflow: hidden;
+    background-color: rgba(0,0,0,.2);
+    color: rgba(255,255,255,.6);
+}
+footer .mt-3{
+	height: 300px;
+}

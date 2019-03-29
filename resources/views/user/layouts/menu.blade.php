@@ -27,8 +27,8 @@
         <div class="block-content">
             <ul>
                 <li><a href="{{ route('order_by_status',1) }}">Wait for confirmation</a></li>
-                <li>Confirmed</li>
-                <li>Borrowing Books</li>
+                <li><a href="{{ route('order_by_status',2) }}">Confirmed</a></li>
+                <li><a href="{{ route('order_by_status',4) }}">Borrowing Books</a></li>
                 <li>Cancelled</li>
                 <li>History</li>
             </ul>

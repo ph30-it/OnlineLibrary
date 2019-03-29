@@ -8,12 +8,12 @@
 
 @section('page-content')
 <div class="row accountcontainer">
-	<div class="col-4">
+	<div class="col-3">
 		<?php $current = 2 ?>
 		@include('user.layouts.menu')
 	</div>
-	<div class="col-8 infocontainer">
-		<h1 class="page-header">Edit Account</h1>
+	<div class="col-9 infocontainer">
+		<h1>Edit Account</h1>
 		<div class="panel panel-default">
 			<form class="form-horizontal" action="{{ route('account_update') }}" method="post">
 				@csrf

@@ -6,5 +6,7 @@ use Illuminate\Http\Request;
 
 class NewsletterController extends Controller
 {
-    //
+    public function subscribe(Request $request){
+    	dd($request);
+    }
 }

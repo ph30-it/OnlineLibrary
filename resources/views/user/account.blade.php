@@ -8,12 +8,11 @@
 
 @section('page-content')
 <div class="row accountcontainer">
-    <div class="col-4">
-        <?php $current = 1 ?>
+    <div class="col-3">
         @include('user.layouts.menu')
     </div>
-    <div class="col-8 infocontainer">
-        <h1>Info Account - {{Auth::user()->firstname}}</h1>
+    <div class="col-9 infocontainer">
+        <h1 class="page-header">Info Account</h1>
         <div class="panel panel-default">
             <div class="tab-content ml-1" id="myTabContent">
                 <div class="row">
@@ -21,7 +20,7 @@
                         <label style="font-weight:bold;">Full Name</label>
                     </div>
                     <div class="col-md-8 col-6">
-                        {{Auth::user()->firstname}} {{Auth::user()->lastname}}
+                         {{Auth::user()->lastname}} {{Auth::user()->firstname}}
                     </div>
                 </div>
                 <hr />
