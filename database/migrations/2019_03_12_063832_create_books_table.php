@@ -19,7 +19,7 @@ class CreateBooksTable extends Migration
             $table->string('img');
             $table->string('author');
             $table->string('published_year')->default(0);
-            $table->string('describes')->nullable();
+            $table->longText('describes')->nullable();
             $table->integer('price')->default(0);
             $table->integer('quantity')->default(1);
             $table->integer('categories_id')->unsigned();
