@@ -17,7 +17,14 @@ class UserController extends Controller
 	}
 
 	public function update(EditUserRequest $request){
-		$data = $request->only('gender', 'phone', 'firstname', 'lastname', 'address');
+		//dd($request);
+    	if($request->password === null){
+    		$data = $request->only('gender', 'phone', 'firstname', 'lastname', 'address');
+    	}
+    	else{
+    		$data = $request->only('gender', 'phone', 'firstname', 'lastname', 'address', 'password');
+    		$data['password'] = bcrypt($data['password']);
+    	}
 		$user = User::where('email',$request->email);
 		if ($user->update($data)) {
 			return redirect()->back()->with(['class' => 'success', 'message' => 'Update Success.']);

@@ -27,7 +27,9 @@ class EditUserRequest extends FormRequest
             'firstname' => 'required|string',
             'lastname' => 'required|string',
             'phone' => 'required',
-            'address' => 'required|string'
+            'address' => 'required|string',
+            'password' => 'nullable|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+            'confirm_password' => 'same:password'
         ];
     }
 
@@ -37,6 +39,9 @@ class EditUserRequest extends FormRequest
             'lastname.required' => 'Lastname must be filled.',
             'phone.required' => 'Phone must be filled',
             'address.required' => 'Address must be filled',
+            'password.min' => 'Your password must be more than 8 characters long.',
+            'password.regex' => 'Your password should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character.',
+            'confirm_password.same' => 'Confirm password does not same password.'
         ];
     }
 }
