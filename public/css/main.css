@@ -192,3 +192,10 @@ footer.page-footer .footer-copyright {
 footer .mt-3{
 	height: 300px;
 }
+
+.avatar{
+	height: 25px;
+	width: 25px;
+	margin-right: 10px;
+	border-radius: 50%;
+}

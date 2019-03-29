@@ -54,7 +54,7 @@ Cart
 					</div>
 				</div>
 			</td>
-			<td><a href="{{ route('category',$book['category_id']) }}">{{$book['category']}}</a></td>
+			<td><a class="nomargin" href="{{ route('category',$book['category_id']) }}">{{$book['category']}}</a></td>
 			<td class="text-center">{{number_format($book['price'])}} VND</td>
 			<td class="text-center">1</td>
 			<td class="text-center">

@@ -7,7 +7,7 @@
 	height: 50px;
 }
 
-.breadcrumb li,a{
+.breadcrumb li,.breadcrumb a{
 	color: white;
 }
 

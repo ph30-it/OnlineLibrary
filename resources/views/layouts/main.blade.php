@@ -30,7 +30,7 @@
 						@if(Auth::user()->roles == 1)
 						<li><a href="{{ route('admin-home') }}">Admin Controll </a></li>
 						@endif
-						<li><a href="{{ route('account_profile') }}">Hello , <?php echo Auth::user()->firstname ?></a></li>
+						<li><a href="{{ route('account_profile') }}"><img class="avatar" src="http://placehold.it/100/100a5ff/fff" class="img-responsive" alt="">Hello , <?php echo Auth::user()->firstname ?></a></li>
 						<li><a href="{{ route('logout') }}">Logout</a></li>
 						@else
 						<li><a href="{{ route('login') }}">Login</a></li>

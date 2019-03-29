@@ -24,6 +24,9 @@ Cart
 		<h4>Nothing to show</h4>
 		@else
 		<h4>Order number :{{ $order->id }}</h4>
+		<div class="alert alert-success">
+			<p>Wait admin check your order !</p>
+		</div>
 		<table id="cart" class="table table-hover table-condensed">
 			<thead>
 				<tr>

@@ -81,14 +81,15 @@ li a:hover{
 	padding-left: 50px;
 }
 
-.current{
-	font-weight: bold;
-	color: #e74c3c;
-}
-
 input[type='radio']{
 	margin-left: 50px;
 }
+
 .page-header{
 	padding-bottom: 20px;
+}
+
+.current a{
+	font-weight: bold;
+	color: #e74c3c !important;
 }
