@@ -37,22 +37,24 @@
 								<th>Tác Giả</th>
 								<th>Năm Xuất Bản</th>
 								<th>Danh Mục</th>
+								<th>Số lượng</th>
 								<th>Giá Thuê</th>
 								<th>Chỉnh Sửa/Xóa</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($books as $book)
-							<tr id="book-{{$book->id}}">
+							<tr data-row="{{$book->id}}">
 								<td>{{$book->id}}</td>
 								<td>{{$book->name}}</td>
 								<td>{{$book->author}}</td>
 								<td>{{$book->published_year}}</td>
 								<td>{{$book->Category->name}}</td>
+								<td>{{$book->quantity}}</td>
 								<td>{{ number_format($book->price) }}đ</td>
 								<td>
 									<a href="{{ route('showEditBook', $book->id) }}" class="btn btn-sm btn-primary">Chỉnh sửa</a>
-									<a href="javascript:trashBook({{$book->id}});" class="btn btn-sm btn-danger">Xóa</a>
+									<a href="javascript:void(0);" class="btn btn-sm btn-danger book-remove" data-id="{{$book->id}}">Xóa</a>
 								</td>
 							</tr>
 							@endforeach
@@ -72,8 +74,8 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-    var api_domain = "{{ url('') }}";
-    var api_atk = "{{ csrf_token() }}";
+    var api_domain = "{{ url('/api/v1/admin') }}";
+    var api_token = "{{ csrf_token() }}";
 </script>
-<script type="text/javascript" src="{{ asset('admin_assets/js/bhome.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin_assets/js/main-app.js') }}"></script>
 @endsection

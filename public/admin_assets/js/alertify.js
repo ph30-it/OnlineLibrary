@@ -59,7 +59,7 @@
             restore: 'Restore',
         },
         theme:{
-            input:'ajs-input',
+            input:'ajs-input form-control',
             ok:'ajs-ok',
             cancel:'ajs-cancel',
         }

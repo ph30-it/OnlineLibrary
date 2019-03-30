@@ -70,6 +70,7 @@
 								<textarea class="form-control" name="address" rows="3" placeholder="Địa chỉ hiện tại (V/d: Đà Nẵng, Việt Nam,...)" disabled>{{$user->address}}</textarea>
 							</div>
 							<a href="{{ route('showEditUser', $user->id) }}" class="btn btn-primary">Thay đổi thông tin</a>
+							<a href="{{ route('ListUser') }}" class="btn btn-default">Xong</a>
 						</div>
 					</div>
 				</div>
@@ -78,3 +79,4 @@
 
 	</div><!--/.row-->
 </div>	<!--/.main-->
+@endsection

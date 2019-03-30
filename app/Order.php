@@ -15,9 +15,8 @@ class Order extends Model
     public function user(){
         return $this->belongsTo('App\User', 'users_id', 'id');
     }
-
-    public function book(){
-        return $this->belongstoMany('App\Book', 'detail_order', 'order_id', 'books_id');
-    }
     
+    public function detailorder(){
+        return $this->hasMany('App\DetailOrder', 'order_id', 'id');
+    }
 }

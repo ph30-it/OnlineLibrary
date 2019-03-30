@@ -13,14 +13,14 @@ class CommentController extends Controller
     	return view('admin.comments.index', compact('comments'));
     }
 
-    public function delete(Request $request){
+    public function destroy(Request $request){
         $data = $request->only('id');
         if($comment = Comment::find($data['id'])){
             if($comment->delete()){
-                return response()->json(['error' => 0], 200);
+                return response()->json(['error' => 0, 'message' => 'Xóa bình luận thành công']);
             }
         }
-        return response()->json(['error' => 1], 200);
+        return response()->json(['error' => 1, 'message' => 'Không tìm thấy bình luận']);
     }
 
     public function search(request $request){

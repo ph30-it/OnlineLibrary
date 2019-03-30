@@ -72,11 +72,20 @@
 				<em class="fa fa-clipboard">&nbsp;</em> Order <span data-toggle="collapse" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="order-item">
-					<!-- <li><a class="" href="{{ route('showAddOrder') }}">
-						<span class="fa fa-arrow-right">&nbsp;</span> Add Order
-					</a></li> -->
-					<li><a class="" href="{{ route('ListOrder') }}">
-						<span class="fa fa-arrow-right">&nbsp;</span> List Orders
+					<li><a class="" href="{{ route('ListOrder', 1) }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> Chờ duyệt
+					</a></li>
+					<li><a class="" href="{{ route('ListOrder', 2) }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> Chờ đến thư viện
+					</a></li>
+					<li><a class="" href="{{ route('ListOrder', 4) }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> Đang thuê
+					</a></li>
+					<li><a class="" href="{{ route('ListOrder', 5) }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> Đã trã
+					</a></li>
+					<li><a class="" href="{{ route('ListOrder', 3) }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> Đã hủy
 					</a></li>
 				</ul>
 			</li>
@@ -103,7 +112,7 @@
 	<!-- dropify -->
 	<script src="{{ asset('admin_assets/js/dropify.min.js') }}"></script>
 
-	@yield('javascript');
+	@yield('javascript')
 	
 </body>
 </html>

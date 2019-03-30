@@ -42,7 +42,7 @@
                         </thead>
                         <tbody>
                             @foreach($users as $user)
-                            <tr id="user-{{$user->id}}">
+                            <tr data-row="{{$user->id}}">
                                 <td>{{$user->id}}</td>
                                 <td>{{$user->firstname}} {{$user->lastname}}</td>
                                 <td>{{$user->email}}</td>
@@ -50,7 +50,7 @@
                                 <td>{{$user->roles == 1 ? 'Quản lý' : 'Thành viên'}}</td>
                                 <td>
                                     <a href="{{ route('detailUser', $user->id) }}" class="btn btn-sm btn-primary">Xem chi tiết</a>
-                                    <a href="javascript:trashUser({{$user->id}});" class="btn btn-sm btn-danger">Xóa</a>
+                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger user-remove" data-id="{{$user->id}}">Xóa</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -59,6 +59,7 @@
                 </div>
                 <div class="panel-footer">
                     <center>
+                        {{ $users->links() }}
                     </center>
                 </div>
             </div>
@@ -69,8 +70,8 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-    var api_domain = "{{ url('') }}";
-    var api_atk = "{{ csrf_token() }}";
+    var api_domain = "{{ url('/api/v1/admin') }}";
+    var api_token = "{{ csrf_token() }}";
 </script>
-<script type="text/javascript" src="{{ asset('admin_assets/js/bhome.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin_assets/js/main-app.js') }}"></script>
 @endsection

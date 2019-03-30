@@ -42,13 +42,13 @@
 						</thead>
 						<tbody>
 							@foreach($comments as $comment)
-							<tr id="comment-{{$comment->id}}">
+							<tr data-row="{{$comment->id}}">
 								<td>{{$comment->id}}</td>
 								<td>{{$comment->user->firstname.' '.$comment->user->lastname}}</td>
 								<td>{{$comment->book->name}}</td>
 								<td class="describe-comment">{{$comment->comment}}</td>
 								<td>{{$comment->created_at}}</td>
-								<td><a href="javascript:trashComment({{$comment->id}});" class="btn btn-sm btn-danger">Xoá</a></td>
+								<td><a href="javascript:void(0);" class="btn btn-sm btn-danger comment-remove" data-id="{{$comment->id}}">Xoá</a></td>
 							</tr>
 							@endforeach
 						</tbody>
@@ -68,8 +68,8 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-	var api_domain = "{{ url('') }}";
-	var api_atk = "{{ csrf_token() }}";
+    var api_domain = "{{ url('/api/v1/admin') }}";
+    var api_token = "{{ csrf_token() }}";
 </script>
-<script type="text/javascript" src="{{ asset('admin_assets/js/bhome.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin_assets/js/main-app.js') }}"></script>
 @endsection

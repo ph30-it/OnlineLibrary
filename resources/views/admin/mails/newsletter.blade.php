@@ -51,7 +51,7 @@
 	<h1>Online Library</h1>
 	<div class="book-new">
 		<img class="thumb" src="{{asset("uploads/$img")}}">
-		<a href="{{url("book/$id")}}" class="btn-buy">Mua ngay</a>
+		<a href="{{url("book/$id")}}" class="btn-buy">Xem ngay</a>
 		<p class="title">{{$name}}</p>
 	</div>
 	<div class="footer">

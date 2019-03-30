@@ -9,18 +9,18 @@ use App\Http\Requests\UsersRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UserRequest;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     public function index(){
     	$users = User::orderBy('id', 'DESC')->paginate(50);
     	return view('admin.users.index', compact('users'));
     }
 
-    public function showAddUser(){
+    public function create(){
     	return view('admin.users.create');
     }
 
-    public function create(UsersRequest $request){
+    public function store(UsersRequest $request){
     	$data = $request->except('_token');
     	$data['password'] = bcrypt($data['password']);
     	if($user = User::create($data)){
@@ -29,7 +29,7 @@ class UsersController extends Controller
         return redirect()->back()->with(['class' => 'danger', 'message' => 'Lỗi hệ thống, thử lại sau.']);
     }
 
-    public function showEditUser($id){
+    public function edit($id){
         if($user = User::find($id)){
             return view('admin.users.edit', compact('user'));
         }
@@ -47,21 +47,21 @@ class UsersController extends Controller
     	return redirect()->route('listUsers');
     }
 
-    public function detail($id){
+    public function show($id){
         if($user = User::find($id)){
             return view('admin.users.detail', compact('user'));
         }
         return redirect()->route('ListUser');
     }
 
-    public function delete(Request $request){
+    public function destroy(Request $request){
         $data = $request->only('id');
         if($user = User::find($data['id'])){
             if($user->delete()){
-                return response()->json(['error' => 0], 200);
+                return response()->json(['error' => 0, 'message' => 'Xóa thành viên thành công']);
             }
         }
-        return response()->json(['error' => 1], 200);
+        return response()->json(['error' => 1, 'message' => 'Không tìm thấy thành viên']);
     }
 
     public function search(request $request){

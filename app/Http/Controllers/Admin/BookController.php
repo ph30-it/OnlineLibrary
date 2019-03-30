@@ -15,12 +15,12 @@ class BookController extends Controller
     	return view('admin.books.index', compact('books'));
     }
 
-    public function showAddBook(){
+    public function create(){
         $categories = Category::all();
     	return view('admin.books.create', compact('categories'));
     }
 
-    public function create(BookRequest $request){
+    public function store(BookRequest $request){
         if(!Category::find($request->category)){
             return redirect()->back()->with(['class'=>'danger','message'=>'Danh mục không tồn tại.']);
         }
@@ -44,7 +44,7 @@ class BookController extends Controller
         }
     }
 
-    public function showEditBook($id){
+    public function edit($id){
         $categories = Category::all();
         if($book = Book::find($id)){
             return view('admin.books.edit', compact(['book', 'categories']));
@@ -73,21 +73,21 @@ class BookController extends Controller
         }
         
     }
+
+    public function destroy(Request $request){
+        $data = $request->only('id');
+        if($book = Book::find($data['id'])){
+            if($book->delete()){
+                return response()->json(['error' => 0, 'message' => 'Xóa sách thành công']);
+            }
+        }
+        return response()->json(['error' => 1, 'message' => 'Không tìm thấy sách']);
+    }
     
     public function search(Request $request){
         $books = Book::where('id', 'like', "%$request->key%")->orwhere('name', 'like', "%$request->key%")->orwhere('price', 'like', "%$request->key%")->orwhere('describes', 'like', "%$request->key%")->orwhere('published_year', 'like', "%$request->key%")->orwhere('author', 'like', "%$request->key%")->orwhereHas('category', function ($query) use ($request) {
             return $query->where('name', 'like', "%$request->key%");
         })->orderBy('id', 'DESC')->paginate(50);
         return view('admin.books.index', compact('books'));
-    }
-
-    public function delete(Request $request){
-        $data = $request->only('id');
-        if($book = Book::find($data['id'])){
-            if($book->delete()){
-                return response()->json(['error' => 0], 200);
-            }
-        }
-        return response()->json(['error' => 1], 200);
     }
 }

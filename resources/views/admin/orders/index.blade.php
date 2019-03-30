@@ -19,6 +19,9 @@
 
 	<div class="row">
 		<div class="col-md-12">
+			@if($orders_expired->count() > 0)
+			<div class="alert bg-warning" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Có {{$orders_expired->count()}} đơn hàng quá giờ đến thư viện, <a href="{{route('ListOrder', 2)}}" class="text-primary">Chi tiết</a><a href="#" class="pull-right" data-dismiss="alert" aria-label="Close"><em class="fa fa-lg fa-close" aria-hidden="true"></em></a></div>
+			@endif
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<form action="{{ route('searchOrder') }}" method="GET">
@@ -32,53 +35,64 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th>ID</th>
+								<th>Mã Đơn Hàng</th>
 								<th>Tên Độc Giả</th>
 								<th>Thời Gian Đăng Ký Thuê</th>
 								<th>Tình trạng</th>
 								<th>Xem Chi Tiết</th>
-								<th>Cho Phép Thuê/Từ Chối</th>
+								<th>Xử Lý</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($orders as $order)
-							<tr id="order-{{$order->id}}">
+							@foreach($orders as $order)<tr data-row="{{$order->id}}">
 								<td>{{$order->id}}</td>
 								<td>{{$order->user->firstname.' '.$order->user->lastname}}</td>
 								<td>{{$order->created_at}}</td>
-								<td class="table-status">
+								<td>
 									@switch($order->status)
-									    @case(1)
-									        <span class="btn-sm btn-warning">Chờ xử lý</span>
-									        @break
-									    @case(2)
-									        <span class="btn-sm btn-warning">Chờ lấy sách</span>
-									        @break
-									    @case(3)
-									        <span class="btn-sm btn-danger">Hủy</span>
-									        @break
-									    @case(4)
-									        <span class="btn-sm btn-primary">Đang thuê</span>
-									        @break
-									    @default
-									        <span class="btn-sm btn-success">Đã trã</span>
-									        @break
+									@case(1)
+									<span class="btn-sm btn-warning">Chờ xử lý</span>
+									@break
+									@case(2)
+									@if($orders_expired->where('id', $order->id)->count() > 0)
+									<span class="btn-sm btn-warning">Quá hạn chờ</span>
+									@else
+									<span class="btn-sm btn-warning">Chờ đến thư viện</span>
+									@endif
+									@break
+									@case(3)
+									<span class="btn-sm btn-danger">Đã hủy</span>
+									@break
+									@case(4)
+									<span class="btn-sm btn-success">Đang thuê</span>
+									@break
+									@case(5)
+									<span class="btn-sm btn-primary">Đã trã</span>
+									@break
 									@endswitch
 								</td>
-								<td><a href="javascript:detailOrder({{$order->id}});" class="btn btn-sm btn-info">Xem chi tiết</a></td>
+								<td><a href="javascript:void(0);" class="btn btn-sm btn-info order-show" data-id="{{$order->id}}">Xem chi tiết</a></td>
 								<td class="table-button">
 									@switch($order->status)
 									@case(1)
-										<a href="javascript:agreeOrder({{$order->id}});" class="btn btn-sm btn-success">Cho phép thuê</a>
-										@break
+									<a href="javascript:void(0);" class="btn btn-sm btn-success allow-order" data-id="{{$order->id}}">Duyệt</a>
+									<a href="javascript:void(0);" class="btn btn-sm btn-danger refused-order" data-id="{{$order->id}}">Từ chối</a>
+									@break
 									@case(2)
-										<a href="javascript:completedOrder({{$order->id}});" class="btn btn-sm btn-success">Nhận sách</a>
-										@break
+									<a href="javascript:void(0);" class="btn btn-sm btn-success received-book" data-id="{{$order->id}}">Đã nhận sách</a>
+									<a href="javascript:void(0);" class="btn btn-sm btn-danger refused-order" data-id="{{$order->id}}">Hủy</a>
+									@break
+									@case(3)
+									<a href="javascript:void(0);" class="btn btn-sm btn-danger order-remove" data-id="{{$order->id}}">Xóa</a>
+									@break
 									@case(4)
-										<a href="javascript:returnOrder({{$order->id}});" class="btn btn-sm btn-success">Trã sách</a>
-										@break
+									<a href="javascript:void(0);" class="btn btn-sm btn-success return-book" data-id="{{$order->id}}">Trã sách</a>
+									@break
+									@case(5)
+									<a href="javascript:void(0);" class="btn btn-sm btn-danger order-remove" data-id="{{$order->id}}">Xóa</a>
+									@break
 									@endswitch
-									<a href="javascript:cancelOrder({{$order->id}});" class="btn btn-sm btn-danger">Hủy</a>
+									
 								</td>
 							</tr>
 							@endforeach
@@ -111,8 +125,8 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-	var api_domain = "{{ url('') }}";
-	var api_atk = "{{ csrf_token() }}";
+    var api_domain = "{{ url('/api/v1/admin') }}";
+    var api_token = "{{ csrf_token() }}";
 </script>
-<script type="text/javascript" src="{{ asset('admin_assets/js/bhome.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin_assets/js/main-app.js') }}"></script>
 @endsection

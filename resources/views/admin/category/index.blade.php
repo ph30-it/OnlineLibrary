@@ -26,12 +26,11 @@
             @endif
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <form action="{{ route('addCategory') }}" method="POST">
-                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <div class="category-add">
                         <div class="input-group">
-                            <input type="text" name="name" class="form-control input-md" placeholder="Add new category" /><span class="input-group-btn"><button type="submit" class="btn btn-primary btn-md" >Add new</button></span>
+                            <input type="text" class="form-control input-md" placeholder="Add new category" /><span class="input-group-btn"><button type="submit" class="btn btn-primary btn-md btn-add" >Add new</button></span>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <table class="table">
@@ -40,15 +39,15 @@
                                 <th>Tên danh mục</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="category-content">
                             @foreach($categories as $category)
-                            <tr id="category-{{$category->id}}">
+                            <tr data-row="{{$category->id}}">
                                 <td>
-                                    <span class="tabledit-span">{{$category->name}}</span>
+                                    <span class="category-name">{{$category->name}}</span>
                                 </td>
                                 <td class="text-right">
-                                    <a href="javascript:updatedCategory({{$category->id}});" class="btn btn-sm btn-primary" data-id="{{$category->id}}">Chỉnh sửa</a>
-                                    <a href="javascript:trashCategory({{$category->id}});" class="btn btn-sm btn-danger">Xóa</a>
+                                    <a href="javascript:void(0);" class="btn btn-sm btn-primary category-newname" data-id="{{$category->id}}">Chỉnh sửa</a>
+                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger category-remove" data-id="{{$category->id}}">Xóa</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -68,8 +67,8 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-    var api_domain = "{{ url('') }}";
-    var api_atk = "{{ csrf_token() }}";
+    var api_domain = "{{ url('/api/v1/admin') }}";
+    var api_token = "{{ csrf_token() }}";
 </script>
-<script type="text/javascript" src="{{ asset('admin_assets/js/bhome.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin_assets/js/main-app.js') }}"></script>
 @endsection

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryRequest;
+use Validator;
 use App\Category;
 
 class CategoryController extends Controller
@@ -14,34 +14,45 @@ class CategoryController extends Controller
     	return view('admin.category.index', compact('categories'));
     }
 
-    public function create(CategoryRequest $request){
-    	$data = $request->only('name');
-    	if(category::create($data)){
-    		return redirect()->route('ListCategory');
-    	}
-    	else{
-    		return redirect()->back()->with(['class'=>'danger', 'message' => 'Lỗi không xác định']);
-    	}
+    public function store(request $request){
+        $validator = Validator::make($request->all(), [
+            'name'=>'required|unique:categories'
+        ], [
+            'name.required' => 'Tên danh mục rỗng',
+            'name.unique' => 'Tên danh mục đã tồn tại'
+        ]);
+        if($validator->passes()){
+
+            if($category = Category::create(['name' => $request->name])){
+                return response()->json(['error' => 0, 'id' => $category->id]);
+            }
+            else{
+                return response()->json(['error' => 1, 'message' => 'Lỗi, thử lại sau']);
+            }
+
+        }
+        else{
+            return response()->json(['error' => 1, 'message' => $validator->errors()->first()]);
+        }
     }
 
     public function update(request $request){
         if($category = Category::find($request->id)){
-            $newname = ($request->name !== '') ? $request->name : $category->name;
+            $newname = ($request->name !== NULL) ? $request->name : $category->name;
             if($category->update(['name' => $newname])){
-                return response()->json(['error' => 0], 200);
+                return response()->json(['error' => 0, 'message' => $newname]);
             }
         }
-        return response()->json(['error' => 1], 200);
-        
+        return response()->json(['error' => 1, 'message' => 'Không tìm thấy danh mục']);
     }
 
-    public function delete(Request $request){
+    public function destroy(request $request){
         $data = $request->only('id');
         if($category = Category::find($data['id'])){
             if($category->delete()){
-                return response()->json(['error' => 0], 200);
+                return response()->json(['error' => 0, 'message' => 'Đã xóa danh mục']);
             }
         }
-        return response()->json(['error' => 1], 200);
+        return response()->json(['error' => 1, 'message' => 'Không tìm thấy danh mục']);
     }
 }
