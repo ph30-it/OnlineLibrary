@@ -30,7 +30,16 @@
 						@if(Auth::user()->roles == 1)
 						<li><a href="{{ route('admin-home') }}">Admin Controll </a></li>
 						@endif
-						<li><a href="{{ route('account_profile') }}"><img class="avatar" src="http://placehold.it/100/100a5ff/fff" class="img-responsive" alt="">Hello , <?php echo Auth::user()->firstname ?></a></li>
+						<li>
+							<a href="{{ route('account_profile') }}">
+								@if(Auth::user()->image == null)
+								<img class="avatar" src="{{ asset('images/default.png') }}" class="img-responsive" alt="">
+								@else
+								<img class="avatar" src="{{ asset(Auth::user()->image) }}" class="img-responsive" alt="">
+								@endif
+								Hello , <?php echo Auth::user()->firstname ?>
+							</a>
+						</li>
 						<li><a href="{{ route('logout') }}">Logout</a></li>
 						@else
 						<li><a href="{{ route('login') }}">Login</a></li>
@@ -86,7 +95,7 @@
 							</div>
 							<div class="col-md-7">
 								<form class="input-group" method="post" action="{{ route('newsletter_subscribe') }}">
-									 {{ csrf_field() }}
+									{{ csrf_field() }}
 									<input type="email" class="form-control" name="email" value="Input your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
 									<button class="btn btn-default" type="submit">Submit</button> 
 								</form>

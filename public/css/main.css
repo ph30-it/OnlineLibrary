@@ -15,7 +15,7 @@ body,html{
 	padding: 0;
 	overflow-x: hidden;
 	font-size: 95%;
-	/* background-color: #ecf0f1; */
+	/* background-color: #f6f6f6; */
 }
 
 *{
@@ -198,4 +198,17 @@ footer .mt-3{
 	width: 25px;
 	margin-right: 10px;
 	border-radius: 50%;
+}
+.breadcrumb {
+	background-color: #e74c3c;
+}
+.breadcrumb li,.breadcrumb a{
+	color: white;
+}
+.active{
+	color: white !important;
+}
+.breadcrumb-item a:hover{
+	font-size: 110%;
+	color: white;
 }

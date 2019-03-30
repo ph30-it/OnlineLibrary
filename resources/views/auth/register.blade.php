@@ -15,8 +15,8 @@
             <form method="POST" class="register-form" id="register-form" action="{{ route('register') }}">
                 @csrf
                 <div class="form-group">
-                    <label for="name"><i class="ti-email"></i>E-Mail</label>
-                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus placeholder="Your E-Mail">
+                    <labe><i class="required">(*)</i><i class="far fa-envelope"></i>E-Mail</label>
+                    <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus placeholder="Your E-Mail">
 
                     @if ($errors->has('email'))
                     <span class="invalid-feedback" role="alert">
@@ -26,8 +26,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="pass"><i class="ti-lock"></i>Password</label>
-                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="Your Password">
+                    <label><i class="required">(*)</i><i class="fas fa-lock"></i>Password</label>
+                    <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="Your Password">
                     @if ($errors->has('password'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('password') }}</strong>
@@ -36,37 +36,39 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="re-pass"><i class="ti-unlock"></i>Repeat Your Password</label>
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="Repeat Your Password">
+                    <label><i class="required">(*)</i><i class="fas fa-unlock-alt"></i>Repeat Your Password</label>
+                    <input type="password" class="form-control" name="password_confirmation" required placeholder="Repeat Your Password">
+                     @if ($errors->has('confirm_password'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('confirm_password') }}</strong>
+                    </span>
+                    @endif
                 </div>
 
                 <div class="form-group">
-                    <label for="lastname"><i class="ti-id-badge"></i>LastName</label>
+                    <label><i class="required">(*)</i><i class="far fa-id-badge"></i>LastName</label>
                     <input id="lastname" type="text" class="form-control" name="lastname" required placeholder="Your LastName">
                 </div>
 
                 <div class="form-group">
-                    <label for="firstname"><i class="ti-id-badge"></i>FirstName</label>
+                    <label><i class="required">(*)</i><i class="fas fa-id-badge"></i>FirstName</label>
                     <input id="firstname" type="text" class="form-control" name="firstname" required placeholder="Your FirstName">
                 </div>
                 <div class="form-group"> 
-                    <p>
-                        <input type="radio" id="test1" name="male"/>
-                        <label for="test1">Male</label>
-                    </p>
-                    <p>
-                        <input type="radio" id="test2" name="female"/>
-                        <label for="test2">Female</label>
-                    </p>
+                    <label><i class="required">(*)</i><i class="fas fa-venus-mars"></i>Gender</label>
+                    <label class="checkbox-inline">
+                        <input type="radio" name="gender"value="0">Male
+                        <input type="radio" name="gender" value="1">Female
+                    </label>
                 </div>
                 
                 <div class="form-group">
-                    <label for="address"><i class="ti-home"></i>Address</label>
-                    <input id="address" type="text" class="form-control" name="address" required placeholder="Your Address">
+                    <label></i><i class="required">(*)</i><i class="fas fa-address-card"></i>Address</label>
+                    <input type="text" class="form-control" name="address" required placeholder="Your Address">
                 </div>
 
                 <div class="form-group">
-                    <label for="phone"><i class="ti-mobile"></i>Phone</label>
+                    <label><i class="required">(*)</i><i class="fas fa-mobile-alt"></i>Phone</label>
                     <input id="phone" type="text" class="form-control" name="phone" required placeholder="Your Phone Number">
                 </div>
 

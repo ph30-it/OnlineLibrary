@@ -26,10 +26,10 @@ class EditUserRequest extends FormRequest
         return [
             'firstname' => 'required|string',
             'lastname' => 'required|string',
-            'phone' => 'required',
+            'phone' => 'required|numeric',
             'address' => 'required|string',
-            'password' => 'nullable|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
-            'confirm_password' => 'same:password'
+            'password' => 'nullable|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/',
+            'confirm_password' => 'same:password',
         ];
     }
 

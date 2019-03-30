@@ -1,7 +1,35 @@
  <div id="sidebar-collapse" class="sidebar">
     <div class="profile-sidebar">
         <div class="profile-userpic">
-            <img src="http://placehold.it/100/100a5ff/fff" class="img-responsive" alt="">
+            @if(Auth::user()->image == null)
+            <img class="avatar" onclick="javascript:$('#myModal').modal('show');" src="{{ asset('images/default.png') }}" class="img-responsive" alt="">
+            @else
+            <img class="avatar" onclick="javascript:$('#myModal').modal('show');" src="{{ asset(Auth::user()->image) }}" class="img-responsive" alt="">
+            @endif
+            <div class="middlee">
+                <button onclick="javascript:$('#myModal').modal('show');" class="btn btn-success">Upload</button>
+            </div>
+            <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Upload avatar image</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <form action="{{route('upload')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <label>Choose your file image here</label>
+                                <input type="file" name="images">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">Upload</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div><br>
         <div class="profile-usertitle">
             <div class="profile-usertitle-name">{{ Auth::user()->lastname ." ".Auth::user()->firstname}}</div>

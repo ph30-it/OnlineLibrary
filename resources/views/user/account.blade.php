@@ -7,6 +7,12 @@
 @endsection
 
 @section('page-content')
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">
+        <i class="fas fa-home"></i>
+    </a></li>
+    <li class="breadcrumb-item active">Account</li>
+</ol>
 <div class="row accountcontainer">
     <div class="col-3">
         @include('user.layouts.menu')
@@ -20,52 +26,52 @@
                         <label style="font-weight:bold;">Full Name</label>
                     </div>
                     <div class="col-md-8 col-6">
-                         {{Auth::user()->lastname}} {{Auth::user()->firstname}}
+                       {{Auth::user()->lastname}} {{Auth::user()->firstname}}
+                   </div>
+               </div>
+               <hr />
+               <div class="row">
+                <div class="col-sm-3 col-md-2 col-5">
+                    <label style="font-weight:bold;">E-Mail</label>
+                </div>
+                <div class="col-md-8 col-6">
+                    {{Auth::user()->email}}
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 col-5">
+                    <label style="font-weight:bold;">Phone</label>
+                </div>
+                <div class="col-md-8 col-6">
+                    {{Auth::user()->phone}}
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 col-5">
+                    <label style="font-weight:bold;">Address</label>
+                </div>
+                <div class="col-md-8 col-6">
+                    {{Auth::user()->address}}
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 col-5">
+                    <label style="font-weight:bold;">Gender</label>
+                </div>
+                <div class="col-md-8 col-6">
+                    <?php if (Auth::user()->gender == 1): ?>
+                        Male
+                        <?php else: ?>
+                            Female
+                        <?php endif ?>
                     </div>
                 </div>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-3 col-md-2 col-5">
-                        <label style="font-weight:bold;">E-Mail</label>
-                    </div>
-                    <div class="col-md-8 col-6">
-                        {{Auth::user()->email}}
-                    </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-3 col-md-2 col-5">
-                        <label style="font-weight:bold;">Phone</label>
-                    </div>
-                    <div class="col-md-8 col-6">
-                        {{Auth::user()->phone}}
-                    </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-3 col-md-2 col-5">
-                        <label style="font-weight:bold;">Address</label>
-                    </div>
-                    <div class="col-md-8 col-6">
-                        {{Auth::user()->address}}
-                    </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-3 col-md-2 col-5">
-                        <label style="font-weight:bold;">Gender</label>
-                    </div>
-                    <div class="col-md-8 col-6">
-                        <?php if (Auth::user()->gender == 1): ?>
-                            Male
-                            <?php else: ?>
-                                Female
-                            <?php endif ?>
-                        </div>
-                    </div>
-                    <hr/>
-                </div>
+                <hr/>
             </div>
         </div>
     </div>
-    @endsection
+</div>
+@endsection

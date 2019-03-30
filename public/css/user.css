@@ -10,6 +10,24 @@
 	border-radius: 9999px !important; 
 }
 
+.profile-userpic:hover img {
+	background-color: black;
+  	opacity: 0.6;
+}
+.profile-userpic:hover .middlee {
+  opacity: 1;
+}
+.middlee {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 70px;
+  color: white;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
 .profile-usertitle {
 	float: left;
 	text-align: left;
@@ -35,22 +53,26 @@
 	color: green;
 	padding-right: 20px;
 }
-
+table a{
+	color: #e74c3c !important;
+}
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-li a{
+.block-content li a{
 	color: black;
 }
 
-li a:hover{
+.block-contentli a:hover{
 	color: #e74c3c;
 	font-weight: bold;
 }
-
+ol{
+	margin-bottom: : 0 !!important;
+}
 .block-content{
 	padding-top: 15px;
 }
@@ -71,18 +93,24 @@ li a:hover{
 }
 
 .accountcontainer{
-	margin-top: 20px;
 	margin-bottom: 50px;
+	background-color: white;
 }
 
 .infocontainer{
-	border-left: 2px solid #f6f6f6;
-	margin-top: 35px;
+	border-left: 2px solid #e9ecf2; 
 	padding-left: 50px;
+	padding-top: 35px;
+	background-color: white;
 }
 
 input[type='radio']{
 	margin-left: 50px;
+}
+
+input:focus:not([readonly]) {
+    border: 1px solid #e74c3c;
+    box-shadow: 0 0 0 1px #e74c3c;
 }
 
 .page-header{
@@ -92,4 +120,12 @@ input[type='radio']{
 .current a{
 	font-weight: bold;
 	color: #e74c3c !important;
+}
+.required{
+	color: red;
+	font-weight: bold;
+	padding-right: 5px;
+}
+.help{
+	color: #3f00ff
 }

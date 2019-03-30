@@ -9,6 +9,13 @@ Cart
 @endsection
 
 @section('page-content')
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="{{ route('home') }}">
+		<i class="fas fa-home"></i>
+	</a></li>
+	<li class="breadcrumb-item"><a href="{{ route('account_profile') }}">Account</a></li>
+	<li class="breadcrumb-item active">Confirmed Order</li>
+</ol>
 <div class="row accountcontainer">
 	<div class="col-3">
 		@include('user.layouts.menu')
@@ -52,13 +59,4 @@ Cart
 		@endif
 	</div>
 </div>
-@endsection
-
-@section('custom-js')
-<script>
-	$('#myForm').on('submit', function(e){
-		$('#myModal').modal('show');
-		e.preventDefault();
-	});
-</script>
 @endsection
