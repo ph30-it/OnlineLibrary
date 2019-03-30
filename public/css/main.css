@@ -1,0 +1,129 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+@import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
+
+@font-face{
+	font-family: Myriad;
+	src: url('/fonts/MyriadPro-Regular.otf');
+}
+*{
+    outline: none;
+}
+
+body,html{
+	border: 0;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+	font-size: 95%;
+	/* background-color: #ecf0f1; */
+}
+
+*{
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	font-family: Myriad;
+}
+
+ul{
+	margin: 0;
+}
+
+p{
+	margin: 0;
+}
+
+.page-container{
+	position: absolute;
+	top: 155px;
+	left: 0;
+	right: 0;
+}
+
+.header-top{
+	background: #24292e;
+	padding: 8px 0;
+	color: #fff;
+	height: 40px;
+	font-size: 90%;
+}
+.header-top ul li {
+	display: inline;
+	margin: 10px;
+	padding-right:20px;
+}
+.header-top ul li.info{
+	border-right: 1px solid gray;
+}
+.header-top ul li span{
+	margin-right: 10px;
+}
+.header-top ul li a{
+	color: white;
+}
+.header-top ul li a:hover{
+	color: white;
+}
+
+@media only screen and (max-width: 768px){
+	.header-top{
+		display: none;
+	}
+}
+
+.header-middle{
+	padding-bottom: 10px;
+}
+
+.search {
+  width: 100%;
+  position: relative
+}
+
+.searchTerm {
+  float: left;
+  width: 100%;
+  border: 3px solid #e74c3c;
+  padding: 5px;
+  height: 40px;
+  border-radius: 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #e74c3c;
+}
+
+.searchButton {
+  position: absolute;  
+  right: -50px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e74c3c;
+  background: #e74c3c;
+  text-align: center;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.wrap{
+  width: 70%;
+  position: absolute;
+  top: 65%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+}
+.slick-prev:before{
+	content: '<';
+	color: #e74c3c !important; 
+}
+
+ .slick-next:before{
+	content: '>';
+	color: #e74c3c !important; 
+}

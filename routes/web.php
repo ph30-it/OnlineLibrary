@@ -1,24 +1,26 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('verified');
-
 Auth::routes();
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home',function(){
+	return redirect()->route('home');
+});
+
+Route::get('/book/{id}','BookController@showBookDetailByID')->name('book')->where('id', '[0-9]+');
+Route::get('/category/{id}','CategoryController@listBooksById')->name('category')->where('id', '[0-9]+');
+
+
+Route::group(['prefix' => 'account'], function(){
+	Route::get('/','UserController@account')->name('account_profile');
+	Route::get('/edit','UserController@edit_show')->name('account_edit');
+	Route::post('/edit','UserController@update')->name('account_update');
+});
+
+Route::get('logout', 'Auth\LoginController@logout', function () {
+    return abort(404);
+});
 
 Route::get('admin/login', 'Admin\LoginController@show')->name('AdminLoginForm');
 Route::post('admin/login', 'Admin\LoginController@login')->name('AdminLogin');
