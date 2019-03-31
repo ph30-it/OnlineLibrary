@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Requests\EditUserRequest;
 use App\User;
@@ -35,23 +36,29 @@ class UserController extends Controller
 
 	public function upload(Request $request)
 	{
-		$user = User::find(\Auth::user()->id);
-		if($request->hasFile('images')) 
-		{
+		$rules = [ 'image' => 'image|max:1024' ]; 
+		$posts = [ 'image' => $request->file('image') ];
+		$valid = Validator::make($posts, $rules);
+		if ($valid->fails()) {
+			return redirect()->back()->with(['avaclass' => 'danger', 'message' => 'Avatar max size is 1024KB']);
+		}else {
+			$user = User::find(\Auth::user()->id);
+			if($request->hasFile('image')) 
+			{
             //xử lí từng ảnh 
-			$item = request()->file('images');
+				$item = request()->file('image');
             //lấy ra tên gốc của ảnh
-			$name= $item->getClientOriginalName();
+				$name= $item->getClientOriginalName();
             //đổi tên ảnh
-			$newName= '/images/avatar/'.rand(100,10000).$name;
+				$newName= '/images/avatar/'.rand(100,10000).$name;
                 //upload ảnh vào thư mục public/images/product/
-			$item->move(public_path('/images/avatar/'), $newName);
-			if ($user->update(['image' => $newName])) {
-				return redirect()->back()->with(['class' => 'success', 'message' => 'Update Success.']);
-			}else{
-				return redirect()->back()->with(['class' => 'danger', 'message' => 'Error Database.']);
+				$item->move(public_path('/images/avatar/'), $newName);
+				if ($user->update(['image' => $newName])) {
+					return redirect()->back()->with(['avaclass' => 'success', 'message' => 'Update Success.']);
+				}else{
+					return redirect()->back()->with(['avaclass' => 'danger', 'message' => 'Error Database.']);
+				}
 			}
 		}
-		return redirect()->back()->with(['class' => 'danger', 'message' => 'Not found images.']);
 	}
 }

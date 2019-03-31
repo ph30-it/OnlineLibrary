@@ -15,7 +15,9 @@
             <form method="POST" class="register-form" id="register-form" action="{{ route('register') }}">
                 @csrf
                 <div class="form-group">
-                    <labe><i class="required">(*)</i><i class="far fa-envelope"></i>E-Mail</label>
+                    <labe>
+                        <i class="required">(*)</i><i class="far fa-envelope"></i>E-Mail
+                    </label>
                     <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus placeholder="Your E-Mail">
 
                     @if ($errors->has('email'))
@@ -27,22 +29,34 @@
 
                 <div class="form-group">
                     <label><i class="required">(*)</i><i class="fas fa-lock"></i>Password</label>
-                    <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="Your Password">
+                    <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="password" required placeholder="Your Password">
                     @if ($errors->has('password'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
                     @endif
+                    <div id="pswd_info">
+                        <h4>Password must meet the following requirements:</h4>
+                        <ul>
+                            <li id="letter" class="invalid">At least <strong>one letter</strong></li>
+                            <li id="capital" class="invalid">At least <strong>one capital letter</strong></li>
+                            <li id="number" class="invalid">At least <strong>one number</strong></li>
+                            <li id="special" class="invalid">At least  <strong>one special letter</strong></li>
+                            <li id="length" class="invalid">Be at least <strong>8 characters</strong></li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label><i class="required">(*)</i><i class="fas fa-unlock-alt"></i>Repeat Your Password</label>
-                    <input type="password" class="form-control" name="password_confirmation" required placeholder="Repeat Your Password">
-                     @if ($errors->has('confirm_password'))
+                    <input type="password" class="form-control" name="password_confirmation" id="confirm_password" required placeholder="Repeat Your Password">
+                    @if ($errors->has('confirm_password'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('confirm_password') }}</strong>
                     </span>
                     @endif
+                    <span style="display: block"  id='message'></span>
+
                 </div>
 
                 <div class="form-group">
@@ -61,7 +75,7 @@
                         <input type="radio" name="gender" value="1">Female
                     </label>
                 </div>
-                
+
                 <div class="form-group">
                     <label></i><i class="required">(*)</i><i class="fas fa-address-card"></i>Address</label>
                     <input type="text" class="form-control" name="address" required placeholder="Your Address">
@@ -79,6 +93,9 @@
                 <div class="form-group form-button">
                     <button  type="submit" name="signup" id="signup" class="btn btn-default btn-cons">Register</button>
                 </div>
+                <div>
+                    <p class="help"><i class="required">(*)</i> : Required Input !</p>
+                </div>
             </form>
         </div>
         <div class="col-md-4 text-center">
@@ -87,4 +104,9 @@
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('custom-js')
+<script type="text/javascript" src="{{ asset('js/password.js') }}"></script>
 @endsection

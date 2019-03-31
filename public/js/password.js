@@ -33,4 +33,14 @@ $(document).ready(function() {
 		$('#pswd_info').hide();
 	});
 
+	$('#confirm_password').on('keyup', function () {
+		if ($('#password').val() == $('#confirm_password').val()) {
+			$('#message').html('Matching').css('color', 'green');
+		} else 
+		$('#message').html('Confirm password must be same as password !').css('color', 'red');
+	}).focus(function() {
+		$('#message').show();
+	}).blur(function() {
+		$('#message').hide();
+	});
 });

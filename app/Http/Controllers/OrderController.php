@@ -14,6 +14,8 @@ class OrderController extends Controller
 			return $this->orderWait();
 			case 2:
 			return $this->orderConfirmed();
+			case 3:
+			return $this->orderCancelled();
 			case 4:
 			return $this->orderBorrowing();
 			default:
@@ -46,6 +48,11 @@ class OrderController extends Controller
 			return view('user.borrowing_order',['result' => 1,'order' => $order[0],'data' => $result]);
 		}
 		return view('user.borrowing_order',['result' => 0]);
+	}
+
+	public function orderCancelled(){
+		$order = Order::where('status','=',3)->get();
+		dd($order);
 	}
 
 	public function cancel(request $request){

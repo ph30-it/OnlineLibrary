@@ -7,9 +7,9 @@
             <img class="avatar" onclick="javascript:$('#myModal').modal('show');" src="{{ asset(Auth::user()->image) }}" class="img-responsive" alt="">
             @endif
             <div class="middlee">
-                <button onclick="javascript:$('#myModal').modal('show');" class="btn btn-success">Upload</button>
+                <button onclick="javascript:$('#avatarmodal').modal('show');" class="btn btn-success">Upload</button>
             </div>
-            <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+            <div class="modal fade" tabindex="-1" role="dialog" id="avatarmodal">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -20,7 +20,7 @@
                             @csrf
                             <div class="modal-body">
                                 <label>Choose your file image here</label>
-                                <input type="file" name="images">
+                                <input type="file" name="image">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -35,7 +35,13 @@
             <div class="profile-usertitle-name">{{ Auth::user()->lastname ." ".Auth::user()->firstname}}</div>
             <div class="profile-usertitle-status"><i class="fa fa-circle"></i>Online</div>
         </div>
+
         <div class="clear"></div>
+        @if(session('avaclass'))
+        <div class="alert alert-{{session('avaclass')}}" style="margin-top: 10px">
+            <li>{{session('message')}}</li>
+        </div>
+        @endif
     </div>
     <div>
         <div class="block-title">
@@ -57,8 +63,8 @@
                 <li class="{{Request::is('account/order/1') ? 'current' : ''}}"><a href="{{ route('order_by_status',1) }}">Wait for confirmation</a></li>
                 <li class="{{Request::is('account/order/2') ? 'current' : ''}}"><a href="{{ route('order_by_status',2) }}">Confirmed</a></li>
                 <li class="{{Request::is('account/order/4') ? 'current' : ''}}"><a href="{{ route('order_by_status',4) }}">Borrowing Books</a></li>
-                <li>Cancelled</li>
-                <li>History</li>
+                <li class="{{Request::is('account/order/3') ? 'current' : ''}}"><a href="{{ route('order_by_status',3) }}">Cancelled</a></li>
+                <li class="{{Request::is('account/order/5') ? 'current' : ''}}"><a href="{{ route('order_by_status',5) }}">History</a></li>
             </ul>
         </div>
     </div>

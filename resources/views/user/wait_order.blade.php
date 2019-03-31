@@ -98,8 +98,9 @@ Cart
 
 @section('custom-js')
 <script>
-	function openModal(){
+	$('#myForm').on('submit', function(e){
 		$('#myModal').modal('show');
-	}
+		e.preventDefault();
+	});
 </script>
 @endsection

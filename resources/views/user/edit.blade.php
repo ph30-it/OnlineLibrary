@@ -105,11 +105,12 @@
 				<div id="formnewpass" style="display: none;">
 					<div class="form-group">
 						<label>New password</label>
-						<input name="password" value="" type="password" class="form-control">
+						<input name="password" id="password" value="" type="password" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>Confirm new password</label>
-						<input name="confirm_password" value="" type="password" class="form-control">
+						<input name="confirm_password" id="confirm_password" value="" type="password" class="form-control">
+						<span style="display: block"  id='message'></span>
 					</div>
 					<div id="pswd_info">
 						<h4>Password must meet the following requirements:</h4>
