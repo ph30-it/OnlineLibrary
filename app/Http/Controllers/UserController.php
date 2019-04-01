@@ -50,10 +50,12 @@ class UserController extends Controller
             //lấy ra tên gốc của ảnh
 				$name= $item->getClientOriginalName();
             //đổi tên ảnh
-				$newName= '/images/avatar/'.rand(100,10000).$name;
+				$newName= '/images/avatars/'.rand(100,10000).$name;
                 //upload ảnh vào thư mục public/images/product/
-				$item->move(public_path('/images/avatar/'), $newName);
+				$item->move(public_path('/images/avatars/'), $newName);
+				$oldName = $user->image;
 				if ($user->update(['image' => $newName])) {
+					($oldName == null) ? "" : unlink(public_path().$oldName);
 					return redirect()->back()->with(['avaclass' => 'success', 'message' => 'Update Success.']);
 				}else{
 					return redirect()->back()->with(['avaclass' => 'danger', 'message' => 'Error Database.']);

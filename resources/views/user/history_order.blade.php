@@ -21,14 +21,14 @@
 		@include('user.layouts.menu')
 	</div>
 	<div class="col-9 infocontainer">
-		<h1>Cancelled Orders</h1>
+		<h1>History Orders</h1>
 		<table id="example" class="display text-center" style="width:100%">
 			<thead>
 				<tr>
 					<th>ID Order</th>
 					<th>Price</th>
-					<th>Create Date</th>
-					<th>Cancelled Date</th>
+					<th>Borrow Date</th>
+					<th>Give Back Date</th>
 					<th>Note</th>
 					<th>Details</th>
 				</tr>
@@ -38,8 +38,8 @@
 				<tr>
 					<td>{{ $order->id }}</td>
 					<td>{{ number_format($order->price)}} VND</td>
-					<td>{{ $order->created_at }}</td>
-					<td>{{ $order->updated_at}}</td>
+					<td>{{ $order->date_borrow }}</td>
+					<td>{{ $order->date_give_back}}</td>
 					<td>{{ $order->note}}</td>
 					<td><button type="button" class="btn btn-warning">View Details</button></td>
 				</tr>

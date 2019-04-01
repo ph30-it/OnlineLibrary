@@ -18,6 +18,8 @@ class OrderController extends Controller
 			return $this->orderCancelled();
 			case 4:
 			return $this->orderBorrowing();
+			case 5:
+			return $this->orderHistory();
 			default:
 			abort(404);
 		}
@@ -53,6 +55,11 @@ class OrderController extends Controller
 	public function orderCancelled(){
 		$orders = Order::where('status','=',3)->get();
 		return view('user.cancelled_order',['orders' => $orders]);
+	}
+
+	public function orderHistory(){
+		$orders = Order::where('status','=',5)->get();
+		return view('user.history_order',['orders' => $orders]);
 	}
 
 	public function cancel(request $request){

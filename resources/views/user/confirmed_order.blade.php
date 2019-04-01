@@ -23,7 +23,9 @@ Cart
 	<div class="col-9 infocontainer">
 		<h2>Confirmed Order</h2>
 		@if($result == 0)
-		<h4>Nothing to show</h4>
+		<div class="alert alert-danger">
+			<li>No data available in here</li>
+		</div>
 		@else
 		<h4>Order number :{{ $order->id }}</h4>
 		<div class="alert alert-success">

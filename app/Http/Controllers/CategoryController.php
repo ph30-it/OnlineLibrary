@@ -12,8 +12,8 @@ class CategoryController extends Controller
     {
         $categories = Categories::all();
         $page_number = isset($request->pagination) ? $request->pagination : 10;
-    	$data = Book::where('categories_id','=',$category_id)->paginate($page_number);
-    	
+        $data = Book::where('categories_id','=',$category_id)->paginate($page_number);
+        
         return view('category',[
         	'data' => $data,
         	'categories' => $categories,
@@ -28,8 +28,8 @@ class CategoryController extends Controller
     	}else{
             $pagination = $request->pagination;
         }
-    	$data = Book::where('categories_id','=',$request->category)->paginate($pagination);
-    	
+        $data = Book::where('categories_id','=',$request->category)->paginate($pagination);
+        
         return view('layouts.list_book',[
         	'data' => $data,
             'page_selection' => $pagination
