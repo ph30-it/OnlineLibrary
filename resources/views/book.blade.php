@@ -80,8 +80,88 @@
 		</div>
 	</div>
 </div>
+
+<hr>
+
+@if(Auth::check())
+<div class="star-container text-center">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Very Bad</th>
+				<th>Bad</th>
+				<th>Normal</th>
+				<th>Like</th>
+				<th>Love</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>Raiting</th>
+				@for($i = 1; $i <= 5;$i++)
+				@if($star_number && $star_number == $i)
+				<th>
+					<input type="radio" name="star" value="{{$i}}" id="rating_radio{{$i}}" class="rating_radio" checked>
+					<label class="rating_label" for="rating_radio{{$i}}"></label>
+				</th>
+				@else
+				<th>
+					<input type="radio" name="star" class="rating_radio" value="{{$i}}" id="rating_radio{{$i}}">
+					<label class="rating_label" for="rating_radio{{$i}}"></label>
+				</th>
+				@endif
+				@endfor
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<hr>
+
+@endif
+
+<div class="comment-container">
+	@if(Auth::check())
+	<div class="user-sending-comment-container">
+		<div class="user-info" id="user-info">
+			{{Auth::user()->firstname}}
+		</div>
+
+		<div class="body">
+			<textarea class="user-sending-area" name="user_comment_content" id="user_comment_content" placeholder="Enter your comment"></textarea>
+		</div>
+		
+		<input type="text" name="book_id" value="{{$book->id}}" style="display: none" id="book_id_input">
+		
+		<button type="button" class="add-comment-btn" id="comment-submit">Post</button>
+
+		<div style="clear: right">
+			
+		</div>
+	</div>
+	<hr>
+	@endif
+	
+	<div class="users-comment-list" id="comment-list">
+		@foreach($comments as $comment)
+		<div class="comment-container">
+			<div class="user-info">
+				{{$comment->user->firstname}} commented at {{$comment->created_at}}
+			</div>
+
+			<textarea class="comment-content" readonly>
+				{{$comment->comment}}
+			</textarea>
+		</div>
+
+		<hr>
+		@endforeach
+	</div>
+</div>
 @endsection
 
 @section('custom-js')
-<script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/book.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/emoji.min.js') }}"></script>
 @endsection

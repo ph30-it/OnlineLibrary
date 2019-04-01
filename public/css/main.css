@@ -199,16 +199,37 @@ footer .mt-3{
 	margin-right: 10px;
 	border-radius: 50%;
 }
+
 .breadcrumb {
 	background-color: #e74c3c;
 }
+
 .breadcrumb li,.breadcrumb a{
 	color: white;
 }
+
 .active{
 	color: white !important;
 }
+
 .breadcrumb-item a:hover{
 	font-size: 110%;
 	color: white;
+}
+
+::-webkit-scrollbar{
+	width: 7px;
+}
+
+::-webkit-scrollbar-track{
+	background-color: #e0e0e0;
+}
+
+::-webkit-scrollbar-thumb{
+	background-color: darkgray;
+	border-radius: 15px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+	background-color: #545454;
 }
