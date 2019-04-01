@@ -57,3 +57,18 @@
 	font-size: 1.1em;
 	color: white;
 }
+.breadcrumb {
+	border-radius: 0;
+	background: #e74c3c;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	height: 50px;
+}
+.breadcrumb a{
+	color: white;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.breadcrumb a:hover{
+	font-weight: bold;
+}

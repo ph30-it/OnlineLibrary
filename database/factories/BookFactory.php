@@ -12,6 +12,6 @@ $factory->define(Book::class, function (Faker $faker) {
 		'describes' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
 		'price' => $faker->numberBetween($min = 1000, $max = 1000000),
 		'quantity' => $faker->numberBetween($min = 0, $max = 100),
-		'categories_id' => $faker->numberBetween($min = 1, $max = 10)
+		'categories_id' => 1
 	];
 });

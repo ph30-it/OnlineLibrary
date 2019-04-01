@@ -51,8 +51,8 @@ class OrderController extends Controller
 	}
 
 	public function orderCancelled(){
-		$order = Order::where('status','=',3)->get();
-		dd($order);
+		$orders = Order::where('status','=',3)->get();
+		return view('user.cancelled_order',['orders' => $orders]);
 	}
 
 	public function cancel(request $request){

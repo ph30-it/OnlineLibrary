@@ -77,7 +77,7 @@
 	<hr>
 
 	<div class="row d-flex justify-content-center">
-		<div class="col-md-8 col-11">
+		<div class="col-md-9 col-11">
 			<!-- Other page contents is here -->
 			@yield('page-content')
 		</div>

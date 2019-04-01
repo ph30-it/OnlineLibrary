@@ -10,8 +10,8 @@ Route::get('/home',function(){
 
 Route::get('/book/{id}','BookController@showBookDetailByID')->name('book')->where('id', '[0-9]+');
 Route::get('/category/{id}','CategoryController@listBooksById')->name('category')->where('id', '[0-9]+');
+Route::post('/category/{id}','CategoryController@listBookPaginate')->name('post_category');
 Route::post('/newsletter','NewsletterController@subscribe')->name('newsletter_subscribe');
-
 
 Route::group(['prefix' => 'account','middleware' => ['auth', 'verified']], function(){
 	Route::get('/','UserController@account')->name('account_profile');
