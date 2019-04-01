@@ -61,29 +61,29 @@
 
                 <div class="form-group">
                     <label><i class="required">(*)</i><i class="far fa-id-badge"></i>LastName</label>
-                    <input id="lastname" type="text" class="form-control" name="lastname" required placeholder="Your LastName">
+                    <input id="lastname" type="text" class="form-control" name="lastname" required placeholder="Your LastName" value="{{ old('lastname') }}">
                 </div>
 
                 <div class="form-group">
                     <label><i class="required">(*)</i><i class="fas fa-id-badge"></i>FirstName</label>
-                    <input id="firstname" type="text" class="form-control" name="firstname" required placeholder="Your FirstName">
+                    <input id="firstname" type="text" class="form-control" name="firstname" required placeholder="Your FirstName" value="{{ old('firstname') }}">
                 </div>
                 <div class="form-group"> 
                     <label><i class="required">(*)</i><i class="fas fa-venus-mars"></i>Gender</label>
                     <label class="checkbox-inline">
-                        <input type="radio" name="gender"value="0">Male
-                        <input type="radio" name="gender" value="1">Female
+                        <input type="radio" name="gender"value="0" {{ old('gender') == 0 ? 'selected' : 0}}>Male
+                        <input type="radio" name="gender" value="1" {{ old('gender') == 1 ? 'selected' : 0}}>Female
                     </label>
                 </div>
 
                 <div class="form-group">
                     <label></i><i class="required">(*)</i><i class="fas fa-address-card"></i>Address</label>
-                    <input type="text" class="form-control" name="address" required placeholder="Your Address">
+                    <input type="text" class="form-control" name="address" required placeholder="Your Address" value="{{ old('address') }}">
                 </div>
 
                 <div class="form-group">
                     <label><i class="required">(*)</i><i class="fas fa-mobile-alt"></i>Phone</label>
-                    <input id="phone" type="text" class="form-control" name="phone" required placeholder="Your Phone Number">
+                    <input id="phone" type="text" class="form-control" name="phone" required placeholder="Your Phone Number" value="{{ old('phone') }}">
                 </div>
 
                 <div class="form-group">

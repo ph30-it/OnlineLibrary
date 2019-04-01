@@ -28,7 +28,6 @@ Cart
 		</div>
 		@endif
 		@if($result == 0)
-
 		<div class="alert alert-danger">
 			<li>No data available in here</li>
 		</div>

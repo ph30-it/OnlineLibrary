@@ -12,17 +12,18 @@
 <div class="product-container">
 	<div class="row">
 		<div class="col-3">
-			<ul class="list-group">
-				<li class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Categories</li>
-				@foreach($categories as $category)
-				<a href="{{ route('category', $category->id) }}">
-					<li class="list-group-item cat-item">
-						{{$category->name}}
-					</li>
-				</a>
-				@endforeach
-
-			</ul>
+			<div class="category-list">
+				<ul class="list-group">
+					<li class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Categories</li>
+					@foreach($categories as $category)
+					<a href="{{ route('category', $category->id) }}">
+						<li class="list-group-item cat-item">
+							{{$category->name}}
+						</li>
+					</a>
+					@endforeach
+				</ul>
+			</div>
 		</div>
 		<div class="col-9">
 			<div>
@@ -76,7 +77,8 @@
 				</div>
 				<hr>
 				<div style="width: 100%;" class="d-flex justify-content-center">
-					{{ $data->links() }}
+					{!! $data->appends(request()->query())->links() !!}
+					<!-- {{ $data->links() }} -->
 				</div>
 
 			</div>
@@ -88,14 +90,8 @@
 @section('custom-js')
 <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
 <script>
-	$(document).ready(function() {
-		$('#example').DataTable( {
-			"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
-		} );
-	} );
-</script>
-<script>
 	$(document).ready(function(){
+		// if ($("select option)
 		$("select#pagination-select").change(function(){
 			let selectedItem = $(this).val();
 			let categoryId = $(this).attr("data-category-id");

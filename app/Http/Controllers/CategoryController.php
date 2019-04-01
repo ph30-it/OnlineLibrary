@@ -11,9 +11,11 @@ class CategoryController extends Controller
 	public function listBooksById($category_id,Request $request)
     {
         $categories = Categories::all();
-        $page_number = isset($request->pagination) ? $request->pagination : 10;
+        $page_number = isset($request->paginate) ? $request->paginate : 10;
         $data = Book::where('categories_id','=',$category_id)->paginate($page_number);
-        
+        if($data->toArray()['total'] == 0 || $data == null){
+            return abort(404);
+        }
         return view('category',[
         	'data' => $data,
         	'categories' => $categories,

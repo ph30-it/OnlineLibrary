@@ -18,7 +18,7 @@
 <body>
 	<div class="header-top">
 		<div class="row justify-content-center">
-			<div class="col-md-8 col-11">
+			<div class="col-md-9 col-11">
 				<div class="d-sm-flex justify-content-between">
 					<ul>
 						<li><a href="tel:+01432152323"><span class="align-middle"><i class="fas fa-mobile-alt"></i></span>+01432152323</a></li>
@@ -52,7 +52,7 @@
 	</div>
 	<div class="header-middle">
 		<div class="row justify-content-center">
-			<div class="col-md-8 col-11">
+			<div class="col-md-9 col-11">
 				<div class="row">
 					<div class="col-md-3 col-2">
 						<a href="{{ route('home') }}"><img src="https://upload.wikimedia.org/wikipedia/en/b/b8/Mid-Continent_Public_Library_logo.png" alt="" height="100px"></a>
