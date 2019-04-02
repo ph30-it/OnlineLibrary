@@ -18,6 +18,7 @@ class CreateRatingsTable extends Migration
             $table->integer('users_id')->unsigned();
             $table->integer('books_id')->unsigned();
             $table->integer('star_number');
+            $table->string('comment');
             $table->timestamps();
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('books_id')->references('id')->on('books')->onDelete('cascade');
