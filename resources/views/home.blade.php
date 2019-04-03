@@ -82,9 +82,9 @@
 										<button class="get-book-btt" data-book-id="{{$book->id}}">Get it now</button>
 									</div>
 									<div class="rate">
-										@if(!is_null($book->rating))
+										@if(isset($rate[$book->id]))
 										@php
-										$average_evalate = $book->rating;
+										$average_evalate = $rate[$book->id];
 										$remain = 5  - $average_evalate;
 										@endphp
 

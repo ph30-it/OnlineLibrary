@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
-@import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
 
 @font-face{
 	font-family: Myriad;
@@ -185,9 +184,9 @@ footer .title{
 }
 
 footer.page-footer .footer-copyright {
-    overflow: hidden;
-    background-color: rgba(0,0,0,.2);
-    color: rgba(255,255,255,.6);
+	overflow: hidden;
+	background-color: rgba(0,0,0,.2);
+	color: rgba(255,255,255,.6);
 }
 footer .mt-3{
 	height: 300px;
@@ -232,4 +231,18 @@ footer .mt-3{
 
 ::-webkit-scrollbar-thumb:hover{
 	background-color: #545454;
+}
+.twitter-typeahead{
+	display: block !important;
+}
+.tt-menu{
+	width: 100%;
+	display: block;
+	position: absolute;
+	z-index: 9000;
+}
+.search-results-dropdown{
+	display: block;
+	padding: 5px;
+	border: 1px;
 }

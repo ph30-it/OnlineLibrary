@@ -46,4 +46,10 @@ class BookController extends Controller
 			'num_star' => $num_star
 		]);
 	}
+
+	public function searchByName(Request $request)
+	{
+		$books = Book::where('name', 'like', '%' . $request->value . '%')->get();
+		return response()->json($books); 
+	}
 }

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Categories;
 use App\Book;
-
+use App\Rating;
+use DB;
 class HomeController extends Controller
 {
     /**
@@ -32,17 +33,26 @@ class HomeController extends Controller
                 array_push($cate,$category);
             }
         }
+
         $booksData = array();
+        $list = array();
         for($i = 0;$i < 3;$i++){
             $books = $cate[$i]->Books()->where('quantity','>',0)->orderBy('created_at','DESC')->take(7)->get();
-            foreach($books as $book){
-                $book['rating'] = $book->ratings()->avg('star_number');
-            }
             array_push($booksData,$books);
+            foreach($books->toArray() as $key => $value){
+                $list[] = $value['id'];
+            }
         }
+        $test = Rating::with('book')->selectRaw('book_id, avg(star_number) as rating')->groupBy('book_id')->whereIn('book_id',[$list])->get()->toArray();
+        $rate = [];
+        foreach ($test as $key => $value) {
+            $rate[$value['book_id']] = $value['rating'];
+        }
+
         return view('home', [
             'categories' => $cate,
-            'databooks' => $booksData
+            'databooks' => $booksData,
+            'rate' => $rate
         ]);
     }
 }

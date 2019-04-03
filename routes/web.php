@@ -15,6 +15,9 @@ Route::get('/category/{id}','CategoryController@listBooksById')->name('category'
 Route::post('/category/{id}','CategoryController@listBookPaginate')->name('post_category');
 
 Route::post('/newsletter','NewsletterController@subscribe')->name('newsletter_subscribe');
+
+Route::get('/search/name', 'BookController@searchByName');
+
 Route::group(['middleware' => 'auth'], function(){
 	Route::delete('/delete_rating/','RatingController@destroy')->name('delete_rating');
 	Route::post('/add_rating','RatingController@Rating')->name('add_rating');

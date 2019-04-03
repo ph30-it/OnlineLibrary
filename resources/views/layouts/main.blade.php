@@ -9,8 +9,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Main Page CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<link rel="stylesheet" href="{{ asset('css/main.css') }}">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<link rel="stylesheet" href="{{ asset('css/main.css') }}">
 	<!-- Custom CSS -->
 	@yield('custom-css')
 </head>
@@ -59,10 +59,12 @@
 					<div class="col-md-7 col-sm-7">
 						<div class="wrap">
 							<div class="search">
-								<input type="text" class="searchTerm" placeholder="What are you looking for?">
-								<button type="submit" class="searchButton">
-									<i class="fas fa-search"></i>
-								</button>
+								<form class="typeahead" role="search">
+									<input type="text" class="searchTerm search-inputt" placeholder="What are you looking for?" autocomplete="off">
+									<button type="submit" class="searchButton">
+										<i class="fas fa-search"></i>
+									</button>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -170,6 +172,44 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+	<script>
+		$(document).ready(function($) {
+			var engine1 = new Bloodhound({
+				remote: {
+					url: '/search/name?value=%QUERY%',
+					wildcard: '%QUERY%'
+				},
+				datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
+				queryTokenizer: Bloodhound.tokenizers.whitespace
+			});
+
+			$(".search-inputt").typeahead({
+				hint: true,
+				highlight: true,
+				minLength: 1
+			}, [
+			{
+				source: engine1.ttAdapter(),
+				name: 'book-list',
+				display: function(data) {
+					return data.name;
+				},
+				templates: {
+					empty: [
+					'<div class="list-group search-results-dropdown"><div class="list-group-item">Nothing found.</div></div>'
+					],
+					header: [
+					''
+					],
+					suggestion: function (data) {
+						return '<p class="search-results-dropdown">' + data.name + '</p>';
+					}
+				}
+			}
+			]);
+		});
+	</script>
 	<!-- Custom JS-->
 	@yield('custom-js')	
 </body>
