@@ -62,47 +62,72 @@
                 <div class="form-group">
                     <label><i class="required">(*)</i><i class="far fa-id-badge"></i>LastName</label>
                     <input id="lastname" type="text" class="form-control" name="lastname" required placeholder="Your LastName" value="{{ old('lastname') }}">
+                    @if ($errors->has('lastname'))
+                    <span class="invalid-feedback" role="alert" style="display: block">
+                        <strong>{{ $errors->first('lastname') }}</strong>
+                    </span>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label><i class="required">(*)</i><i class="fas fa-id-badge"></i>FirstName</label>
                     <input id="firstname" type="text" class="form-control" name="firstname" required placeholder="Your FirstName" value="{{ old('firstname') }}">
+                    @if ($errors->has('firstname'))
+                    <span class="invalid-feedback" role="alert" style="display: block">
+                        <strong>{{ $errors->first('firstname') }}</strong>
+                    </span>
+                    @endif
                 </div>
                 <div class="form-group"> 
                     <label><i class="required">(*)</i><i class="fas fa-venus-mars"></i>Gender</label>
                     <label class="checkbox-inline">
-                        <input type="radio" name="gender"value="0" {{ old('gender') == 0 ? 'selected' : 0}}>Male
-                        <input type="radio" name="gender" value="1" {{ old('gender') == 1 ? 'selected' : 0}}>Female
+                        <input type="radio" name="gender"value="0" {{ old('gender') == 0 ? 'selected' : 0}} required>Male
+                        <input type="radio" name="gender" value="1" {{ old('gender') == 1 ? 'selected' : 0}} required>Female
+                        @if ($errors->has('gender'))
+                        <span class="invalid-feedback" role="alert" style="display: block">
+                            <strong>{{ $errors->first('gender') }}</strong>
+                        </span>
+                        @endif
                     </label>
                 </div>
 
                 <div class="form-group">
                     <label></i><i class="required">(*)</i><i class="fas fa-address-card"></i>Address</label>
                     <input type="text" class="form-control" name="address" required placeholder="Your Address" value="{{ old('address') }}">
+                    @if ($errors->has('address'))
+                    <span class="invalid-feedback" role="alert" style="display: block">
+                        <strong>{{ $errors->first('address') }}</strong>
+                    </span>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label><i class="required">(*)</i><i class="fas fa-mobile-alt"></i>Phone</label>
                     <input id="phone" type="text" class="form-control" name="phone" required placeholder="Your Phone Number" value="{{ old('phone') }}">
+                    @if ($errors->has('phone'))
+                    <span class="invalid-feedback" role="alert" style="display: block">
+                        <strong>{{ $errors->first('phone') }}</strong>
+                    </span>
+                    @endif
                 </div>
 
-                <div class="form-group">
+                <!--  <div class="form-group">
                     <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
                     <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
-                </div>
-                <div class="form-group form-button">
-                    <button  type="submit" name="signup" id="signup" class="btn btn-default btn-cons">Register</button>
-                </div>
-                <div>
-                    <p class="help"><i class="required">(*)</i> : Required Input !</p>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-4 text-center">
-            <figure><img src="images/signup-image.jpg" alt="signup image"></figure>
-            <a href="{{ route('login') }}" class="signup-image-link">I am already member</a>
-        </div>
+                </div> -->
+               <div class="form-group form-button">
+                <button  type="submit" name="signup" id="signup" class="btn btn-default btn-cons">Register</button>
+            </div>
+            <div>
+                <p class="help"><i class="required">(*)</i> : Required Input !</p>
+            </div>
+        </form>
     </div>
+    <div class="col-md-4 text-center">
+        <figure><img src="images/signup-image.jpg" alt="signup image"></figure>
+        <a href="{{ route('login') }}" class="signup-image-link">I am already member</a>
+    </div>
+</div>
 </div>
 @endsection
 

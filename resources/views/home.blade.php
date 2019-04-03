@@ -37,16 +37,15 @@
 		</div>
 		<div class="col-lg-9 d-none d-lg-block">
 			<div class="picture-slider-container">
+				@foreach(glob('images/sliders/*.{jpg,png,gif}', GLOB_BRACE) as $file)
 				<div>
-					<img src="https://www.houseofbots.com/images/news/4594/cover.png" class="slide-item">
-					<div class="carousel-caption d-none d-md-block">
+					<img src="{{ asset($file) }}" class="slide-item">
+					<!-- <div class="carousel-caption d-none d-md-block">
 						<h5>MORE BOOK FOR YOU.</h5>
 						<p>Have Fun !</p>
-					</div>
+					</div> -->
 				</div>
-				<div>
-					<img src="http://dasaptaerwin.net/wp/wp-content/uploads/2016/02/best-books-book-youll-ever-read.jpg" class="slide-item">
-				</div>
+				@endforeach
 			</div>
 		</div>
 	</div>
@@ -55,15 +54,15 @@
 <div class="product-container">
 	<div class="row d-flex justify-content-center">
 		<div class="col-12">
-			@for ($i = 0; $i < 2; $i++)
+			@foreach($databooks as $books)
 			<div class="product-by-category-container">
 				<div class="category-name">
-					<a href="{{ route('category', $books[$i][0]->categories->id) }}">{{$books[$i][0]->categories->name}}</a>
+					<a href="{{ route('category', $books[0]->categories->id) }}">{{$books[0]->categories->name}}</a>
 				</div>
 				<div class="book-container">
 					<div class="row d-flex justify-content-center">
 						<div class="col-md-11 col-12 book-list">
-							@foreach ($books[$i] as $book)
+							@foreach ($books as $book)
 							<div class="book-item">
 								<figure class="book-cover">
 									<a href="{{ route('book',$book->id) }}"><img src="{{$book->img}}" alt="Book Image" hr></a>
@@ -107,9 +106,8 @@
 					</div>
 				</div>
 			</div>
-
 			<hr>
-			@endfor
+			@endforeach
 		</div>
 	</div>
 </div>

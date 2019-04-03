@@ -31,16 +31,16 @@ class RatingController extends Controller
         $data = $request->only('comment','star_number','user_id','book_id');
         if ($request->rating_id == null) {
             if(Rating::create($data)){
-                return back()->with('status','success !');
+                return redirect()->back()->with(['class' => 'success', 'message' => 'Rating Success.']);
             }else{
-                return back()->with('status','Error Database !');
+                return redirect()->back()->with(['class' => 'danger', 'message' => 'Rating error.']);
             }
         }
         $result = Rating::find($request->rating_id)->update($data);
         if ($result) {
-            return back()->with('status','success !');
+            return redirect()->back()->with(['class' => 'success', 'message' => 'Update Success.']);
         }else{
-            return back()->with('status','Error Database !');
+            return redirect()->back()->with(['class' => 'danger', 'message' => 'Rating error.']);
         }
     }
 
@@ -48,9 +48,9 @@ class RatingController extends Controller
     {
         $rating = Rating::where('user_id','=',Auth::user()->id)->where('book_id','=',$request->id)->first();
         if ($rating->delete()) {
-            return back()->with('status','Delete success !');
+            return redirect()->back()->with(['class' => 'success', 'message' => 'Delete success']);
         }else{
-            return back()->with('status','Error Database !');
+            return redirect()->back()->with(['class' => 'danger', 'message' => 'Rating error.']);
         }
     }
 }

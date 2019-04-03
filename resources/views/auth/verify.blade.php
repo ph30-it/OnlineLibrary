@@ -1,24 +1,38 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+@section('page-title')
+Veryfy Email
+@endsection
 
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
+@section('custom-css')
+<style>
+    .veryfy{
+        padding-top: 70px;
+        height: 350px;
+    }
+</style>
+@endsection
 
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }}, <a href="{{ route('verification.resend') }}">{{ __('click here to request another') }}</a>.
+@section('page-content')
+<div class="row justify-content-center veryfy">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+
+            <div class="card-body">
+                @if (session('resent'))
+                <div class="alert alert-success" role="alert">
+                    {{ __('A fresh verification link has been sent to your email address.') }}
                 </div>
+                @endif
+
+                {{ __('Before proceeding, please check your email for a verification link.') }}
+                {{ __('If you did not receive the email') }}, <a href="{{ route('verification.resend') }}">{{ __('click here to request another') }}</a>.
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('custom-js')
 @endsection

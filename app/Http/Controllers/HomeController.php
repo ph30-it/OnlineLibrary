@@ -33,7 +33,7 @@ class HomeController extends Controller
             }
         }
         $booksData = array();
-        for($i = 0;$i < 2;$i++){
+        for($i = 0;$i < 3;$i++){
             $books = $cate[$i]->Books()->where('quantity','>',0)->orderBy('created_at','DESC')->take(7)->get();
             foreach($books as $book){
                 $book['rating'] = $book->ratings()->avg('star_number');
@@ -42,7 +42,7 @@ class HomeController extends Controller
         }
         return view('home', [
             'categories' => $cate,
-            'books' => $booksData
+            'databooks' => $booksData
         ]);
     }
 }

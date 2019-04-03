@@ -21,6 +21,17 @@
 				<li class="breadcrumb-item active">{{$book->name}}</li>
 			</ol>
 		</div>
+		<div class="col-12">
+			
+			@if(session('class'))
+			<div class="alert alert-{{session('class')}} alert-dismissible fade show">
+				<li>{{session('message')}}</li>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			@endif
+		</div>
 		<div class="col-5">
 			<div class="book-cover">
 				<img src="{{$book->img}}">
@@ -318,8 +329,8 @@
 					</div>
 				</div>
 				<div class="col-11 comment">
-					<div style="width: 100%;font-weight: bold" class="mt-2">
-						{{ $rating->user->firstname }} commented at {{ $rating->created_at }} 
+					<div style="width: 100%" class="mt-2">
+						<p style="font-weight: bold">{{ $rating->user->firstname }}</p> Commented at {{ $rating->created_at }} 
 					</div>
 					<div style="width: 100%;font-weight: bold" class="mt-2">
 						@php
@@ -342,7 +353,7 @@
 						@endif					
 					</div>
 
-					<div style="width: 100%;font-weight: bold" class="mt-2">
+					<div style="width: 100%;" class="mt-2">
 						{{ $rating->comment }}
 					</div>
 				</div>
