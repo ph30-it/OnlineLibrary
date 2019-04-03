@@ -113,7 +113,7 @@
 									</div>
 									<br>
 									<div style="font-size: 1.1em;font-weight: bold">
-										{{ $count_comments }} rated
+										{{ $count_ratings }} rated
 									</div>
 								</div>
 							</div>
@@ -151,7 +151,7 @@
 				<div style="width: 100%;height: 100%;display: flex;justify-content: center;align-items: center">
 					@if(!Auth::check())
 					<a class="btn btn-warning" href="/login">Login to rating !</a>
-					@elseif ($is_user_commented)
+					@elseif ($ratings !== null)
 					<button class="btn btn-success" data-toggle="collapse" data-target="#comment-section">You are commented on this book , click here to edit!</button>
 					@else
 					<button data-toggle="collapse" data-target="#comment-section" id="comment-btn">Write Comment</button>
@@ -227,7 +227,7 @@
 
 					<div style="width: 100%:height: 80px">
 
-						@if($is_user_commented)
+						@if($ratings !== null)
 						<button type="submit" class="btn btn-success float-right mr-5"><b>Update</b></button>
 						<!-- <form action="{{ route('delete_rating') }}" method="POST">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -331,7 +331,7 @@
 		@endforeach
 
 		<div style="width: 100%;display: flex;justify-content: center;align-items: center">
-			
+			{!! $ratings->appends(request()->query())->links() !!}
 		</div>
 	</div>
 </div>

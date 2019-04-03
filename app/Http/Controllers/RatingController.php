@@ -11,18 +11,16 @@ class RatingController extends Controller
 {
     public function getRatingPaginate(Request $request)
     {
-    	$number_comment = Rating::where('book_id','=',$request->book_id)->count();
-
+        $data = Rating::where('book_id','=',$request->book_id);
+    	$number_comment = $data->count();
         if($request->number_comment != 0){
             $number_comment = $request->number_comment;
-        }   
-
+        }
         $returned_data = null;
-
         if($request->number_star != 0){
-            $returned_data = Rating::where('book_id','=',$request->book_id)->where('star_number','=',$request->number_star)->paginate($number_comment);
+            $returned_data = $data->where('star_number','=',$request->number_star)->paginate($number_comment);
         }else{
-            $returned_data = Rating::where('book_id','=',$request->book_id)->paginate($number_comment);
+            $returned_data = $data->paginate($number_comment);
         }
 
         return view('layouts.user_comment_section',['data' => $returned_data]);

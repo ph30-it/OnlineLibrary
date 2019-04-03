@@ -7,7 +7,7 @@ use App\Book;
 use App\Order;
 use Illuminate\Support\Facades\DB;
 
-class cartcontroller extends controller
+class Cartcontroller extends controller
 {
 	public function cart(){
 		return view('cart');
