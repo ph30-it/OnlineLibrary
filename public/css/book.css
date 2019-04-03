@@ -55,6 +55,7 @@
 	font-size: 1.1em;
 	color: white;
 }
+
 .breadcrumb {
 	border-radius: 0;
 	background: #e74c3c;
@@ -67,12 +68,15 @@
 	padding-left: 10px;
 	padding-right: 10px;
 }
+
 .breadcrumb a:hover{
 	font-weight: bold;
 }
+
 .star-container{
 	width: 600px;
 }
+
 .comment-container{
 	width: 100%;
 	margin-top: 20px;
@@ -122,15 +126,150 @@
 	border: 0;
 }
 
-.rating_radio{
-	display: none;
+.evalate-container{
+	width: 100%;
+	min-height: 250px;
+	background-color: #ecf0f1;
 }
 
-.rating_label{
-	opacity: 0.2;
+.average-evalate{
+	height: 250px;
+	width: 100%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.evalate-on-percent{
+	margin-top: 20px;
+	font-size: 1.2em;
+	width: 100%;
+	height: 250px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+
+.percent-outer{
+	width: 100%;
+	height: 15px;
+	background-color: darkgray;
+	margin-top: 2px;
+	border-radius: 10px;
+}
+
+.percent-outer .percent-inner{
+	height: 100%;
+	background-color: #2ecc71;
+	border-radius: 10px;
+}
+
+#comment-btn{
+	width: 80%;
+	height: 40px;
+	border-radius: 5px;
+	background-color: #f1c40f;
+	color: white;
+	border: 0;
+	font-weight: bold;
+}
+
+#comment-section{
+	height: 300px;
+	width: 100%;
+	background-color: #eaeaea;
+}
+
+.user-info{
+	height: 300px;
+	width: 100%;
+	border-right: 1px solid gray;
+
+	display: flex;	
+	justify-content: center;
+	align-items: center;
+}
+
+.user-info .user-avatar{
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	object-fit: cover;
+}
+
+.user-info .user-detail{
+	font-size: 1.2em;
+	font-weight: bold;
+	text-align: center;
+}
+
+.rating-label{
 	cursor: pointer;
 }
 
-.rating_radio:checked + label{
-	opacity: 1;
+.rating-label:hover{
+	color: #f1c40f;
+	opacity: 0.5;
+}
+
+.comment-textarea{
+	width: 100%;
+	height: 120px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.comment-textarea textarea{
+	border-radius: 5px;
+	border: 1px solid darkgray;
+	background-color: #ecf0f1;
+	width: 90%;
+	height: 100%;
+	resize: none;
+	font-weight: bold;
+}
+
+.other-user-comment{
+	width: 100%;
+	background-color: #ecf0f1;
+}
+
+.other-user-comment .user-info{
+	height: 200px;
+	width: 100%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.other-user-comment .user-info .user-avatar{
+	height: 120px;
+	width: 120px;
+
+	border-radius: 50%;
+	object-fit: cover;
+	border: 1px solid gray;
+}
+
+input[type="radio"]:checked + label{
+	color: #f1c40f;
+}
+
+button{
+	cursor: pointer;
+}
+
+input[type="radio"]{
+	display: none;
+}
+
+
+th,td{
+	text-align: center;
 }

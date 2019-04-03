@@ -78,7 +78,6 @@
 				<hr>
 				<div style="width: 100%;" class="d-flex justify-content-center">
 					{!! $data->appends(request()->query())->links() !!}
-					<!-- {{ $data->links() }} -->
 				</div>
 
 			</div>
@@ -111,11 +110,6 @@
 					console.log(jqXHR.responseText);
 				}
 			});
-		});
-
-		$(".page-link").on('click',function(e){
-			console.log($(this).text());
-			window.location.href += "&pagination=" + $("select#pagination-select").children("option:selected").val();;
 		});
 	});
 </script>

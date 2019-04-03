@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Categories;
+use App\Order;
 
 class Book extends Model
 {
@@ -13,10 +15,10 @@ class Book extends Model
     ];
 
     public function categories(){
-        return $this->belongsTo('App\Categories');
+        return $this->belongsTo(Categories::class);
     }
 
     public function Order(){
-        return $this->belongstoMany('App\Order', 'detail_order', 'order_id', 'books_id');
+        return $this->belongstoMany(Order::class, 'detail_order', 'order_id', 'books_id');
     }
 }

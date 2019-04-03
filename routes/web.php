@@ -9,11 +9,15 @@ Route::get('/home',function(){
 });
 
 Route::get('/book/{id}','BookController@showBookDetailByID')->name('book')->where('id', '[0-9]+');
+Route::post('/book/{id}','RatingController@getRatingPaginate')->name('book')->where('id', '[0-9]+');
+
 Route::get('/category/{id}','CategoryController@listBooksById')->name('category')->where('id', '[0-9]+');
 Route::post('/category/{id}','CategoryController@listBookPaginate')->name('post_category');
+
 Route::post('/newsletter','NewsletterController@subscribe')->name('newsletter_subscribe');
-Route::post('/add_star','RatingController@addStar');
-Route::post('/add_comment','CommentController@addComment')->name('add_comment');
+
+Route::delete('/delete_rating/','RatingController@destroy')->name('delete_rating');
+Route::post('/add_rating','RatingController@Rating')->name('add_rating');
 
 Route::group(['prefix' => 'account','middleware' => ['auth', 'verified']], function(){
 	Route::get('/','UserController@account')->name('account_profile');

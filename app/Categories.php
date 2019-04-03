@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Book;
 
 class Categories extends Model
 {
@@ -14,6 +15,6 @@ class Categories extends Model
     ];
 
     public function Books(){
-    	return $this->hasMany('App\Book');
+    	return $this->hasMany(Book::class);
     }
 }
