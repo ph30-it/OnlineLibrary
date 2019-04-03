@@ -12,7 +12,7 @@ class RatingController extends Controller
     public function getRatingPaginate(Request $request)
     {
         $data = Rating::where('book_id','=',$request->book_id);
-    	$number_comment = $data->count();
+        $number_comment = $data->count();
         if($request->number_comment != 0){
             $number_comment = $request->number_comment;
         }
@@ -28,11 +28,19 @@ class RatingController extends Controller
 
     public function Rating(Request $request)
     {
-    	$data = $request->only('comment','star_number','user_id','book_id');
-    	if(Rating::updateOrCreate($data)){
+        $data = $request->only('comment','star_number','user_id','book_id');
+        if ($request->rating_id == null) {
+            if(Rating::create($data)){
+                return back()->with('status','success !');
+            }else{
+                return back()->with('status','Error Database !');
+            }
+        }
+        $result = Rating::find($request->rating_id)->update($data);
+        if ($result) {
             return back()->with('status','success !');
         }else{
-            return back()->with('status','Database !');
+            return back()->with('status','Error Database !');
         }
     }
 

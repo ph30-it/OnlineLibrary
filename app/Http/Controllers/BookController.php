@@ -15,14 +15,18 @@ class BookController extends Controller
 		if($data == null) abort(404);
 
 		$user_rating = Auth::check() ? $data->ratings()->where('user_id','=',Auth::user()->id)->first() : null;
-
 		$count_ratings = $data->ratings->count();
 		$percentOfRatings = array();
-		for($i = 1;$i <= 5;$i++){
-			array_push($percentOfRatings,round($data->ratings->where('star_number','=',$i)->count()*100/$count_ratings));
+		if ($count_ratings == 0) {
+			for($i = 1;$i <= 5;$i++){
+				array_push($percentOfRatings,0);
+			}
+		}else{
+			for($i = 1;$i <= 5;$i++){
+				array_push($percentOfRatings,round($data->ratings->where('star_number','=',$i)->count()*100/$count_ratings));
+			}
 		}
-		$average_avalate = $percentOfRatings[0]*1 + $percentOfRatings[1]*2 + $percentOfRatings[2]*3 + $percentOfRatings[3]*4 + $percentOfRatings[4]*5;
-		$average_avalate = round($average_avalate/150,1);
+		$average_avalate = round($data->ratings()->avg('star_number'),1);
 
 		$num_comment = $request->has('num_comment') ? $request->num_comment : 5;
 		$num_star = $request->has('num_star') ? $request->num_star : 0;

@@ -1,9 +1,15 @@
 $("#submit-comment").on('click',function(e){
-	let rating = $("input[name='rating']:checked").val();
-
+	let rating = $("input[name='star_number']:checked").val();
+	let comment = $("#comment-text-content").val();
+	console.log(comment.length);
 	if(!rating){
-		e.preventDefault();
 		alert("Please rate for this book");
+		e.preventDefault();
+		return;
+	}
+	if(comment.length > 1000){
+		alert("The comment must be less than 1000 characters");
+		e.preventDefault();
 		return;
 	}
 });

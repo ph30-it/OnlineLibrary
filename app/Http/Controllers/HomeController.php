@@ -26,14 +26,19 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Categories::all();
-        $list_category = Categories::take(2)->get();
-        $booksData = array();
-        foreach($list_category as $key => $category ){
-            $book = Book::where('categories_id','=',$category->id)->where('quantity','>',0)->take(7)->get();
-            array_push($booksData,$book);
+        $cate = array();
+        foreach ($categories as $category) {
+            if ($category->Books()->count() > 0) {
+                array_push($cate,$category);
+            }
         }
+        $booksData = array();
+        for($i = 0;$i < 2;$i++){
+            $book = $cate[$i]->Books()->where('quantity','>',0)->take(7)->get();
+            array_push($booksData,$book);
+        }   
         return view('home', [
-            'categories' => $categories,
+            'categories' => $cate,
             'books' => $booksData
         ]);
     }

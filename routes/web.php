@@ -15,17 +15,18 @@ Route::get('/category/{id}','CategoryController@listBooksById')->name('category'
 Route::post('/category/{id}','CategoryController@listBookPaginate')->name('post_category');
 
 Route::post('/newsletter','NewsletterController@subscribe')->name('newsletter_subscribe');
-
-Route::delete('/delete_rating/','RatingController@destroy')->name('delete_rating');
-Route::post('/add_rating','RatingController@Rating')->name('add_rating');
-
-Route::group(['prefix' => 'account','middleware' => ['auth', 'verified']], function(){
-	Route::get('/','UserController@account')->name('account_profile');
-	Route::get('/edit','UserController@edit_show')->name('account_edit');
-	Route::post('/edit','UserController@update')->name('account_update');
-	Route::get('/order/{status?}','OrderController@orderstatus')->name('order_by_status');
-	Route::delete('/cart_cancel','OrderController@cancel')->name('cart_cancel');
-	Route::post('/upload', 'UserController@upload')->name('upload');
+Route::group(['middleware' => 'auth'], function(){
+	Route::delete('/delete_rating/','RatingController@destroy')->name('delete_rating');
+	Route::post('/add_rating','RatingController@Rating')->name('add_rating');
+	
+	Route::group(['prefix' => 'account','middleware' => 'verified'], function(){
+		Route::get('/','UserController@account')->name('account_profile');
+		Route::get('/edit','UserController@edit_show')->name('account_edit');
+		Route::post('/edit','UserController@update')->name('account_update');
+		Route::get('/order/{status?}','OrderController@orderstatus')->name('order_by_status');
+		Route::delete('/cart_cancel','OrderController@cancel')->name('cart_cancel');
+		Route::post('/upload', 'UserController@upload')->name('upload');
+	});
 });
 
 Route::group(['prefix' => 'cart'], function(){

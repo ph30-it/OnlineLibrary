@@ -6,6 +6,7 @@ Cart
 
 @section('custom-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/user.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/TimeCircles.css') }}">
 @endsection
 
 @section('page-content')
@@ -34,8 +35,9 @@ Cart
 		@else
 		<h4>Order number :{{ $order->id }}</h4>
 		<div class="alert alert-success">
-			<p>Wait admin check your order !</p>
+			<p>Wait admin check your order in 24h!</p>
 		</div>
+		<div id="DateCountdown" data-date="{{date("Y-m-d H:i:s", strtotime('+24 hours', strtotime($order->created_at)))}}" style="width: 100%;"></div>
 		<table id="cart" class="table table-hover table-condensed">
 			<thead>
 				<tr>
@@ -99,10 +101,39 @@ Cart
 @endsection
 
 @section('custom-js')
+<script type="text/javascript" src="{{ asset('js/TimeCircles.js') }}"></script>
 <script>
 	$('#myForm').on('submit', function(e){
 		$('#myModal').modal('show');
 		e.preventDefault();
 	});
+	$("#DateCountdown").TimeCircles({
+    "animation": "smooth",
+    "bg_width": 1.2,
+    "fg_width": 0.1,
+    "circle_bg_color": "#60686F",
+    "time": {
+        "Days": {
+            "text": "Days",
+            "color": "#FFCC66",
+            "show": true
+        },
+        "Hours": {
+            "text": "Hours",
+            "color": "#99CCFF",
+            "show": true
+        },
+        "Minutes": {
+            "text": "Minutes",
+            "color": "#BBFFBB",
+            "show": true
+        },
+        "Seconds": {
+            "text": "Seconds",
+            "color": "#FF9999",
+            "show": true
+        }
+    }
+});
 </script>
 @endsection

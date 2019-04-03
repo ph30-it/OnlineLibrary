@@ -103,12 +103,15 @@
 										$remain = 5  - $average_evalate;
 										@endphp
 
-										@for($i = 0; $i < $average_evalate;$i++)
+										@for($i = 0; $i < (int)$average_evalate;$i++)
 										<i class="fas fa-star" style="color: #f1c40f;font-size: 15px"></i>
 										@endfor
+										@if(($average_evalate + (int)$remain) != 5)
+										<i class="fas fa-star-half-alt" style="color: #f1c40f;font-size: 15px"></i>
+										@endif
 
-										@for($i = 0; $i < $remain;$i++)
-										<i class="fas fa-star" style="font-size: 15px;color: darkgray"></i>
+										@for($i = 0; $i < (int)$remain;$i++)
+										<i class="far fa-star" style="font-size: 15px;color: #f1c40f"></i>
 										@endfor
 									</div>
 									<br>
@@ -151,7 +154,7 @@
 				<div style="width: 100%;height: 100%;display: flex;justify-content: center;align-items: center">
 					@if(!Auth::check())
 					<a class="btn btn-warning" href="/login">Login to rating !</a>
-					@elseif ($ratings !== null)
+					@elseif ($user_rating !== null)
 					<button class="btn btn-success" data-toggle="collapse" data-target="#comment-section">You are commented on this book , click here to edit!</button>
 					@else
 					<button data-toggle="collapse" data-target="#comment-section" id="comment-btn">Write Comment</button>
@@ -200,12 +203,12 @@
 									@for($i = 1;$i <= 5;$i++)
 									@if($user_rating && $user_rating->star_number == $i)
 									<td>
-										<input type="radio" name="star_number" value="{{ $i }}" id="rating-star-{{ $i }}" checked>
+										<input type="radio" name='star_number' value="{{ $i }}" id="rating-star-{{ $i }}" checked>
 										<label for="rating-star-{{ $i }}" class="rating-label"><i class="fas fa-star"></i></label>
 									</td>
 									@else
 									<td>
-										<input type="radio" name="star_number" value="{{ $i }}" id="rating-star-{{ $i }}">
+										<input type="radio" name='star_number' value="{{ $i }}" id="rating-star-{{ $i }}">
 										<label for="rating-star-{{ $i }}" class="rating-label"><i class="fas fa-star"></i></label>
 									</td>
 									@endif
@@ -217,17 +220,19 @@
 					</div>
 
 					<div class="comment-textarea">
-						<textarea name="comment" placeholder="Bình luận cuốn sách này" id="comment-text-content" required>{{ ($user_rating == null ) ? '' : $user_rating->comment }} </textarea>
+						<textarea name="comment" placeholder="Comment this b" id="comment-text-content" required>{{ ($user_rating == null ) ? '' : $user_rating->comment }} </textarea>
 					</div>
 
 					<br>
 
 					<input type="label" value="{{ $book->id }}" name="book_id" id="book-id" style="display: none;">
 					<input type="label" value="{{ Auth::user()->id }}" name="user_id" id="book-id" style="display: none;">
+					<input type="label" value="{{ ($user_rating) ? $user_rating->id : null}}" name="rating_id" id="book-id" style="display: none;">
 
 					<div style="width: 100%:height: 80px">
 
-						@if($ratings !== null)
+						@if($user_rating !== null)
+						<button id="delete_rating" class="btn btn-danger float-right mr-5">Delete</button>
 						<button type="submit" class="btn btn-success float-right mr-5"><b>Update</b></button>
 						<!-- <form action="{{ route('delete_rating') }}" method="POST">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -235,14 +240,35 @@
 							<input type="hidden" name="id" value="{{ $book->id }}">
 						</form> -->
 						@else
-						<button type="submit" class="btn btn-success float-right mr-5"><b>Send</b></button>
+						<button type="submit" class="btn btn-success float-right mr-5" id="submit-comment"><b>Send</b></button>
 						@endif
 					</div>
 				</div>
 			</div>
 		</div>
 	</form>
-	
+	<div class="modal fade" tabindex="-1" role="dialog" id="ratingModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Delete</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<p>You submit delete rating ?&hellip;</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<form action="{{ route('delete_rating') }}" method="POST">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<input type="hidden" name="_method" value="DELETE">
+						<input type="hidden" name="id" value="{{ $book->id }}">
+						<button type="submit" class="btn btn-danger float-right mr-5"><b>Delete</b></button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	@endif
 	<br>
 
@@ -275,7 +301,7 @@
 	</div>
 	
 	<br>
-
+	@if($count_ratings > 0)
 	<div class="user-comment-container" id="user-comment-container">
 		@foreach($ratings as $rating)
 		<div class="other-user-comment">
@@ -334,9 +360,21 @@
 			{!! $ratings->appends(request()->query())->links() !!}
 		</div>
 	</div>
+	@else
+	<div class="alert alert-warning">
+		<li>No Comment in this book, will be the first rating in this book !</li>
+	</div>
+	@endif
 </div>
 @endsection
 
 @section('custom-js')
 <script type="text/javascript" src="{{ asset('js/book.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+<script>
+	$("#delete_rating").on('click',function(e){
+		$('#ratingModal').modal('show');
+		e.preventDefault();
+	});
+</script>
 @endsection
