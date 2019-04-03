@@ -104,14 +104,14 @@
 										@endphp
 
 										@for($i = 0; $i < (int)$average_evalate;$i++)
-										<i class="fas fa-star" style="color: #f1c40f;font-size: 15px"></i>
+										<i class="fas fa-star" style="color: #f1c40f;"></i>
 										@endfor
 										@if(($average_evalate + (int)$remain) != 5)
-										<i class="fas fa-star-half-alt" style="color: #f1c40f;font-size: 15px"></i>
+										<i class="fas fa-star-half-alt" style="color: #f1c40f;"></i>
 										@endif
 
 										@for($i = 0; $i < (int)$remain;$i++)
-										<i class="far fa-star" style="font-size: 15px;color: #f1c40f"></i>
+										<i class="far fa-star" style="color: #f1c40f"></i>
 										@endfor
 									</div>
 									<br>
@@ -220,7 +220,7 @@
 					</div>
 
 					<div class="comment-textarea">
-						<textarea name="comment" placeholder="Comment this b" id="comment-text-content" required>{{ ($user_rating == null ) ? '' : $user_rating->comment }} </textarea>
+						<textarea name="comment" placeholder="Comment this b" id="comment-text-content">{{ ($user_rating == null ) ? '' : $user_rating->comment }} </textarea>
 					</div>
 
 					<br>
@@ -234,11 +234,6 @@
 						@if($user_rating !== null)
 						<button id="delete_rating" class="btn btn-danger float-right mr-5">Delete</button>
 						<button type="submit" class="btn btn-success float-right mr-5"><b>Update</b></button>
-						<!-- <form action="{{ route('delete_rating') }}" method="POST">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-							<input type="hidden" name="_method" value="DELETE">
-							<input type="hidden" name="id" value="{{ $book->id }}">
-						</form> -->
 						@else
 						<button type="submit" class="btn btn-success float-right mr-5" id="submit-comment"><b>Send</b></button>
 						@endif
@@ -270,7 +265,7 @@
 		</div>
 	</div>
 	@endif
-	<br>
+	<hr>
 
 	<div class="filter-option">
 		<div class="row">
@@ -306,23 +301,23 @@
 		@foreach($ratings as $rating)
 		<div class="other-user-comment">
 			<div class="row">
-				<div class="col-3">
-					<div class="user-info">
+				<div class="col-1">
+					<div class="user-info-comment">
 						<div>
 							<div>
 								@if($rating->user->image)
-								<img src="{{ $rating->user->image }}" class="user-avatar">
+								<img src="{{ $rating->user->image }}" class="user-avatar-comment">
 								@else
-								<img src="{{ asset('images/default.png') }}" class="user-avatar">
+								<img src="{{ asset('images/default.png') }}" class="user-avatar-comment">
 								@endif
 							</div>
-							<div class="text-center" style="font-weight: bold;font-size: 1.1em">
+							<!-- <div class="text-center" style="font-weight: bold;font-size: 1.1em">
 								{{ $rating->user->firstname }}
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
-				<div class="col-9">
+				<div class="col-11 comment">
 					<div style="width: 100%;font-weight: bold" class="mt-2">
 						{{ $rating->user->firstname }} commented at {{ $rating->created_at }} 
 					</div>

@@ -137,4 +137,13 @@
 .category-list li:hover{
 	background-color: #34495e;
 	color: white;
-}	
+}
+
+.rate{
+	padding-top: 15px;
+	text-align: center;
+}
+.rate p{
+	color: darkgray;
+	font-size: 80%;
+}

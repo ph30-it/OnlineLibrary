@@ -52,6 +52,26 @@
 								<div class="product-image">
 									<img src="{{$book->img}}">
 								</div>
+								<div class="rate">
+									@if(!is_null($book->rating))
+									@php
+									$average_evalate = $book->rating;
+									$remain = 5  - $average_evalate;
+									@endphp
+
+									@for($i = 0; $i < (int)$average_evalate;$i++)
+									<i class="fas fa-star" style="color: #f1c40f;font-size: 15px"></i>
+									@endfor
+									@if(($average_evalate + (int)$remain) != 5)
+									<i class="fas fa-star-half-alt" style="color: #f1c40f;font-size: 15px"></i>
+									@endif
+
+									@for($i = 0; $i < (int)$remain;$i++)
+									<i class="far fa-star" style="font-size: 15px;color: #f1c40f"></i>
+									@endfor
+									<p>Rating : {{ round($book->rating,1) }}/5</p>
+									@endif
+								</div>
 							</div>
 							<div class="col-md-6 col-12">
 								<div class="product-info">

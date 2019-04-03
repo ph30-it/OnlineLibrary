@@ -9,6 +9,15 @@
 @endsection
 
 @section('page-content')
+@if(session('class'))
+<div class="alert alert-{{session('class')}} alert-dismissible fade show">
+	<li>{{session('message')}}</li>
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+@endif
+
 <div class="category-container">
 	<div class="row">
 		<div class="col-lg-3 col-sm-12col-12">
@@ -72,7 +81,25 @@
 									</div> -->
 									<div class="book-buy">
 										<button class="get-book-btt" data-book-id="{{$book->id}}">Get it now</button>
-									</div> 
+									</div>
+									<div class="rate">
+										@if(!is_null($book->rating))
+										@php
+										$average_evalate = $book->rating;
+										$remain = 5  - $average_evalate;
+										@endphp
+
+										@for($i = 0; $i < (int)$average_evalate;$i++)
+										<i class="fas fa-star" style="color: #f1c40f;font-size: 15px"></i>
+										@endfor
+										@if(($average_evalate + (int)$remain) != 5)
+										<i class="fas fa-star-half-alt" style="color: #f1c40f;font-size: 15px"></i>
+										@endif
+										@for($i = 0; $i < (int)$remain;$i++)
+										<i class="far fa-star" style="font-size: 15px;color: #f1c40f"></i>
+										@endfor
+										@endif
+									</div>
 								</div>
 							</div>
 							@endforeach

@@ -189,3 +189,9 @@
 figure{
   position: relative;
 }
+.fas,.far{
+	display: inline !important;
+}
+.rate{
+	padding-top: 5px;
+}

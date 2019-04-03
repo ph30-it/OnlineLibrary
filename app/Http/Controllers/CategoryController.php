@@ -18,9 +18,12 @@ class CategoryController extends Controller
             }
         }
         $page_number = isset($request->paginate) ? $request->paginate : 10;
-        $data = Book::where('categories_id','=',$category_id)->paginate($page_number);
+        $data = Book::where('categories_id','=',$category_id)->orderBy('created_at','DESC')->paginate($page_number);
         if($data->toArray()['total'] == 0 || $data == null){
             return abort(404);
+        }
+        foreach($data as $book){
+            $book['rating'] = $book->ratings()->avg('star_number');
         }
         return view('category',[
         	'data' => $data,
