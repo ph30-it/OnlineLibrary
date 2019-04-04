@@ -25,7 +25,13 @@
 				</div>
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-lg-12">
+						<div class="col-lg-3">
+							<div class="form-group">
+                                <label for="input-file">Hình Ảnh</label>
+                                <input type="file" id="input-file" name="img" class="dropify" data-height="275px" data-default-file="{{asset('uploads')}}/{{ $user->image }}" disabled="" />
+                            </div>
+						</div>
+						<div class="col-lg-9">
 							@if(session('class'))
 							<div class="alert bg-{{session('class')}}" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>{{session('message')}}</div>
 							@endif
@@ -69,8 +75,8 @@
 								<label>Địa chỉ</label>
 								<textarea class="form-control" name="address" rows="3" placeholder="Địa chỉ hiện tại (V/d: Đà Nẵng, Việt Nam,...)" disabled>{{$user->address}}</textarea>
 							</div>
-							<a href="{{ route('showEditUser', $user->id) }}" class="btn btn-primary">Thay đổi thông tin</a>
-							<a href="{{ route('ListUser') }}" class="btn btn-default">Xong</a>
+							<a href="{{ route('User.Edit', $user->id) }}" class="btn btn-primary">Thay đổi thông tin</a>
+							<a href="{{ route('User.List') }}" class="btn btn-default">Xong</a>
 						</div>
 					</div>
 				</div>
@@ -79,4 +85,13 @@
 
 	</div><!--/.row-->
 </div>	<!--/.main-->
+@endsection
+@section('javascript')
+<script type="text/javascript">
+	$(document).ready(function(){
+        // Basic
+        $('.dropify').dropify();
+    });
+</script>
+<script type="text/javascript" src="{{ asset('admin_assets/js/main-app.js') }}"></script>
 @endsection

@@ -27,7 +27,8 @@ class UserUpdateRequest extends FormRequest
             'firstname' => 'required|string',
             'lastname' => 'required|string',
             'confirm_password' => 'same:password',
-            'phone' => 'required'
+            'phone' => 'required',
+            'img'=>'mimes:jpeg,jpg,png,gif'
         ];
     }
 
@@ -36,7 +37,8 @@ class UserUpdateRequest extends FormRequest
             'firstname.required' => 'Họ không được trống.',
             'lastname.required' => 'Tên không được trống.',
             'confirm_password.same' => 'Nhập lại mật khẩu không trùng khớp.',
-            'phone.required' => 'Số điện thoại không được trống.'
+            'phone.required' => 'Số điện thoại không được trống.',
+            'img.mimes' => 'File tải lên phải là một hình ảnh.'
         ];
     }
 }

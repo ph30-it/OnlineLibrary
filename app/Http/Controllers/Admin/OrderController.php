@@ -4,17 +4,48 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\orderRequest;
+use Illuminate\Support\Facades\DB;
 use App\Order;
 use App\Book;
+use App\OrderDetail;
 
 class OrderController extends Controller
 {
     public function index($status){
         $status = ($status < 1 || $status > 5) ? 1 : $status;
-    	$orders = Order::where('status', '=', $status)->orderBy('status', 'ASC')->paginate(50);
-        $dayBefore = (new \DateTime(date('Y-m-d h:i:s')))->modify('-1 day')->format('Y-m-d h:i:s');
+    	$orders = Order::where('status', '=', $status)->orderBy('id', 'DESC')->paginate(50);
+        $dayBefore = (new \DateTime(now()))->modify('-1 day')->format('Y-m-d h:i:s');
         $orders_expired = Order::where('status', 2)->where('updated_at', '<', $dayBefore)->get();
     	return view('admin.orders.index', compact('orders', 'status', 'orders_expired'));
+    }
+
+    public function create(){
+        return view('admin.orders.create');
+    }
+
+    public function store(orderRequest $request){
+        foreach ($request->book as $key => $value) {
+            $data[$value['id']] = $value['quantity'];
+        }
+        DB::beginTransaction();
+        try {
+            $order = Order::create(['users_id' => $request->readers]);
+            foreach($data as $book_id => $quantity){
+                if($book = Book::find($book_id)){
+                    OrderDetail::create(['order_id' => $order->id,'books_id' => $book_id, 'quantity' => $quantity]);
+                    $price = $book->price * $quantity;
+                    $order->price += $price;
+                    $order->save();
+                }
+            }
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw new Exception($e->getMessage());
+        }
+        return redirect()->route('Order.List', 1)->with(['class' => 'success', 'message' => 'Thêm đơn hàng thành công']);
+        
     }
 
     public function show(request $request){
@@ -24,11 +55,12 @@ class OrderController extends Controller
                 'contact' => $order->user->phone,
                 'created_time' => date($order->created_at),
                 'total' => number_format($order->price),
-                'count' => $order->detailorder->count(),
+                'count' => $order->orderdetail->count(),
                 'status' => $order->status,
                 'date_borrow' => $order->date_borrow,
                 'date_give_back' => $order->date_give_back,
-                'book' => $order->detailorder->map(function($item){
+                'note' => $order->note,
+                'book' => $order->orderdetail->map(function($item){
                     $data = [
                         'name' => $item->book->name,
                         'quantity' => $item->quantity,
@@ -47,39 +79,48 @@ class OrderController extends Controller
     	if($order = Order::find($data['id'])){
             switch ($data['status']) {
                 case 2:
-                    $order->detailorder->map(function($item){ // ẩn đi số lượng sách được phép thuê
-                        $book = Book::find($item->book->id);
-                        $book->quantity -= $item->quantity;
-                        return $book->save();
-                    });
+                    // ẩn đi số lượng sách được phép thuê
+                    $this->hiddenBook($order->orderdetail);
                     break;
                 case 3:
-                    if($order->status == 2){ // nếu đang chờ lấy nhưng bị hủy sẽ trã số lượng sách bị ẩn lại
-                        $order->detailorder->map(function($item){
-                            $book = Book::find($item->book->id);
-                            $book->quantity += $item->quantity;
-                            return $book->save();
-                        });
+                    if($order->status == 2){
+                        // nếu đang chờ lấy nhưng bị hủy sẽ trã số lượng sách bị ẩn lại
+                        $this->returnBook($order->orderdetail);
                     }
+                    $order->note = $request->note;
                     break;
                 case 4:
-                    $data['date_borrow'] = date("Y-m-d h:i:s");
+                    $order->date_borrow = now();
                     break;
                 case 5:
-                    $order->detailorder->map(function($item){ // trã lại số sách bị ẩn
-                        $book = Book::find($item->book->id);
-                        $book->quantity += $item->quantity;
-                        return $book->save();
-                    });
-                    $data['date_give_back'] = date("Y-m-d h:i:s");
+                    // trã lại số sách bị ẩn
+                    $this->returnBook($order->orderdetail);
+                    $order->date_give_back = now();
                     break;
             }
-            if($order->update($data)){
+            $order->status = $data['status'];
+            if($order->save($data)){
                 return response()->json(['error' => 0, 'message' => '']);
             }
 
     	}
     	return response()->json(['error' => 1, 'message' => 'Không tìm thấy đơn hàng']);
+    }
+
+    public function hiddenBook($book){
+        $book->map(function($item){
+            $book = Book::find($item->book->id);
+            $book->quantity -= ($item->quantity > $book->quantity) ? $book->quantity : $item->quantity;
+            return $book->save();
+        });
+    }
+
+    public function returnBook($book){
+        $book->map(function($item){
+            $book = Book::find($item->book->id);
+            $book->quantity += $item->quantity;
+            return $book->save();
+        });
     }
 
     public function destroy(request $request){
@@ -92,10 +133,13 @@ class OrderController extends Controller
         return response()->json(['error' => 1, 'message' => 'Không tìm thấy đơn hàng']);
     }
 
-    public function search(request $request){
+    public function search(request $request, $status){
+        $status = ($status < 1 || $status > 5) ? 1 : $status;
         $orders = Order::whereHas('user', function ($query) use ($request){
             return $query->WhereRaw("concat(firstname, ' ', lastname) like '%$request->key%' ");
-        })->Where('status', '!=', 3)->orWhere('id', 'like', "%$request->key%")->Where('status', '!=', 3)->orderBy('status', 'ASC')->paginate(50);
-        return view('admin.orders.index', compact('orders'));
+        })->Where('status', $status)->orWhere('id', 'like', "%$request->key%")->Where('status', $status)->orderBy('status', 'ASC')->paginate(50);
+        $dayBefore = (new \DateTime(date('Y-m-d h:i:s')))->modify('-1 day')->format('Y-m-d h:i:s');
+        $orders_expired = Order::where('status', 2)->where('updated_at', '<', $dayBefore)->get();
+        return view('admin.orders.index', compact('orders', 'status', 'orders_expired'));
     }
 }

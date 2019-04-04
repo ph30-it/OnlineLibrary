@@ -67,8 +67,8 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-    var api_domain = "{{ url('/api/v1/admin') }}";
+    var api_domain = "{{ url('/admin') }}";
     var api_token = "{{ csrf_token() }}";
 </script>
-<script type="text/javascript" src="{{ asset('admin_assets/js/main-app.js') }}"></script>
+<script type="text/javascript" src="{{asset('admin_assets/js/main-app.js')}}"></script>
 @endsection

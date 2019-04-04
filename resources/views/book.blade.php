@@ -17,13 +17,13 @@
 				<li><a href="{{ route('home') }}">
 					<i class="ti-home"></i>
 				</a></li>
-				<li class="active"><a href="{{ route('category', $book->categories->id) }}">{{$book->categories->name}}</a></li>
+				<li class="active"><a href="{{ route('category', $book->category->id) }}">{{$book->category->name}}</a></li>
 				<li><a href="">{{$book->name}}</a></li>
 			</ol>
 		</div>
 		<div class="col-4">
 			<div class="book-cover">
-				<img src="{{$book->img}}">
+				<img src="{{asset('uploads')}}/{{$book->img}}">
 			</div>
 		</div>
 		<div class="col-8">

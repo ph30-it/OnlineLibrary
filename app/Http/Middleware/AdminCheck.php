@@ -22,6 +22,6 @@ class AdminCheck
                 return $next($request);
             }
         }
-        return redirect()->route('AdminLoginForm');
+        return redirect()->route('login');
     }
 }

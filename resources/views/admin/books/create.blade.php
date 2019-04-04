@@ -29,7 +29,7 @@
 							@if(session('class'))
 							<div class="alert bg-{{session('class')}}" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>{{session('message')}}</div>
 							@endif
-							<form action="{{ route('addBook') }}" method="post" enctype="multipart/form-data">
+							<form action="{{ route('Book.Store') }}" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<div class="col-lg-3">
 									<div class="form-group">

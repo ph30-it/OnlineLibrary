@@ -21,7 +21,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<form action="{{ route('searchComment') }}" method="GET">
+					<form action="{{ route('Comment.Search') }}" method="GET">
 						<div class="input-group">
 							<input type="text" class="form-control input-md" name="key" placeholder="Search for..." />
 							<span class="input-group-btn"><button type="submit" class="btn btn-primary btn-md" >Search</button></span>
@@ -41,6 +41,11 @@
 							</tr>
 						</thead>
 						<tbody>
+							@if($comments->count() < 1)
+							<tr>
+								<td colspan="6">Không có bình luận nào</td>
+							</tr>
+							@endif
 							@foreach($comments as $comment)
 							<tr data-row="{{$comment->id}}">
 								<td>{{$comment->id}}</td>
@@ -68,7 +73,7 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-    var api_domain = "{{ url('/api/v1/admin') }}";
+    var api_domain = "{{ url('/admin') }}";
     var api_token = "{{ csrf_token() }}";
 </script>
 <script type="text/javascript" src="{{ asset('admin_assets/js/main-app.js') }}"></script>

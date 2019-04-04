@@ -49,7 +49,7 @@
 			@for ($i = 0; $i < count($categories); $i++)
 			<div class="product-by-category-container">
 				<div class="category-name">
-					<a href="{{ route('category', $books[$i][0]->categories->id) }}">{{$books[$i][0]->categories->name}}</a>
+					<a href="{{ route('category', $books[$i][0]->category->id) }}">{{$books[$i][0]->category->name}}</a>
 				</div>
 				<div class="book-container">
 					<div class="row d-flex justify-content-center">
@@ -57,7 +57,7 @@
 							@foreach ($books[$i] as $book)
 							<div class="book-item">
 								<figure class="book-cover">
-									<a href="{{ route('book',$book->id) }}"><img src="{{$book->img}}" alt="Book Image" hr></a>
+									<a href="{{ route('book',$book->id) }}"><img src="{{asset('uploads')}}/{{$book->img}}" alt="Book Image" hr></a>
 								</figure>
 
 								<div class="book-info">

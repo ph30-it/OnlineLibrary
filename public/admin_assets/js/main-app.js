@@ -10,12 +10,12 @@ $(document).ready(function(){
 				},
 				function(data){
 					if(data.error == 0){
-						var html = '<tr data-row="'+data.id+'">';
-						html += '<td><span class="category-name">'+categoryname+'</span></td>';
-						html += '<td class="text-right">';
-						html += '<a href="javascript:void(0);" class="btn btn-sm btn-primary category-newname" data-id="'+data.id+'">Chỉnh sửa</a>&nbsp';
-	                    html += '<a href="javascript:void(0);" class="btn btn-sm btn-danger category-remove" data-id="'+data.id+'">Xóa</a>';
-	                    html += '</td>';
+						var html = '<tr data-row="'+data.id+'">'+
+						'<td><span class="category-name">'+categoryname+'</span></td>'+
+						'<td class="text-right">'+
+						'<a href="javascript:void(0);" class="btn btn-sm btn-primary category-newname" data-id="'+data.id+'">Chỉnh sửa</a>&nbsp'+
+	                    '<a href="javascript:void(0);" class="btn btn-sm btn-danger category-remove" data-id="'+data.id+'">Xóa</a>'+
+	                    '</td>';
 						$('.category-content').prepend(html);
 						alertify.success('Thêm danh mục thành công');
 						$('.category-add input:first').val('');
@@ -25,6 +25,9 @@ $(document).ready(function(){
 					}
 				}, 'json'
 			);
+		}
+		else{
+			alertify.error('Tên danh mục trống');
 		}
 	});
 	// new name category
@@ -84,7 +87,7 @@ $(document).ready(function(){
 		var bookid = $(this).attr('data-id');
 		alertify.confirm('Xác nhận xóa', 'Nếu bạn xóa, sách sẽ mất đi trong các đơn hàng!', function(){
 			$.ajax({
-				url: api_domain+'/book/deleted',
+				url: api_domain+'/books/deleted',
 				method: 'DELETE',
 				data: {
 					id: bookid,
@@ -108,7 +111,7 @@ $(document).ready(function(){
 		var userid = $(this).attr('data-id');
 		alertify.confirm('Xác nhận xóa', 'Nếu bạn xóa, các đơn hàng của thành viên sẽ xóa theo!', function(){
 			$.ajax({
-				url: api_domain+'/user/deleted',
+				url: api_domain+'/users/deleted',
 				method: 'DELETE',
 				data: {
 					id: userid,
@@ -156,16 +159,16 @@ $(document).ready(function(){
 		    	return '<span class="btn-sm btn-warning">Chờ xử lý<span>';
 		    break;
 		  	case 2:
-		    	return '<span class="btn-sm btn-warning">Chờ đến thư viện<span>';
+		    	return '<span class="btn-sm btn-warning">Chờ nhận sách<span>';
 		    break;
 		  	case 3:
 		    	return '<span class="btn-sm btn-danger">Đã hủy<span>';
 		    break;
 		  	case 4:
-		    	return '<span class="btn-sm btn-success">Đang mượn<span>';
+		    	return '<span class="btn-sm btn-primary">Đang mượn<span>';
 		    break;
 		  	default:
-		    	return '<span class="btn-sm btn-primary">đã trả<span>';
+		    	return '<span class="btn-sm btn-success">đã trã<span>';
 		}
 	}
 	// Order Detail
@@ -181,6 +184,7 @@ $(document).ready(function(){
 				'<p>Thời Gian Trã Sách: <b>'+data.date_give_back+'</b></p>';
 			}
 			html += '<p>Tổng Số Lượng Sách Thuê: <b>'+data.count+'</b></p>'+
+			'<p>Ghi chú: <b>'+data.note+'</b></p>'+
 			'<table class="table"><thead><tr><th>Tên Sách</th><th>Số Lượng</th><th>Giá Thuê</th><th>Tổng Tiền</th></tr></thead><tbody>';
 			$.each(data.book, function( i, l ) {
 				html += '<tr>'+
@@ -211,7 +215,7 @@ $(document).ready(function(){
 				success: function(data){
 					if(data.error == 0){
 						$('[data-row='+orderID+']').remove();
-						alertify.success('Trạng thái chuyển sang chờ đến thư viện');
+						alertify.success('Trạng thái chuyển sang chờ nhận sách');
 					}else{
 						alertify.success(message);
 					}
@@ -248,13 +252,14 @@ $(document).ready(function(){
 	//refused order
 	$('.refused-order').on('click', function(){
 		var orderID = $(this).attr('data-id');
-		alertify.confirm('Xác nhận', 'Bạn muốn hủy đơn hàng này?', function(){
+		alertify.prompt('Xác nhận', 'Lí do từ chối đơn hàng', 'Số lượng sách không đủ', function(evt, value){
 			$.ajax({
 				url: api_domain+'/order/updated',
 				method: 'PUT',
 				data: {
 					id: orderID,
 					status: 3,
+					note: value,
 					_token: api_token
 				},
 				success: function(data){
@@ -316,4 +321,52 @@ $(document).ready(function(){
 			});
 		},function(){});
 	});
+
+});
+jQuery(document).delegate('a.add-record', 'click', function(e) {
+	e.preventDefault();    
+	var content = jQuery('#sample_table tr'),
+	size = jQuery('#tbl_posts >tbody >tr').length + 1,
+	element = null,    
+	element = content.clone();
+	element.attr('id', 'row-'+size);
+	element.find('.book-record').attr('name', 'book['+size+'][id]');
+	element.find('.quantity-record').attr('name', 'book['+size+'][quantity]');
+	element.find('.delete-record').attr('data-id', size);
+	element.appendTo('#tbl_posts_body');
+	element.find('.sn').html(size);
+	element.find('.book-record').select2({
+        placeholder: 'Chọn sách',
+        ajax: {
+          url: api_domain+'/books/api/search',
+          dataType: 'json',
+          delay: 250,
+          processResults: function (data) {
+            return {
+              results: data
+            };
+          },
+          cache: true
+        }
+      });
+});
+jQuery(document).delegate('a.delete-record', 'click', function(e) {
+    if(jQuery('#tbl_posts >tbody >tr').length > 1){
+		e.preventDefault();
+		var id = jQuery(this).attr('data-id');
+      	var targetDiv = jQuery(this).attr('targetDiv');
+		alertify.confirm('Xác nhận', 'Bạn chắn chắn muốn xóa cột này?', function(){
+	      	jQuery('#row-' + id).remove();
+		    //regnerate index number on table
+		    $('#tbl_posts_body tr').each(function(index) {
+		      	//alert(index);
+		      	$(this).find('span.sn').html(index+1);
+		    });
+	    	return true;
+		}, function(){
+		});
+	}
+	else{
+		alertify.alert('Cảnh Báo', 'Tối thiểu phải có 1 cột');
+	}
 });

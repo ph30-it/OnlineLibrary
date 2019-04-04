@@ -15,6 +15,18 @@ class BookController extends Controller
     	return view('admin.books.index', compact('books'));
     }
 
+    public function apiSearch(request $request){
+        $key = ($request->q !== null) ? $request->q : '';
+        $books = Book::where('name', 'like', "%$key%")->orderBy('id', 'DESC')->get();
+        return response()->json($books->map(function($item){
+            $data = [
+                'id' => $item->id,
+                'text' => $item->name
+            ];
+            return $data;
+        }));
+    }
+
     public function create(){
         $categories = Category::all();
     	return view('admin.books.create', compact('categories'));
@@ -37,7 +49,7 @@ class BookController extends Controller
         }
     	
     	if($book = Book::create($data)){
-    		return redirect()->route('showEditBook', $book->id)->with(['class'=>'success','message'=>'Thêm sách thành công.']);
+    		return redirect()->route('Book.Edit', $book->id)->with(['class'=>'success','message'=>'Thêm sách thành công.']);
     	}
         else{
             return redirect()->back()->with(['class'=>'danger','message'=>'Lỗi hệ thống, thử lại sau.']);
@@ -50,7 +62,7 @@ class BookController extends Controller
             return view('admin.books.edit', compact(['book', 'categories']));
         }
         else{
-            return redirect()->route('ListBook');
+            return redirect()->route('Book.List');
         }
     }
 
@@ -63,7 +75,7 @@ class BookController extends Controller
             $data['categories_id'] = $request->category;
             if($request->hasFile('img')){
                 $file = $request->file('img');
-                $filename = ($book->img == 'default.jpg') ? md5(time()).'.jpg' : $book->img;
+                $filename = ($book->img == 'default.jpg' || $book->img == NULL) ? md5(time()).'.jpg' : $book->img;
                 $file->move(public_path('/uploads/'), $filename);
                 $data['img'] = $filename;
             }
