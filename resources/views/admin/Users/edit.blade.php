@@ -122,6 +122,7 @@
 
 	</div><!--/.row-->
 </div>	<!--/.main-->
+@endsection
 @section('javascript')
 <script type="text/javascript">
 	$(document).ready(function(){

@@ -25,14 +25,16 @@ class orderRequest extends FormRequest
     {
         return [
             'readers' => 'required',
-            'book' => 'required'
+            'book.*.id' => 'required',
+            'book.*.quantity' => 'min:1'
         ];
     }
 
     public function messages(){
         return [
             'readers.required' => 'Độc giả không được trống',
-            'book.required' => 'Đơn hàng ít nhất phải có 1 sách'
+            'book.*.id.required' => 'Vui lòng chọn sách',
+            'book.*.quantity.min' => 'Số lượng tối thiểu là 1'
         ];
     }
 }
