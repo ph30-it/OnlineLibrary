@@ -23,6 +23,30 @@
 					</a>
 					@endforeach
 				</ul>
+			</div><hr>
+			<div class="select_option">
+				<p class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Options</p>
+				<form data-category-id="{{$data[0]->categories->id}}">
+					<div class="form-group">
+						<label for="">Number Books</label>
+						<select class="browser-default custom-select custom-select-md" style="display: inline;" id="pagination-select">
+							<option {{ ($page_selection == 10) ? 'selected' : "" }} value="10">Show 10 books</option>
+							<option {{ ($page_selection == 15) ? 'selected' : "" }} value="15">Show 15 books</option>
+							<option {{ ($page_selection == 20) ? 'selected' : "" }} value="20">Show 20 books</option>
+							<option {{ ($page_selection == 0) ? 'selected' : "" }} value="0">Show All books</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="">Group By</label>
+						<select class="browser-default custom-select custom-select-md" style="display: inline;" id="orderByName-select">
+							<option {{ ($orderByName == 0) ? 'selected' : "" }} value="0">A-Z</option>
+							<option {{ ($orderByName == 1) ? 'selected' : "" }} value="1">Z-A</option>
+						</select>
+					</div>
+					<div class="text-center">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</form>
 			</div>
 		</div>
 		<div class="col-9">
@@ -36,12 +60,6 @@
 					<li class="breadcrumb-item active">{{$data[0]->categories->name}}</li>
 				</ol>
 			</div>
-			<select class="browser-default custom-select custom-select-md" style="display: inline;" id="pagination-select" data-category-id="{{$data[0]->categories->id}}">
-				<option {{ ($page_selection == 10) ? 'selected' : "" }} value="10">Show 10 books</option>
-				<option {{ ($page_selection == 15) ? 'selected' : "" }} value="15">Show 15 books</option>
-				<option {{ ($page_selection == 20) ? 'selected' : "" }} value="20">Show 20 books</option>
-				<option {{ ($page_selection == 0) ? 'selected' : "" }} value="0">Show All books</option>
-			</select>
 			<hr>	
 			<div id="paginate">
 				<div class="all-products-container" id="product-container">
@@ -108,29 +126,5 @@
 
 @section('custom-js')
 <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
-<script>
-	$(document).ready(function(){
-		// if ($("select option)
-		$("select#pagination-select").change(function(){
-			let selectedItem = $(this).val();
-			let categoryId = $(this).attr("data-category-id");
-			let token = $("meta[name='csrf-token']").attr("content");
-			$.ajax({
-				type:'POST',
-				url:'/category/'+categoryId,
-				data:{
-					'category':categoryId,
-					'pagination':selectedItem,
-					'_token':token
-				},
-				success:function(data){
-					$("#paginate").empty().append($(data).hide().fadeIn(500));
-				},
-				error:function(jqXHR,exception){
-					console.log(jqXHR.responseText);
-				}
-			});
-		});
-	});
-</script>
+<script type="text/javascript" src="{{ asset('js/category.js') }}"></script>
 @endsection

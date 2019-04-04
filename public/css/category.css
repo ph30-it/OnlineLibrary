@@ -147,3 +147,19 @@
 	color: darkgray;
 	font-size: 80%;
 }
+
+.select_option{
+	padding-top: 20px;
+	border: 1px solid #f6f6f6;
+}
+
+label{
+	font-weight: bold;
+	font-size: 110%;
+	color: #34495e;
+}
+
+.form-group{
+	padding: 20px;
+	padding-bottom: 0px;
+}

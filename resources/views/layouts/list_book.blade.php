@@ -31,5 +31,5 @@
 </div>
 <hr>
 <div style="width: 100%;" class="d-flex justify-content-center">
-	{!! $data->appends(['paginate'=>$page_selection])->links() !!}
+	{!! $data->appends(['paginate'=>$page_selection,'orderbyname'=>$orderByName])->links() !!}
 </div>

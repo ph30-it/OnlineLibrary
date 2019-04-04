@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Book;
 use App\Categories;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -18,7 +19,12 @@ class CategoryController extends Controller
             }
         }
         $page_number = isset($request->paginate) ? $request->paginate : 10;
-        $data = Book::where('categories_id','=',$category_id)->orderBy('created_at','DESC')->paginate($page_number);
+        $orderbyname = isset($request->orderbyname) ? $request->orderbyname : 0;
+        if($orderbyname == 0){
+            $data = Book::where('categories_id','=',$category_id)->orderBy('name')->orderBy('created_at','DESC')->paginate($page_number);
+        }else{
+            $data = Book::where('categories_id','=',$category_id)->orderBy('created_at','DESC')->orderBy('name','DESC')->paginate($page_number);
+        }
         if($data->toArray()['total'] == 0 || $data == null){
             return abort(404);
         }
@@ -28,22 +34,27 @@ class CategoryController extends Controller
         return view('category',[
         	'data' => $data,
         	'categories' => $cate,
-            'page_selection' => $page_number
+            'page_selection' => $page_number,
+            'orderByName' => null
         ]);
 
     }
 
     public function listBookPaginate(Request $request){
-    	if($request->pagination == 0){
-    		$pagination = Book::count();
-    	}else{
+        if($request->pagination == 0){
+            $pagination = Book::count();
+        }else{
             $pagination = $request->pagination;
         }
-        $data = Book::where('categories_id','=',$request->category)->paginate($pagination);
-        
+        if ($request->orderByName == 0) {
+            $data = Book::where('categories_id','=',$request->category)->orderBy('name')->paginate($pagination);
+        }else{
+            $data = Book::where('categories_id','=',$request->category)->orderBy('name','DESC')->paginate($pagination);
+        }
         return view('layouts.list_book',[
-        	'data' => $data,
-            'page_selection' => $pagination
-        ]);
+         'data' => $data,
+         'page_selection' => $pagination,
+         'orderByName' => $request->orderByName
+     ]);
     }
 }

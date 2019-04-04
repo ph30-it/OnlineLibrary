@@ -49,6 +49,9 @@ class HomeController extends Controller
             $rate[$value['book_id']] = $value['rating'];
         }
 
+        /*$test1 = Book::with('ratings')->join('ratings','books.id', '=', 'ratings.book_id')->where('books.categories_id','=',1)->where('books.quantity','>',0)->selectRaw('book_id, avg(star_number) as rating')->groupBy('book_id')->get();
+        dd($test1);
+        */
         return view('home', [
             'categories' => $cate,
             'databooks' => $booksData,
