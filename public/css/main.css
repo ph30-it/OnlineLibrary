@@ -163,6 +163,14 @@ p{
 .cartt{
 	margin-top: 40px;
 }
+
+.cartt a{
+	color: #e74c3c;
+}
+.cartt p{
+	display: inline;
+}
+
 footer{
 	background-color: #1c2331!important;
 	color: white;

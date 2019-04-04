@@ -8,6 +8,9 @@ $(document).ready(function(){
 				if(data == 1){
 					let message = new MessageOnTop("Book was added to cart");
 					message.Create(message.CONFIG.SUCCESS_BOOTSTRAP_CLASS);
+					let sd = $(".cartnumber").text().replace(/[^0-9]/gi,'');
+					var num = parseInt(sd) + 1;
+					$(".cartnumber").text(num);
 					return;
 				}
 				if(data == -2){

@@ -61,7 +61,7 @@ Cart
 			<td class="text-center">{{number_format($book['price'])}} VND</td>
 			<td class="text-center">1</td>
 			<td class="text-center">
-				<form onsubmit="openModal()" id="myForm">
+				<form id="myForm">
 					<button type="submit" class="btn btn-danger">Delete</button>
 				</form>
 				<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
@@ -96,7 +96,7 @@ Cart
 			<td colspan="2" class="hidden-xs"></td>
 			@if(Auth::check())
 			<td class="hidden-xs text-center">
-				<form onsubmit="openModal()" id="myForm2">
+				<form id="myForm2">
 					<button class="btn btn-success">Checkout</button>
 				</form>
 				<div class="modal fade" tabindex="-1" role="dialog" id="myModal2">
@@ -119,7 +119,7 @@ Cart
 			</td>
 			@else
 			<td class="hidden-xs text-center">
-				<form onsubmit="openModal()" id="myForm2">
+				<form id="myForm2">
 					<button class="btn btn-success">Checkout</button>
 				</form>
 				<div class="modal fade" tabindex="-1" role="dialog" id="myModal2">

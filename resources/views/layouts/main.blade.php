@@ -69,7 +69,11 @@
 						</div>
 					</div>
 					<div class="col-md-2 col-sm-3 cartt">
-						<a href="{{ route('cart') }}"><i class="fas fa-shopping-cart carticon"></i></a>
+						@if(!session()->get('cart'))
+						<a href="{{ route('cart') }}"><i class="fas fa-shopping-cart carticon"></i>Cart : <p class="cartnumber">0</p></a>
+						@else
+						<a href="{{ route('cart') }}"><i class="fas fa-shopping-cart carticon"></i>Cart : <p class="cartnumber">{{count(session()->get('cart'))}}</p></a>
+						@endif
 					</div>
 				</div>
 			</div>
