@@ -41,11 +41,27 @@
 					<td>{{ $order->date_borrow }}</td>
 					<td>{{ $order->date_give_back}}</td>
 					<td>{{ $order->note}}</td>
-					<td><button type="button" class="btn btn-warning">View Details</button></td>
+					<td><a href="javascript:detail_order({{ $order->id }})"><button type="button" class="btn btn-warning">View Details</button></a></td>
 				</tr>
 				@endforeach
 			</tbody>
 		</table>
+		<!-- Modal -->
+		<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">Details Order</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 @endsection
@@ -57,6 +73,24 @@
 			"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
 		} );
 	} );
+	function detail_order(id){
+		$.ajax({
+			url: "{{ route('detail_order') }}",
+			method: "GET",
+			data: {
+				id: id
+			},
+			dataType: "html",
+			success: function(data){
+				console.log(data);
+				$('#detailModal .modal-body').html(data);
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) { 
+				$('#detailModal .modal-body').html("Status: " + textStatus +" <br>Error: " + errorThrown);
+			}   
+		});
+		$('#detailModal').modal('show');
+	}
 </script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 @endsection

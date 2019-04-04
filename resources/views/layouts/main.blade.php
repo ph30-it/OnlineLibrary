@@ -54,13 +54,14 @@
 			<div class="col-md-9 col-11">
 				<div class="row">
 					<div class="col-md-3 col-2">
-						<a href="{{ route('home') }}"><img src="https://upload.wikimedia.org/wikipedia/en/b/b8/Mid-Continent_Public_Library_logo.png" alt="" height="100px"></a>
+						<a href="{{ route('home') }}"><img src="{{ asset('images/logo.png') }}" alt="" height="100px"></a>
 					</div>
 					<div class="col-md-7 col-sm-7">
 						<div class="wrap">
 							<div class="search">
-								<form class="typeahead" role="search">
-									<input type="text" class="searchTerm search-inputt" placeholder="What are you looking for?" autocomplete="off">
+								<form class="input-group" action="{{ route('search') }}" method="post">
+									@csrf
+									<input type="text" name="keysearch" class="searchTerm search-inputt" placeholder="What are you looking for?">
 									<button type="submit" class="searchButton">
 										<i class="fas fa-search"></i>
 									</button>
@@ -83,7 +84,6 @@
 
 	<div class="row d-flex justify-content-center">
 		<div class="col-md-9 col-11">
-			<!-- Other page contents is here -->
 			@yield('page-content')
 		</div>
 	</div>
@@ -100,7 +100,7 @@
 							</div>
 							<div class="col-md-7">
 								<form class="input-group" method="post" action="{{ route('newsletter_subscribe') }}">
-									{{ csrf_field() }}
+									@csrf
 									<input type="email" class="form-control" name="email" value="Input your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
 									<button class="btn btn-default" type="submit">Submit</button> 
 								</form>
@@ -160,61 +160,18 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- Copyright -->
 		<div class="footer-copyright text-center py-3">© 2019 Copyright:
 			<a href="{{ route('home') }}"> OnlineLibrary.com</a>
 		</div>
-		<!-- Copyright -->
-
 	</footer>
-	<!-- Footer -->
-	<!-- JS-->
-	<!-- Bootstrap JS-->
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-	<script>
-		$(document).ready(function($) {
-			var engine1 = new Bloodhound({
-				remote: {
-					url: '/search/name?value=%QUERY%',
-					wildcard: '%QUERY%'
-				},
-				datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
-				queryTokenizer: Bloodhound.tokenizers.whitespace
-			});
-
-			$(".search-inputt").typeahead({
-				hint: true,
-				highlight: true,
-				minLength: 1
-			}, [
-			{
-				source: engine1.ttAdapter(),
-				name: 'book-list',
-				display: function(data) {
-					return data.name;
-				},
-				templates: {
-					empty: [
-					'<div class="list-group search-results-dropdown"><div class="list-group-item">Nothing found.</div></div>'
-					],
-					header: [
-					''
-					],
-					suggestion: function (data) {
-						return '<p class="search-results-dropdown">' + data.name + '</p>';
-					}
-				}
-			}
-			]);
-		});
-	</script>
 	<!-- Custom JS-->
+	<script type="text/javascript" src="{{ asset('js/search_main.js') }}"></script>
 	@yield('custom-js')	
 </body>
 </html>

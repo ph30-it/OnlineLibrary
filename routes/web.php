@@ -17,11 +17,13 @@ Route::post('/category/{id}','CategoryController@listBookPaginate')->name('post_
 Route::post('/newsletter','NewsletterController@subscribe')->name('newsletter_subscribe');
 
 Route::get('/search/name', 'SearchController@searchByName');
-Route::get('/search', 'SearchController@index');
+Route::get('/search', 'SearchController@index')->name('search');
+Route::post('/search', 'SearchController@index')->name('search');
 
 Route::group(['middleware' => 'auth'], function(){
 	Route::delete('/delete_rating/','RatingController@destroy')->name('delete_rating');
 	Route::post('/add_rating','RatingController@Rating')->name('add_rating');
+	Route::get('/detail', 'OrderController@detail')->name('detail_order');
 	
 	Route::group(['prefix' => 'account','middleware' => 'verified'], function(){
 		Route::get('/','UserController@account')->name('account_profile');

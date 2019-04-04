@@ -19,25 +19,32 @@ class CategoryController extends Controller
             }
         }
         $page_number = isset($request->paginate) ? $request->paginate : 10;
-        $orderbyname = isset($request->orderbyname) ? $request->orderbyname : 0;
-        if($orderbyname == 0){
-            $data = Book::where('categories_id','=',$category_id)->orderBy('name')->orderBy('created_at','DESC')->paginate($page_number);
-        }else{
-            $data = Book::where('categories_id','=',$category_id)->orderBy('created_at','DESC')->orderBy('name','DESC')->paginate($page_number);
+        $orderby= isset($request->orderby) ? $request->orderby : 0;
+        switch ($orderby) {
+            case 1:
+            $data = Book::where('categories_id','=',$category_id)->orderBy('name','DESC')->paginate($page_number);
+            break;
+            case 2:
+            $data = Book::where('categories_id','=',$category_id)->orderBy('created_at','DESC')->paginate($page_number);
+            break;
+            case 3:
+            $data = Book::where('categories_id','=',$category_id)->orderBy('created_at')->paginate($page_number);
+            break;
+            case 0:
+            default:
+            $data = Book::where('categories_id','=',$category_id)->orderBy('name')->paginate($page_number);
+            break;
         }
+
         if($data->toArray()['total'] == 0 || $data == null){
             return abort(404);
         }
-        foreach($data as $book){
-            $book['rating'] = $book->ratings()->avg('star_number');
-        }
         return view('category',[
-        	'data' => $data,
-        	'categories' => $cate,
+            'data' => $data,
+            'categories' => $cate,
             'page_selection' => $page_number,
-            'orderByName' => null
+            'orderBy' => null
         ]);
-
     }
 
     public function listBookPaginate(Request $request){
@@ -46,15 +53,15 @@ class CategoryController extends Controller
         }else{
             $pagination = $request->pagination;
         }
-        if ($request->orderByName == 0) {
+        if ($request->orderBy == 0) {
             $data = Book::where('categories_id','=',$request->category)->orderBy('name')->paginate($pagination);
         }else{
             $data = Book::where('categories_id','=',$request->category)->orderBy('name','DESC')->paginate($pagination);
         }
         return view('layouts.list_book',[
-         'data' => $data,
-         'page_selection' => $pagination,
-         'orderByName' => $request->orderByName
-     ]);
+           'data' => $data,
+           'page_selection' => $pagination,
+           'orderBy' => $request->orderBy
+       ]);
     }
 }

@@ -26,7 +26,7 @@
 			</div><hr>
 			<div class="select_option">
 				<p class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Options</p>
-				<form data-category-id="{{$data[0]->categories->id}}">
+				<form data-category-id="{{$data[0]->categories->id}}" id="options">
 					<div class="form-group">
 						<label for="">Number Books</label>
 						<select class="browser-default custom-select custom-select-md" style="display: inline;" id="pagination-select">
@@ -39,8 +39,10 @@
 					<div class="form-group">
 						<label for="">Group By</label>
 						<select class="browser-default custom-select custom-select-md" style="display: inline;" id="orderByName-select">
-							<option {{ ($orderByName == 0) ? 'selected' : "" }} value="0">A-Z</option>
-							<option {{ ($orderByName == 1) ? 'selected' : "" }} value="1">Z-A</option>
+							<option {{ ($orderBy == 0) ? 'selected' : "" }} value="0">A-Z</option>
+							<option {{ ($orderBy == 1) ? 'selected' : "" }} value="1">Z-A</option>
+							<option {{ ($orderBy == 2) ? 'selected' : "" }} value="2">Newest</option>
+							<option {{ ($orderBy == 3) ? 'selected' : "" }} value="2">Oldest</option>
 						</select>
 					</div>
 					<div class="text-center">
@@ -71,9 +73,9 @@
 									<img src="{{$book->img}}">
 								</div>
 								<div class="rate">
-									@if(!is_null($book->rating))
+									@if(!is_null($book->ratings->avg('star_number')))
 									@php
-									$average_evalate = $book->rating;
+									$average_evalate = $book->ratings->avg('star_number');
 									$remain = 5  - $average_evalate;
 									@endphp
 
@@ -87,7 +89,7 @@
 									@for($i = 0; $i < (int)$remain;$i++)
 									<i class="far fa-star" style="font-size: 15px;color: #f1c40f"></i>
 									@endfor
-									<p>Rating : {{ round($book->rating,1) }}/5</p>
+									<p>Rating : {{ round($average_evalate,1) }}/5</p>
 									@endif
 								</div>
 							</div>

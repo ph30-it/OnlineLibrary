@@ -58,13 +58,13 @@ Cart
 				</div>
 			</td>
 			<td><a class="nomargin" href="{{ route('category',$book['category_id']) }}">{{$book['category']}}</a></td>
-			<td class="text-center">{{number_format($book['price'])}} VND</td>
+			<td class="text-center top50">{{number_format($book['price'])}} VND</td>
 			<td class="text-center">1</td>
 			<td class="text-center">
-				<form id="myForm">
-					<button type="submit" class="btn btn-danger">Delete</button>
+				<form id="myForm" data-book-id="{{ $book['id'] }}">
+					<button type="submit" class="btn btn-danger deletebutton">Delete</button>
 				</form>
-				<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+				<div class="modal fade" tabindex="-1" role="dialog" id="myModal{{ $book['id'] }}">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -149,14 +149,5 @@ Cart
 @endsection
 
 @section('custom-js')
-<script>
-	$('#myForm').on('submit', function(e){
-		$('#myModal').modal('show');
-		e.preventDefault();
-	});
-	$('#myForm2').on('submit', function(e){
-		$('#myModal2').modal('show');
-		e.preventDefault();
-	});
-</script>
+<script type="text/javascript" src="{{ asset('js/cart.js') }}"></script>
 @endsection

@@ -25,7 +25,7 @@ class OrderController extends Controller
 		}
 	}
 
-	public function orderWait(){
+	private function orderWait(){
 		$order = Order::where('status','=',1)->where('users_id','=',\Auth::user()->id)->get();
 		if(count($order) == 1){
 			$result = Order::find($order[0]->id)->Book;
@@ -34,7 +34,7 @@ class OrderController extends Controller
 		return view('user.wait_order',['result' => 0]);
 	}
 
-	public function orderConfirmed(){
+	private function orderConfirmed(){
 		$order = Order::where('status','=',2)->where('users_id','=',\Auth::user()->id)->get();
 		if(count($order) == 1){
 			$result = Order::find($order[0]->id)->Book;
@@ -43,7 +43,7 @@ class OrderController extends Controller
 		return view('user.confirmed_order',['result' => 0]);
 	}
 
-	public function orderBorrowing(){
+	private function orderBorrowing(){
 		$order = Order::where('status','=',4)->where('users_id','=',\Auth::user()->id)->get();
 		if(count($order) == 1){
 			$result = Order::find($order[0]->id)->Book;
@@ -52,12 +52,12 @@ class OrderController extends Controller
 		return view('user.borrowing_order',['result' => 0]);
 	}
 
-	public function orderCancelled(){
+	private function orderCancelled(){
 		$orders = Order::where('status','=',3)->get();
 		return view('user.cancelled_order',['orders' => $orders]);
 	}
 
-	public function orderHistory(){
+	private function orderHistory(){
 		$orders = Order::where('status','=',5)->get();
 		return view('user.history_order',['orders' => $orders]);
 	}
@@ -71,4 +71,12 @@ class OrderController extends Controller
 		$order->save();
 		return redirect()->back()->with(['class' => 'success', 'message' => 'Cancel order id : ' . $request->id. ' success.']);
 	}
+
+	public function detail(request $request){
+        $id = $request->id;
+        if($order = Order::find($id)){
+        	return response()->json($order); 
+        }
+        return false;
+    }
 }
