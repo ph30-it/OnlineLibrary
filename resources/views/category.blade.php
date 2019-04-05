@@ -33,7 +33,7 @@
 							<option {{ ($page_selection == 10) ? 'selected' : "" }} value="10">Show 10 books</option>
 							<option {{ ($page_selection == 15) ? 'selected' : "" }} value="15">Show 15 books</option>
 							<option {{ ($page_selection == 20) ? 'selected' : "" }} value="20">Show 20 books</option>
-							<option {{ ($page_selection == 0) ? 'selected' : "" }} value="0">Show All books</option>
+							<option {{ ($page_selection == 25) ? 'selected' : "" }} value="25">Show 25 books</option>
 						</select>
 					</div>
 					<div class="form-group">

@@ -33,6 +33,15 @@
 						<option {{ ($orderby == 1) ? 'selected' : "" }} value="1">Rating up</option>
 					</select>
 				</div>
+				<div class="form-group">
+					<label for="">Count Books</label>
+					<select class="form-control" id="paginate-select">
+						<option {{ ($paginate == 10) ? 'selected' : "" }} value="10">Show 10 books</option>
+						<option {{ ($paginate == 15) ? 'selected' : "" }} value="15">Show 15 books</option>
+						<option {{ ($paginate == 20) ? 'selected' : "" }} value="20">Show 20 books</option>
+						<option {{ ($paginate == 25) ? 'selected' : "" }} value="25">Show 25 books</option>
+					</select>
+				</div>
 				<button type="submit" class="btn btn-primary">search</button>
 			</form>
 		</div>
