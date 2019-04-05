@@ -8,6 +8,7 @@ use App\Http\Requests\orderRequest;
 use Illuminate\Support\Facades\DB;
 use App\Order;
 use App\Book;
+use App\User;
 use App\OrderDetail;
 
 class OrderController extends Controller
@@ -141,5 +142,21 @@ class OrderController extends Controller
         $dayBefore = (new \DateTime(date('Y-m-d h:i:s')))->modify('-1 day')->format('Y-m-d h:i:s');
         $orders_expired = Order::where('status', 2)->where('updated_at', '<', $dayBefore)->get();
         return view('admin.orders.index', compact('orders', 'status', 'orders_expired'));
+    }
+
+    public function OrderByBook($id){
+        if($book = Book::find($id)){
+            $details = OrderDetail::where('books_id', $id)->orderBy('id', 'ASC')->paginate(50);
+            return view('admin.orders.orderbybook', compact(['details', 'book']));
+        }
+        return redirect()->Route('Book.List');
+    }
+
+    public function OrderByUser($id){
+        if($user = User::find($id)){
+            $orders = Order::where('users_id', $id)->orderBy('id', 'ASC')->paginate(50);
+            return view('admin.orders.orderbyuser', compact(['orders', 'user']));
+        }
+        return redirect()->Route('Book.List');
     }
 }

@@ -51,7 +51,7 @@
 							@foreach($books as $book)
 							<tr data-row="{{$book->id}}">
 								<td>{{$book->id}}</td>
-								<td>{{$book->name}}</td>
+								<td><a href="{{route('Order.Book', $book->id)}}">{{$book->name}}</a></td>
 								<td>{{$book->author}}</td>
 								<td>{{$book->published_year}}</td>
 								<td>{{$book->Category->name}}</td>

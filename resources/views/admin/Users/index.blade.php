@@ -49,7 +49,7 @@
                             @foreach($users as $user)
                             <tr data-row="{{$user->id}}">
                                 <td>{{$user->id}}</td>
-                                <td>{{$user->firstname}} {{$user->lastname}}</td>
+                                <td><a href="{{route('Order.User', $user->id)}}">{{$user->firstname}} {{$user->lastname}}</a></td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->phone}}</td>
                                 <td>{{$user->roles == 1 ? 'Quản lý' : 'Thành viên'}}</td>

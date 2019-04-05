@@ -63,6 +63,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 		Route::get('/{status}/search', 'Admin\OrderController@search')->name('Order.Search');
 		Route::put('/updated', 'Admin\OrderController@update');
 		Route::delete('/deleted', 'Admin\OrderController@destroy');
+		Route::get('/book/{id}', 'Admin\OrderController@OrderByBook')->name('Order.Book');
+		Route::get('/user/{id}', 'Admin\OrderController@OrderByUser')->name('Order.User');
 	});
 
 	Route::group(['prefix' => 'comment'], function(){
