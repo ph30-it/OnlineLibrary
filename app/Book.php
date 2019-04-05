@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Categories;
+use App\Category;
 use App\Order;
 
 class Book extends Model
@@ -14,8 +14,12 @@ class Book extends Model
     	'name', 'img', 'author', 'published_year', 'describes', 'price', 'quantity', 'category_id'
     ];
 
-    public function category(){
-        return $this->belongsTo(Categories::class);
+    public function orderdetail(){
+        return $this->hasMany('App\OrderDetail', 'books_id', 'id');
+    }
+    
+    public function Category(){
+        return $this->belongsTo(Category::class);
     }
 
     public function Order(){

@@ -1,81 +1,86 @@
 @extends('admin.layouts.master')
 @section('content')
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header">Quản lý sách</h1>
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Danh sách sách trên thư viện
-                                </div>
-                                <!-- /.panel-heading -->
-                                <div class="panel-body">
-                                    <div>
-                                        <table class="table table-striped table-bordered table-hover" id="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Mã Sách</th>
-                                                    <th>Tên Sách</th>
-                                                    <th>Tác Giả</th>
-                                                    <th>Năm Xuất Bản</th>
-                                                    <th>Danh Mục</th>
-                                                    <th>Chỉnh Sửa</th>
-                                                    <th>Xóa</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($books as $row)
-                                                <tr>
-                                                    <td>{{ $row->id }}</td>
-                                                    <td>{{ $row->name }}</td>
-                                                    <td>{{ $row->author }}</td>
-                                                    <td>{{ $row->published_year }}</td>
-                                                    <td>{{ $row->categories->name }}</td>
-                                                    <td><a href="{{ route('showeditBooks', $row->id) }}" class="btn btn-info">Chỉnh sửa</a></td>
-                                                    <td>
-                                                        <form action="{{ route('deleteBooks') }}" method="POST" onsubmit="return check_confirm('Chắc Chắn Muốn Xóa?')">
-                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <input type="hidden" name="id" value="{{ $row->id }}">
-                                                            <button type="submit" class="btn btn-danger">Xoá</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- /.panel-body -->
-                            </div>
-                            <!-- /.panel -->
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                </div>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	<div class="row">
+		<ol class="breadcrumb">
+			<li><a href="#">
+				<em class="fa fa-home"></em>
+			</a></li>
+			<li>Books Manager</li>
+			<li class="active">List Books</li>
+		</ol>
+	</div><!--/.row-->
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">List Books</h1>
+		</div>
+	</div><!--/.row-->
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<form action="{{ route('Book.Search') }}" method="GET">
+						<div class="input-group">
+							<input type="text" class="form-control input-md" name="key" placeholder="Search for..." />
+							<span class="input-group-btn"><button type="submit" class="btn btn-primary btn-md" >Search</button></span>
+						</div>
+					</form>
+				</div>
+				<div class="panel-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Tên Sách</th>
+								<th>Tác Giả</th>
+								<th>Năm Xuất Bản</th>
+								<th>Danh Mục</th>
+								<th>Số lượng</th>
+								<th>Giá Thuê</th>
+								<th>Chỉnh Sửa/Xóa</th>
+							</tr>
+						</thead>
+						<tbody>
+							@if($books->count() < 1)
+							<tr>
+								<td colspan="8">Không có sách nào</td>
+							</tr>
+							@endif
+							@foreach($books as $book)
+							<tr data-row="{{$book->id}}">
+								<td>{{$book->id}}</td>
+								<td><a href="{{route('Order.Book', $book->id)}}">{{$book->name}}</a></td>
+								<td>{{$book->author}}</td>
+								<td>{{$book->published_year}}</td>
+								<td>{{$book->Category->name}}</td>
+								<td>{{$book->quantity}}</td>
+								<td>{{ number_format($book->price) }}đ</td>
+								<td>
+									<a href="{{ route('Book.Edit', $book->id) }}" class="btn btn-sm btn-primary">Chỉnh sửa</a>
+									<a href="javascript:void(0);" class="btn btn-sm btn-danger book-remove" data-id="{{$book->id}}">Xóa</a>
+								</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+				<div class="panel-footer">
+					<center>
+						{{ $books->links() }}
+					</center>
+				</div>
+			</div>
+		</div><!--/.col-->
+
+	</div><!--/.row-->
+</div>	<!--/.main-->
 @endsection
 @section('javascript')
-<script src="{{ asset('admin_assets/js/dataTables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('admin_assets/js/dataTables/dataTables.bootstrap.min.js') }}"></script>
-<script>
-    function check_confirm(msg){
-        if(confirm(msg) == true){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    $(document).ready(function() {
-        $('#table').DataTable({
-                responsive: true
-        });
-    });
+<script type="text/javascript">
+    var api_domain = "{{ url('/admin') }}";
+    var api_token = "{{ csrf_token() }}";
 </script>
+<script type="text/javascript" src="{{ asset('admin_assets/js/main-app.js') }}"></script>
 @endsection

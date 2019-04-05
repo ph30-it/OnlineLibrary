@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Book;
+use App\OrderDetail;
+use App\Observers\BookObserver;
+use App\Observers\OrderDetailObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Book::observe(BookObserver::class);
+        //OrderDetail::observe(OrderDetailObserver::class);
     }
 }

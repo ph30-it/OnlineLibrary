@@ -31,7 +31,7 @@ class CategoryRequest extends FormRequest
     public function messages(){
         return [
             'name.required' => 'Tên danh mục không được bỏ trống.',
-            'name.unique' => 'Tên danh mục đã tồn tại trên hệ thống.'
+            'name.unique' => 'Tên danh mục không được trùng với danh mục khác.'
         ];
     }
 }

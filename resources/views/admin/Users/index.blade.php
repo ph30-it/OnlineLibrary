@@ -1,81 +1,82 @@
 @extends('admin.layouts.master')
 @section('content')
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header">Quản lý thành viên</h1>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">
+                <em class="fa fa-home"></em>
+            </a></li>
+            <li>Users Manager</li>
+            <li class="active">List Users</li>
+        </ol>
+    </div><!--/.row-->
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">List Users</h1>
+        </div>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <form action="{{ route('User.Search') }}" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-md" name="key" placeholder="Search for..." />
+                            <span class="input-group-btn"><button type="submit" class="btn btn-primary btn-md" >Search</button></span>
                         </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Danh sách thành viên
-                                </div>
-                                <!-- /.panel-heading -->
-                                <div class="panel-body">
-                                    <div>
-                                        <table class="table table-striped table-bordered table-hover" id="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Họ và tên</th>
-                                                    <th>Email</th>
-                                                    <th>Số điện thoại</th>
-                                                    <th>Chức vụ</th>
-                                                    <th>Chỉnh Sửa</th>
-                                                    <th>Xóa</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($users as $row)
-                                                <tr>
-                                                    <td>{{ $row->id }}</td>
-                                                    <td>{{ $row->firstname }} {{ $row->lastname }}</td>
-                                                    <td>{{ $row->email }}</td>
-                                                    <td>{{ $row->phone }}</td>
-                                                    <td>{{ $row->roles > 0 ? 'Quản lý' : 'Thành viên' }}</td>
-                                                    <td><a href="{{ route('showeditUsers', $row->id) }}" class="btn btn-info">Chỉnh sửa</a></td>
-                                                    <td>
-                                                        <form action="{{ route('deleteUsers') }}" method="POST" onsubmit="return check_confirm('Chắc Chắn Muốn Xóa?')">
-                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <input type="hidden" name="id" value="{{ $row->id }}">
-                                                            <button type="submit" class="btn btn-danger">Xoá</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- /.panel-body -->
-                            </div>
-                            <!-- /.panel -->
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
+                    </form>
                 </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên Độc Giả</th>
+                                <th>Email</th>
+                                <th>Số Điện Thoại</th>
+                                <th>Chức Vụ</th>
+                                <th>Chi tiết/Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if($users->count() < 1)
+                            <tr>
+                                <td colspan="6">Không có thành viên nào</td>
+                            </tr>
+                            @endif
+                            @foreach($users as $user)
+                            <tr data-row="{{$user->id}}">
+                                <td>{{$user->id}}</td>
+                                <td><a href="{{route('Order.User', $user->id)}}">{{$user->firstname}} {{$user->lastname}}</a></td>
+                                <td>{{$user->email}}</td>
+                                <td>{{$user->phone}}</td>
+                                <td>{{$user->roles == 1 ? 'Quản lý' : 'Thành viên'}}</td>
+                                <td>
+                                    <a href="{{ route('User.Show', $user->id) }}" class="btn btn-sm btn-primary">Xem chi tiết</a>
+                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger user-remove" data-id="{{$user->id}}">Xóa</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <center>
+                        {{ $users->links() }}
+                    </center>
+                </div>
+            </div>
+        </div><!--/.col-->
+
+    </div><!--/.row-->
+</div>  <!--/.main-->
 @endsection
 @section('javascript')
-<script src="{{ asset('admin_assets/js/dataTables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('admin_assets/js/dataTables/dataTables.bootstrap.min.js') }}"></script>
-<script>
-    function check_confirm(msg){
-        if(confirm(msg) == true){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    $(document).ready(function() {
-        $('#table').DataTable({
-                responsive: true
-        });
-    });
+<script type="text/javascript">
+    var api_domain = "{{ url('/admin') }}";
+    var api_token = "{{ csrf_token() }}";
 </script>
+<script type="text/javascript" src="{{ asset('admin_assets/js/main-app.js') }}"></script>
 @endsection

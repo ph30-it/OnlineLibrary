@@ -1,157 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Lumino - Widgets</title>
+	<link href="{{ asset('admin_assets/css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('admin_assets/css/font-awesome.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('admin_assets/css/datepicker3.css') }}" rel="stylesheet">
+	<link href="{{ asset('admin_assets/css/styles.css') }}" rel="stylesheet">
+	<!-- alertify -->
+	<link href="{{ asset('admin_assets/css/alertify.css') }}" rel="stylesheet">
+	<!-- dropify -->
+	<link rel="stylesheet" href="{{ asset('admin_assets/css/dropify.min.css') }}">
+	
+	<!--Custom Font-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-        <title>Startmin - Bootstrap Admin Theme</title>
+</head>
+<body>
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span></button>
+				<a class="navbar-brand" href="{{url('')}}"><span>Home</span></a>
+			</div>
+		</div><!-- /.container-fluid -->
+	</nav>
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<div class="profile-sidebar">
+			<div class="profile-userpic">
+				<img src="{{asset('uploads')}}/{{Auth::user()->image}}" class="img-responsive" alt="">
+			</div>
+			<div class="profile-usertitle">
+				<div class="profile-usertitle-name">Administrator</div>
+				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="divider"></div>
+		<ul class="nav menu">
+			<li><a href="{{ route('admin-home') }}"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li><a href="{{ route('Category.List') }}"><em class="fa fa-folder-open">&nbsp;</em> Category</a></li>
+			<li class="parent "><a data-toggle="collapse" href="#books-item">
+				<em class="fa fa-book">&nbsp;</em> Books <span data-toggle="collapse" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				</a>
+				<ul class="children collapse" id="books-item">
+					<li><a class="" href="{{ route('Book.Create') }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> Add New Book
+					</a></li>
+					<li><a class="" href="{{ route('Book.List') }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> List Books
+					</a></li>
+				</ul>
+			</li>
+			<li class="parent "><a data-toggle="collapse" href="#user-item">
+				<em class="fa fa-user">&nbsp;</em> User <span data-toggle="collapse" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				</a>
+				<ul class="children collapse" id="user-item">
+					<li><a class="" href="{{ route('User.Create') }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> Add New User
+					</a></li>
+					<li><a class="" href="{{ route('User.List') }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> List Users
+					</a></li>
+				</ul>
+			</li>
+			<li class="parent "><a data-toggle="collapse" href="#order-item">
+				<em class="fa fa-clipboard">&nbsp;</em> Order <span data-toggle="collapse" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				</a>
+				<ul class="children collapse" id="order-item">
+					<li><a class="" href="{{ route('Order.List', 1) }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> Order Wait
+					</a></li>
+					<li><a class="" href="{{ route('Order.List', 2) }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> Order Confirmed
+					</a></li>
+					<li><a class="" href="{{ route('Order.List', 4) }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> Order Borrowing
+					</a></li>
+					<li><a class="" href="{{ route('Order.List', 5) }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> Order History
+					</a></li>
+					<li><a class="" href="{{ route('Order.List', 3) }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> Order Cancelled
+					</a></li>
+					<li><a class="" href="{{ route('Order.Create') }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> Add New Order
+					</a></li>
+				</ul>
+			</li>
+			
+			<li><a href="{{ route('Comment.List') }}"><em class="fa fa-comment">&nbsp;</em> Comments</a></li>
+			<li><a href="{{route('logout')}}"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+		</ul>
+	</div><!--/.sidebar-->
+		
+	@yield('content')
+	  
 
-        <!-- Bootstrap Core CSS -->
-        <link href="{{ asset('admin_assets/css/bootstrap.min.css') }}" rel="stylesheet">
+	<script src="{{ asset('admin_assets/js/jquery-1.11.1.min.js') }}"></script>
+	<script src="{{ asset('admin_assets/js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('admin_assets/js/chart.min.js') }}"></script>
+	<script src="{{ asset('admin_assets/js/chart-data.js') }}"></script>
+	<script src="{{ asset('admin_assets/js/easypiechart.js') }}"></script>
+	<script src="{{ asset('admin_assets/js/easypiechart-data.js') }}"></script>
+	<script src="{{ asset('admin_assets/js/bootstrap-datepicker.js') }}"></script>
+	<script src="{{ asset('admin_assets/js/custom.js') }}"></script>
 
-        <!-- MetisMenu CSS -->
-        <link href="{{ asset('admin_assets/css/metisMenu.min.css') }}" rel="stylesheet">
+	<!-- alertify -->
+	<script src="{{ asset('admin_assets/js/alertify.js') }}"></script>
+	<!-- dropify -->
+	<script src="{{ asset('admin_assets/js/dropify.min.js') }}"></script>
 
-        <!-- Timeline CSS -->
-        <link href="{{ asset('admin_assets/css/timeline.css') }}" rel="stylesheet">
-
-        <!-- Custom CSS -->
-        <link href="{{ asset('admin_assets/css/startmin.css') }}" rel="stylesheet">
-
-        <!-- Morris Charts CSS -->
-        <link href="{{ asset('admin_assets/css/morris.css') }}" rel="stylesheet">
-
-        <!-- Custom Fonts -->
-        <link href="{{ asset('admin_assets/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-        <!-- DataTables CSS -->
-        <link href="{{ asset('admin_assets/css/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet">
-
-        <!-- DataTables Responsive CSS -->
-        <link href="{{ asset('admin_assets/css/dataTables/dataTables.responsive.css') }}" rel="stylesheet">
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-    </head>
-    <body>
-
-        <div id="wrapper">
-
-            <!-- Navigation -->
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ route('admin-home') }}">Administrator</a>
-                </div>
-
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <ul class="nav navbar-right navbar-top-links">
-                    <li class="dropdown navbar-inverse">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-comment fa-fw"></i> New Comment
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                        <span class="pull-right text-muted small">12 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-tasks fa-fw"></i> New Task
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#">
-                                    <strong>See All Alerts</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i> {{ Auth::user()->firstname }} {{ Auth::user()->lastname }} <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="{{ route('AdminLogout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- /.navbar-top-links -->
-
-                @include('admin.layouts.menu')
-            </nav>
-
-            <div id="page-wrapper">
-                @yield('content')
-                <!-- /.container-fluid -->
-            </div>
-            <!-- /#page-wrapper -->
-
-        </div>
-        <!-- /#wrapper -->
-
-        <!-- jQuery -->
-        <script src="{{ asset('admin_assets/js/jquery.min.js') }}"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="{{ asset('admin_assets/js/bootstrap.min.js') }}"></script>
-
-        <!-- Metis Menu Plugin JavaScript -->
-        <script src="{{ asset('admin_assets/js/metisMenu.min.js') }}"></script>
-
-        @yield('javascript')
-
-        <!-- Custom Theme JavaScript -->
-        <script src="{{ asset('admin_assets/js/startmin.js') }}"></script>
-
-    </body>
+	@yield('javascript')
+	
+</body>
 </html>

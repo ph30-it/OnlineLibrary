@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('page-title')
-{{$data[0]->categories->name}}
+{{$data[0]->category->name}}
 @endsection
 
 @section('custom-css')
@@ -54,12 +54,20 @@
 		<div class="col-9">
 			<div>
 				<ol class="breadcrumb">
+<<<<<<< HEAD
+					<li><a href="{{ route('home') }}">
+						<i class="ti-home"></i>
+					</a></li>
+					<li><a href="">Category / </a></li>
+					<li class="active"><a href="{{ route('category', $data[0]->category->id) }}">{{$data[0]->category->name}}</a></li>
+=======
 					<li class="breadcrumb-item">
 						<a href="{{ route('home') }}">
 							<i class="fas fa-home"></i>
 						</a>
 					</li>
 					<li class="breadcrumb-item active">{{$data[0]->categories->name}}</li>
+>>>>>>> abeb917dc470c86364e0805499d234295efffa18
 				</ol>
 			</div>
 			<hr>	
@@ -79,6 +87,20 @@
 									$remain = 5  - $average_evalate;
 									@endphp
 
+<<<<<<< HEAD
+				@foreach ($data as $book)
+				<div class="product-container container shadow-hover">
+					<div class="row">
+						<div class="col-md-6 col-12">
+							<div class="product-image">
+								<img src="{{asset('uploads')}}/{{$book->img}}">
+							</div>
+						</div>
+						<div class="col-md-6 col-12">
+							<div class="product-info">
+								<div class="book-name">
+									<a href="{{ route('book',$book->id) }}"><b></b>{{$book->name}}</a>
+=======
 									@for($i = 0; $i < (int)$average_evalate;$i++)
 									<i class="fas fa-star" style="color: #f1c40f;font-size: 15px"></i>
 									@endfor
@@ -91,6 +113,7 @@
 									@endfor
 									<p>Rating : {{ round($average_evalate,1) }}/5</p>
 									@endif
+>>>>>>> abeb917dc470c86364e0805499d234295efffa18
 								</div>
 							</div>
 							<div class="col-md-6 col-12">

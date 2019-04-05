@@ -54,36 +54,52 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 	Route::get('/', 'Admin\DashboardController@index')->name('admin-home');
 
 	Route::group(['prefix' => 'users'], function(){
-		Route::get('/list', 'Admin\UsersController@index')->name('listUsers');
-		Route::delete('/list', 'Admin\UsersController@delete')->name('deleteUsers');
-		Route::get('/create', 'Admin\UsersController@showCreateUser')->name('showaddUsers');
-		Route::post('/create', 'Admin\UsersController@create')->name('createUsers');
-		Route::get('/{id}/edit', 'Admin\UsersController@showEditUser')->name('showeditUsers');
-		Route::post('/{id}/edit', 'Admin\UsersController@update')->name('updateUsers');
+		Route::get('/list', 'Admin\UserController@index')->name('User.List');
+		Route::get('/api/search', 'Admin\UserController@apiSearch');
+		Route::delete('/deleted', 'Admin\UserController@destroy');
+		Route::get('/{id}/show', 'Admin\UserController@show')->name('User.Show');
+		Route::get('/{id}/edit', 'Admin\UserController@edit')->name('User.Edit');
+		Route::post('/{id}/edit', 'Admin\UserController@update')->name('User.Update');
+		Route::get('/search', 'Admin\UserController@search')->name('User.Search');
+		Route::get('/create', 'Admin\UserController@create')->name('User.Create');
+		Route::post('/create', 'Admin\UserController@store')->name('User.Store');
 	});
 
-	Route::group(['prefix' => 'categories'], function(){
-		Route::get('/list', 'Admin\CategoriesController@index')->name('listCategory');
-		Route::delete('/list', 'Admin\CategoriesController@delete')->name('deleteCategory');
-		Route::get('/create', 'Admin\CategoriesController@showCreateCategory')->name('showaddCategory');
-		Route::post('/create', 'Admin\CategoriesController@create')->name('createCategory');
-		Route::get('/{id}/edit', 'Admin\CategoriesController@showEdit')->name('showeditCategory');
-		Route::post('/{id}/edit', 'Admin\CategoriesController@update')->name('updateCategory');
+	Route::group(['prefix' => 'category'], function(){
+		Route::get('/list', 'Admin\CategoryController@index')->name('Category.List');
+		Route::post('/add', 'Admin\CategoryController@store');
+		Route::put('/updated', 'Admin\CategoryController@update');
+		Route::delete('/deleted', 'Admin\CategoryController@destroy');
 	});
 
 	Route::group(['prefix' => 'books'], function(){
-		Route::get('/list', 'Admin\BooksController@index')->name('listBooks');
-		Route::get('/create', 'Admin\BooksController@showCreateBooks')->name('showaddBooks');
-		Route::post('/create', 'Admin\BooksController@create')->name('createBooks');
-		Route::get('/{id}/edit', 'Admin\BooksController@showEditBooks')->name('showeditBooks');
-		Route::post('/{id}/edit', 'Admin\BooksController@update')->name('updateBooks');
-		Route::delete('/list', 'Admin\BooksController@delete')->name('deleteBooks');
+		Route::get('/list', 'Admin\BookController@index')->name('Book.List');
+		Route::get('/create', 'Admin\BookController@create')->name('Book.Create');
+		Route::post('/create', 'Admin\BookController@store')->name('Book.Store');
+		Route::get('/{id}/edit', 'Admin\BookController@edit')->name('Book.Edit');
+		Route::post('/{id}/edit', 'Admin\BookController@update')->name('Book.Update');
+		Route::get('/search', 'Admin\BookController@search')->name('Book.Search');
+		Route::get('/api/search', 'Admin\BookController@apiSearch');
+		Route::delete('/deleted', 'Admin\BookController@destroy');
 	});
 
 	Route::group(['prefix' => 'order'], function(){
-		Route::get('/list', 'Admin\OrderController@index')->name('listOrder');
-		Route::post('/list', 'Admin\OrderController@updateStatus')->name('updateStatus');
-		Route::get('/detail', 'Admin\OrderController@ViewDetail')->name('detail');
+		Route::get('/list/{status}', 'Admin\OrderController@index')->name('Order.List');
+		Route::get('/show', 'Admin\OrderController@show')->name('Order.Show');
+		Route::get('/create', 'Admin\OrderController@create')->name('Order.Create');
+		Route::post('/create', 'Admin\OrderController@store')->name('Order.Store');
+		Route::get('/{status}/search', 'Admin\OrderController@search')->name('Order.Search');
+		Route::put('/updated', 'Admin\OrderController@update');
+		Route::delete('/deleted', 'Admin\OrderController@destroy');
+		Route::get('/book/{id}', 'Admin\OrderController@OrderByBook')->name('Order.Book');
+		Route::get('/user/{id}', 'Admin\OrderController@OrderByUser')->name('Order.User');
 	});
+
+	Route::group(['prefix' => 'comment'], function(){
+		Route::get('/list', 'Admin\RatingController@index')->name('Comment.List');
+		Route::get('/search', 'Admin\RatingController@search')->name('Comment.Search');
+		Route::delete('/deleted', 'Admin\RatingController@destroy');
+	});
+	
 });
 

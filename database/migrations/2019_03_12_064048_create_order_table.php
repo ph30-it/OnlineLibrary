@@ -18,6 +18,7 @@ class CreateOrderTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('status')->default(1);
             $table->integer('price')->default(0);
+            $table->string('note')->nullable();
             $table->dateTime('date_borrow')->nullable();
             $table->dateTime('date_give_back')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
