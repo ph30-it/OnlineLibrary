@@ -36,7 +36,7 @@ class HomeController extends Controller
         $booksData = array();
         $list = array();
         for($i = 0;$i < 3;$i++){
-            $books = $cate[$i]->Books()->where('quantity','>',0)->orderBy('created_at','DESC')->take(7)->get();
+            $books = Book::withCount(['ratings as average_rating' => function($query) {$query->select(DB::raw('coalesce(avg(star_number),0)')); }])->where([['quantity','>',0], ['categories_id','=',$cate[$i]->id]])->orderByDesc('average_rating')->take(10)->get();
             array_push($booksData,$books);
         }
         return view('home', [
