@@ -18,8 +18,7 @@ Route::post('/newsletter','NewsletterController@subscribe')->name('newsletter_su
 
 Route::get('/search/name', 'SearchController@searchByName');
 Route::get('/search', 'SearchController@index')->name('search');
-Route::post('/search', 'SearchController@index')->name('search');
-Route::post('/search/ajax', 'SearchController@searchbyajax')->name('search_ajax');
+Route::post('/search', 'SearchController@searchbyajax')->name('search_ajax');
 
 Route::group(['middleware' => 'auth'], function(){
 	Route::delete('/delete_rating/','RatingController@destroy')->name('delete_rating');

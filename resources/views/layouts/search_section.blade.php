@@ -58,7 +58,7 @@
 </div>
 <hr>
 <div style="width: 100%;" class="d-flex justify-content-center">
-	{!! $data->appends(['orderby'=>$orderby])->links() !!}
+	{!! $data->appends(['orderby'=>$orderby,'category'=>$category,'keysearch'=>$key])->links() !!}
 </div>
 @else
 <div class="alert alert-warning alert-dismissible fade show">

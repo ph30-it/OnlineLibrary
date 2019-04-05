@@ -59,8 +59,7 @@
 					<div class="col-md-7 col-sm-7">
 						<div class="wrap">
 							<div class="search">
-								<form class="input-group" action="{{ route('search') }}" method="post">
-									@csrf
+								<form class="input-group" action="{{ route('search') }}" method="get">
 									<input type="text" name="keysearch" class="searchTerm search-inputt" placeholder="What are you looking for?">
 									<button type="submit" class="searchButton">
 										<i class="fas fa-search"></i>

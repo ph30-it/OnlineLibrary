@@ -18,7 +18,6 @@ $(document).ready(function(){
 					message.Create(message.CONFIG.DANGER_BOOTSTRAP_CLASS);
 					return;
 				}
-
 				if(data == -1){
 					let message = new MessageOnTop("This book is not exist");
 					message.Create(message.CONFIG.ALERT_BOOTSTRAP_CLASS);

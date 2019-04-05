@@ -7,7 +7,7 @@ $(document).ready(function(){
 		let token = $("meta[name='csrf-token']").attr("content");
 		$.ajax({
 			type:'POST',
-			url:'/search/ajax',
+			url:'/search',
 			data:{
 				'keysearch':keysearch,
 				'category':categoryId,

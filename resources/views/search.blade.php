@@ -15,14 +15,14 @@
 			<form id="options_search" style="padding: 23px;">
 				<div class="form-group has-search">
 					<span class="fa fa-search form-control-feedback"></span>
-					<input type="text" id="keysearch" class="form-control" placeholder="search" value="">
+					<input type="text" id="keysearch" class="form-control" placeholder="search" value={{ (isset($key)) ? $key : ""}}>
 				</div>
 				<div class="form-group">
 					<label for="category-select">Category</label>
 					<select class="form-control" id="category-select">
-						<option value="-1">All</option>
+						<option {{ ($category == -1) ? 'selected' : "" }} value="-1">All</option>
 						@foreach($categories as $cate)
-						<option value="{{$cate->id}}">{{$cate->name}}</option>
+						<option {{ ($category == $cate->id) ? 'selected' : "" }} value="{{$cate->id}}">{{$cate->name}}</option>
 						@endforeach
 					</select>
 				</div>
