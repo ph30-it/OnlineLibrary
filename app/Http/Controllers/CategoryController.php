@@ -11,13 +11,9 @@ class CategoryController extends Controller
 {
 	public function listBooksById($category_id,Request $request)
     {
-        $categories = Category::all();
-        $cate = array();
-        foreach ($categories as $category) {
-            if ($category->Books()->count() > 0) {
-                array_push($cate,$category);
-            }
-        }
+        $cate= Category::whereHas('books' , function($query) {
+            $query->where('quantity' , '>' ,0  );
+        }, '>', 0)->get();
         $page_number = isset($request->paginate) ? $request->paginate : 10;
         $orderby= isset($request->orderby) ? $request->orderby: 0;
         switch ($orderby) {
@@ -81,9 +77,9 @@ class CategoryController extends Controller
             break;
         }
         return view('layouts.list_book',[
-         'data' => $data,
-         'page_selection' => $page_number,
-         'orderby' => $request->orderby
-     ]);
+           'data' => $data,
+           'page_selection' => $page_number,
+           'orderby' => $request->orderby
+       ]);
     }
 }

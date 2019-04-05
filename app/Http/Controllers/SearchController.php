@@ -17,14 +17,9 @@ class SearchController extends Controller
      */
     public function index(Request $request)
     {
-        //search param
-        $categories = Category::all();
-        $cate = array();
-        foreach ($categories as $category) {
-            if ($category->Books()->count() > 0) {
-                array_push($cate,$category);
-            }
-        }
+        $cate= Category::whereHas('books' , function($query) {
+            $query->where('quantity' , '>' ,0  );
+        }, '>', 0)->get();
         $orderby = (isset($request->orderby)) ? $request->orderby : 0;
         if ($request->keysearch == null) {
             return view('search',['categories' => $cate,'data' => null,'orderby' => $orderby])->with(['class' => 'warning', 'message' => 'Please input key to search']);
@@ -57,19 +52,19 @@ class SearchController extends Controller
             'data' => null,
             'orderby' => $orderby
         ]);
-        $books = Book::withCount(['ratings as average_rating' => function($query) {$query->select(DB::raw('coalesce(avg(star_number),0)')); }]);
-        if($category_id >= 0){
-            $books = $books->where('category_id','=',$category_id);
-        }
-        if($orderby == 0){
-            $books = $books->where('name', 'like', '%' . $request->keysearch . '%')->orderByDesc('average_rating')->paginate(10);
-        }else{
-             $books = $books->where('name', 'like', '%' . $request->keysearch . '%')->orderBy('average_rating')->paginate(10);
-        }
-        return view('layouts.search_section',[
+            $books = Book::withCount(['ratings as average_rating' => function($query) {$query->select(DB::raw('coalesce(avg(star_number),0)')); }]);
+            if($category_id >= 0){
+                $books = $books->where('category_id','=',$category_id);
+            }
+            if($orderby == 0){
+                $books = $books->where('name', 'like', '%' . $request->keysearch . '%')->orderByDesc('average_rating')->paginate(10);
+            }else{
+               $books = $books->where('name', 'like', '%' . $request->keysearch . '%')->orderBy('average_rating')->paginate(10);
+           }
+           return view('layouts.search_section',[
             'key' => $request->keysearch,
             'data' => $books,
             'orderby' => $orderby
         ]);
-    }
-}
+       }
+   }

@@ -26,17 +26,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        $cate = array();
-        foreach ($categories as $category) {
-            if ($category->Books()->count() > 0) {
-                array_push($cate,$category);
-            }
-        }
+        $cate= Category::whereHas('books' , function($query) {
+           $query->where('quantity' , '>' ,0  );
+        }, '>', 0)->get();
         $booksData = array();
         $list = array();
         for($i = 0;$i < 3;$i++){
-            $books = Book::withCount(['ratings as average_rating' => function($query) {$query->select(DB::raw('coalesce(avg(star_number),0)')); }])->where([['quantity','>',0], ['category_id','=',$cate[$i]->id]])->orderByDesc('average_rating')->take(10)->get();
+            $books = Book::withCount(['ratings as average_rating' => function($query) {
+                $query->select(DB::raw('coalesce(avg(star_number),0)'));
+            }])->where([['quantity','>',0], ['category_id','=',$cate[$i]->id]])->orderByDesc('average_rating')->take(10)->get();
             array_push($booksData,$books);
         }
         return view('home', [

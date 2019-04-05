@@ -263,3 +263,6 @@ footer .mt-3{
 	background: #dadada;
 	font-weight: bold;
 }
+.search-results-dropdown a{
+	font-size: 120%;
+}
