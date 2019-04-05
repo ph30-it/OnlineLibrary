@@ -1,5 +1,5 @@
-@if(true)
-@foreach($ratings as $rating)
+@if($count_ratings > 0)
+@foreach($data as $rating)
 <div class="other-user-comment">
 	<div class="row">
 		<div class="col-1">
@@ -49,10 +49,10 @@
 <br>
 @endforeach
 <div style="width: 100%;display: flex;justify-content: center;align-items: center">
-	{!! $ratings->appends(request()->query())->links() !!}
+	{!! $data->appends(request()->query())->links() !!}
 </div>
 @else
 <div class="alert alert-warning">
-	<li>No Comment in this book, will be the first rating in this book !</li>
+	<li>No Comment!</li>
 </div>
 @endif

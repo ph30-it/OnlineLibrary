@@ -366,9 +366,8 @@
 		<div class="alert alert-warning">
 			<li>No Comment in this book, will be the first rating in this book !</li>
 		</div>
+		@endif
 	</div>
-	
-	@endif
 </div>
 @endsection
 

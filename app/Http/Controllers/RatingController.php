@@ -22,8 +22,8 @@ class RatingController extends Controller
         }else{
             $returned_data = $data->paginate($number_comment);
         }
-
-        return view('layouts.user_comment_section',['data' => $returned_data]);
+        $count = $returned_data->toArray()['total'];
+        return view('layouts.user_comment_section',['count_ratings'=>$count,'data' => $returned_data]);
     }
 
     public function Rating(Request $request)

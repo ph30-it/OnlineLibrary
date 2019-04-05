@@ -10,9 +10,7 @@
 .sidebar{
     border-right: 1px solid #f6f6f6;
 }
-form{
-    padding: 20px;
-}
+
 .has-search .form-control {
     padding-left: 2.375rem;
 }

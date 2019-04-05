@@ -12,13 +12,13 @@
 	<div class="col-3">
 		<div id="sidebar-collapse" class="sidebar">
 			<p class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Options</p>
-			<form id="options_search">
+			<form id="options_search" style="padding: 23px;">
 				<div class="form-group has-search">
 					<span class="fa fa-search form-control-feedback"></span>
 					<input type="text" id="keysearch" class="form-control" placeholder="search" value="">
 				</div>
 				<div class="form-group">
-					<label for="category-select">category</label>
+					<label for="category-select">Category</label>
 					<select class="form-control" id="category-select">
 						<option value="-1">All</option>
 						@foreach($categories as $cate)
