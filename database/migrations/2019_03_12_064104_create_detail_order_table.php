@@ -16,10 +16,10 @@ class CreateDetailOrderTable extends Migration
         Schema::create('detail_order', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id')->unsigned();
-            $table->integer('books_id')->unsigned();
+            $table->integer('book_id')->unsigned();
             $table->integer('quantity')->default(1);
             $table->foreign('order_id')->references('id')->on('order')->onDelete('cascade');
-            $table->foreign('books_id')->references('id')->on('books')->onDelete('cascade');
+            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -22,8 +22,8 @@ class CreateBooksTable extends Migration
             $table->longText('describes')->nullable();
             $table->integer('price')->default(0);
             $table->integer('quantity')->default(1);
-            $table->integer('categories_id')->unsigned();
-            $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
