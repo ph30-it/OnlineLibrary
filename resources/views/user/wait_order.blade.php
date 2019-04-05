@@ -47,52 +47,57 @@ Cart
 				</tr>
 			</thead>
 			<tbody>
-				
-				@foreach ($data as $book)
+				@foreach ($data as $orderdetails)
 				<tr>
 					<td>
 						<div class="row">
-							<div class="col-sm-2 hidden-xs"><img src="{{ $book->img }}" alt="..." class="img-responsive" height="100px" width="70px"/></div>
+							<div class="col-sm-2 hidden-xs"><img src="{{ $orderdetails->book->img }}" alt="..." class="img-responsive" height="100px" width="70px"/></div>
 							<div class="col-sm-10">
-								<h4><a class="nomargin" href="{{ route('book',$book->id) }}">{{ $book->name }}</a></h4>
-								<p>Describes : {{substr($book->describes,0,90)}} ...</p>
+								<h4><a class="nomargin" href="{{ route('book',$orderdetails->book->id) }}">{{ $orderdetails->book->name }}</a></h4>
+								<p>Describes : {{substr($orderdetails->book->describes,0,90)}} ...</p>
 							</div>
 						</div>
 					</td>
-					<td><a href="">{{$book->categories->name}}</a></td>
-					<td class="text-center">{{number_format($book->price)}} VND</td>
+					<td><a href="{{ route('category',$orderdetails->book->category->id) }}">{{ $orderdetails->book->category->name }}</a></td>
+					<td class="text-center">{{number_format($orderdetails->book->price)}} VND</td>
 				</tr>
 				@endforeach
 			</tbody>
 			<tfoot>
-				<td colspan="2" class="hidden-xs"></td>
-				<td class="hidden-xs text-center">
-					<form onsubmit="openModal()" id="myForm">
-						<button class="btn btn-danger">Cancel Order</button>
-					</form>
-					<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 class="modal-title">Cancel Order!</h4>
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-								</div>
-								<div class="modal-body">
-									<p>Confirm cancel order id {{ $order->id }}&hellip;</p>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									<form action="{{ route('cart_cancel') }}" method="post">
-										@csrf
-										<input type="hidden" name="id" value="{{ $order->id }}">
-										<input type="hidden" name="_method" value="delete" />
-										<button type="submit" class="btn btn-danger">Submit Cancel</button>
-									</form>
+				<tr>
+					<td colspan="2" style="font-weight: bold;text-align: right">Total :</td>
+					<td class="text-center">{{ number_format($order->price) }} VND</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="hidden-xs"></td>
+					<td class="hidden-xs text-center">
+						<form onsubmit="openModal()" id="myForm">
+							<button class="btn btn-danger">Cancel Order</button>
+						</form>
+						<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title">Cancel Order!</h4>
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
+									<div class="modal-body">
+										<p>Confirm cancel order id {{ $order->id }}&hellip;</p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										<form action="{{ route('cart_cancel') }}" method="post">
+											@csrf
+											<input type="hidden" name="id" value="{{ $order->id }}">
+											<input type="hidden" name="_method" value="delete" />
+											<button type="submit" class="btn btn-danger">Submit Cancel</button>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</td>
+					</td>
+				</tr>
 			</tfoot>
 		</table>
 		@endif
@@ -108,32 +113,32 @@ Cart
 		e.preventDefault();
 	});
 	$("#DateCountdown").TimeCircles({
-    "animation": "smooth",
-    "bg_width": 1.2,
-    "fg_width": 0.1,
-    "circle_bg_color": "#60686F",
-    "time": {
-        "Days": {
-            "text": "Days",
-            "color": "#FFCC66",
-            "show": true
-        },
-        "Hours": {
-            "text": "Hours",
-            "color": "#99CCFF",
-            "show": true
-        },
-        "Minutes": {
-            "text": "Minutes",
-            "color": "#BBFFBB",
-            "show": true
-        },
-        "Seconds": {
-            "text": "Seconds",
-            "color": "#FF9999",
-            "show": true
-        }
-    }
-});
+		"animation": "smooth",
+		"bg_width": 1.2,
+		"fg_width": 0.1,
+		"circle_bg_color": "#60686F",
+		"time": {
+			"Days": {
+				"text": "Days",
+				"color": "#FFCC66",
+				"show": true
+			},
+			"Hours": {
+				"text": "Hours",
+				"color": "#99CCFF",
+				"show": true
+			},
+			"Minutes": {
+				"text": "Minutes",
+				"color": "#BBFFBB",
+				"show": true
+			},
+			"Seconds": {
+				"text": "Seconds",
+				"color": "#FF9999",
+				"show": true
+			}
+		}
+	});
 </script>
 @endsection

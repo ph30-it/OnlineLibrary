@@ -40,17 +40,14 @@ class UserController extends Controller
 		$posts = [ 'image' => $request->file('image') ];
 		$valid = Validator::make($posts, $rules);
 		if ($valid->fails()) {
-			return redirect()->back()->with(['avaclass' => 'danger', 'message' => 'Avatar max size is 1024KB']);
+			return redirect()->back()->with(['avaclass' => 'danger', 'message' => 'Avatar max size is 1024KB|1MB']);
 		}else {
 			$user = User::find(\Auth::user()->id);
 			if($request->hasFile('image')) 
 			{
-            //xử lí từng ảnh 
 				$item = request()->file('image');
-            //lấy ra tên gốc của ảnh
 				$name= $item->getClientOriginalName();
-            //đổi tên ảnh
-				$newName= '/images/avatars/'.rand(100,10000).$name;
+				$newName= '/images/avatars/'.md5(time()).$name;
                 //upload ảnh vào thư mục public/images/product/
 				$item->move(public_path('/images/avatars/'), $newName);
 				$oldName = $user->image;

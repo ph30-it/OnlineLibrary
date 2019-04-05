@@ -26,7 +26,7 @@
 			</div><hr>
 			<div class="select_option">
 				<p class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Options</p>
-				<form data-category-id="{{$data[0]->categories->id}}" id="options">
+				<form data-category-id="{{$data[0]->category->id}}" id="options">
 					<div class="form-group">
 						<label for="">Number Books</label>
 						<select class="browser-default custom-select custom-select-md" style="display: inline;" id="pagination-select">
@@ -38,11 +38,13 @@
 					</div>
 					<div class="form-group">
 						<label for="">Group By</label>
-						<select class="browser-default custom-select custom-select-md" style="display: inline;" id="orderByName-select">
-							<option {{ ($orderBy == 0) ? 'selected' : "" }} value="0">A-Z</option>
-							<option {{ ($orderBy == 1) ? 'selected' : "" }} value="1">Z-A</option>
-							<option {{ ($orderBy == 2) ? 'selected' : "" }} value="2">Newest</option>
-							<option {{ ($orderBy == 3) ? 'selected' : "" }} value="2">Oldest</option>
+						<select class="browser-default custom-select custom-select-md" style="display: inline;" id="orderby-select">
+							<option {{ ($orderby == 0) ? 'selected' : "" }} value="0">A-Z</option>
+							<option {{ ($orderby == 1) ? 'selected' : "" }} value="1">Z-A</option>
+							<option {{ ($orderby == 2) ? 'selected' : "" }} value="2">Newest</option>
+							<option {{ ($orderby == 3) ? 'selected' : "" }} value="3">Oldest</option>
+							<option {{ ($orderby == 4) ? 'selected' : "" }} value="4">Rating up</option>
+							<option {{ ($orderby == 5) ? 'selected' : "" }} value="5">Rating down</option>
 						</select>
 					</div>
 					<div class="text-center">
@@ -54,20 +56,12 @@
 		<div class="col-9">
 			<div>
 				<ol class="breadcrumb">
-<<<<<<< HEAD
-					<li><a href="{{ route('home') }}">
-						<i class="ti-home"></i>
-					</a></li>
-					<li><a href="">Category / </a></li>
-					<li class="active"><a href="{{ route('category', $data[0]->category->id) }}">{{$data[0]->category->name}}</a></li>
-=======
 					<li class="breadcrumb-item">
 						<a href="{{ route('home') }}">
 							<i class="fas fa-home"></i>
 						</a>
 					</li>
-					<li class="breadcrumb-item active">{{$data[0]->categories->name}}</li>
->>>>>>> abeb917dc470c86364e0805499d234295efffa18
+					<li class="breadcrumb-item active">{{$data[0]->category->name}}</li>
 				</ol>
 			</div>
 			<hr>	
@@ -86,21 +80,6 @@
 									$average_evalate = $book->ratings->avg('star_number');
 									$remain = 5  - $average_evalate;
 									@endphp
-
-<<<<<<< HEAD
-				@foreach ($data as $book)
-				<div class="product-container container shadow-hover">
-					<div class="row">
-						<div class="col-md-6 col-12">
-							<div class="product-image">
-								<img src="{{asset('uploads')}}/{{$book->img}}">
-							</div>
-						</div>
-						<div class="col-md-6 col-12">
-							<div class="product-info">
-								<div class="book-name">
-									<a href="{{ route('book',$book->id) }}"><b></b>{{$book->name}}</a>
-=======
 									@for($i = 0; $i < (int)$average_evalate;$i++)
 									<i class="fas fa-star" style="color: #f1c40f;font-size: 15px"></i>
 									@endfor
@@ -113,7 +92,6 @@
 									@endfor
 									<p>Rating : {{ round($average_evalate,1) }}/5</p>
 									@endif
->>>>>>> abeb917dc470c86364e0805499d234295efffa18
 								</div>
 							</div>
 							<div class="col-md-6 col-12">

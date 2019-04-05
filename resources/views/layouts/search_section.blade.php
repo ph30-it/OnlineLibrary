@@ -1,3 +1,9 @@
+<div class="alert alert-success alert-dismissible fade show">
+	<li>Found {{$data->toArray()['total']}} results with " {{ $key }} "</li>
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
 <div class="all-products-container" id="product-container">
 	@foreach ($data as $book)
 	<div class="product-container container shadow-hover" id="#example">
@@ -7,9 +13,9 @@
 					<img src="{{$book->img}}">
 				</div>
 				<div class="rate">
-					@if(!is_null($book->ratings->avg('star_number')))
+					@if($book->average_rating > 0)
 					@php
-					$average_evalate = $book->ratings->avg('star_number');
+					$average_evalate = $book->average_rating;
 					$remain = 5  - $average_evalate;
 					@endphp
 
@@ -51,5 +57,5 @@
 </div>
 <hr>
 <div style="width: 100%;" class="d-flex justify-content-center">
-	{!! $data->appends(['paginate'=>$page_selection,'orderby'=>$orderby])->links() !!}
+	{!! $data->appends(['orderby'=>$orderby])->links() !!}
 </div>

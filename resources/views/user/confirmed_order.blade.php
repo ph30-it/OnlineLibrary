@@ -42,23 +42,28 @@ Cart
 				</tr>
 			</thead>
 			<tbody>
-				
-				@foreach ($data as $book)
+				@foreach ($data as $orderdetails)
 				<tr>
 					<td>
 						<div class="row">
-							<div class="col-sm-2 hidden-xs"><img src="{{ $book->img }}" alt="..." class="img-responsive" height="100px" width="70px"/></div>
+							<div class="col-sm-2 hidden-xs"><img src="{{ $orderdetails->book->img }}" alt="..." class="img-responsive" height="100px" width="70px"/></div>
 							<div class="col-sm-10">
-								<h4><a class="nomargin" href="{{ route('book',$book->id) }}">{{ $book->name }}</a></h4>
-								<p>Describes : {{substr($book->describes,0,90)}} ...</p>
+								<h4><a class="nomargin" href="{{ route('book',$orderdetails->book->id) }}">{{ $orderdetails->book->name }}</a></h4>
+								<p>Describes : {{substr($orderdetails->book->describes,0,90)}} ...</p>
 							</div>
 						</div>
 					</td>
-					<td><a href="">{{$book->categories->name}}</a></td>
-					<td class="text-center">{{number_format($book->price)}} VND</td>
+					<td><a href="{{ route('category',$orderdetails->book->category->id) }}">{{ $orderdetails->book->category->name }}</a></td>
+					<td class="text-center">{{number_format($orderdetails->book->price)}} VND</td>
 				</tr>
 				@endforeach
 			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="2" style="font-weight: bold;text-align: right">Total :</td>
+					<td class="text-center">{{ number_format($order->price) }} VND</td>
+				</tr>
+			</tfoot>
 		</table>
 		@endif
 	</div>
@@ -69,32 +74,32 @@ Cart
 <script type="text/javascript" src="{{ asset('js/TimeCircles.js') }}"></script>
 <script>
 	$("#DateCountdown").TimeCircles({
-    "animation": "smooth",
-    "bg_width": 1.2,
-    "fg_width": 0.1,
-    "circle_bg_color": "#60686F",
-    "time": {
-        "Days": {
-            "text": "Days",
-            "color": "#FFCC66",
-            "show": true
-        },
-        "Hours": {
-            "text": "Hours",
-            "color": "#99CCFF",
-            "show": true
-        },
-        "Minutes": {
-            "text": "Minutes",
-            "color": "#BBFFBB",
-            "show": true
-        },
-        "Seconds": {
-            "text": "Seconds",
-            "color": "#FF9999",
-            "show": true
-        }
-    }
-});
+		"animation": "smooth",
+		"bg_width": 1.2,
+		"fg_width": 0.1,
+		"circle_bg_color": "#60686F",
+		"time": {
+			"Days": {
+				"text": "Days",
+				"color": "#FFCC66",
+				"show": true
+			},
+			"Hours": {
+				"text": "Hours",
+				"color": "#99CCFF",
+				"show": true
+			},
+			"Minutes": {
+				"text": "Minutes",
+				"color": "#BBFFBB",
+				"show": true
+			},
+			"Seconds": {
+				"text": "Seconds",
+				"color": "#FF9999",
+				"show": true
+			}
+		}
+	});
 </script>
 @endsection

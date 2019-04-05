@@ -40,12 +40,12 @@ class BookController extends Controller
         $data['category_id'] = $request->category;
         if($request->hasFile('img')){
             $file = $request->file('img');
-            $filename = md5(time()).'.jpg';
+            $filename = '/uploads/'.md5(time()).'.jpg';
             $file->move(public_path('/uploads/'), $filename);
             $data['img'] = $filename;
         }
         else{
-            $data['img'] = 'default.jpg';
+            $data['img'] = '/uploads/default.jpg';
         }
     	
     	if($book = Book::create($data)){

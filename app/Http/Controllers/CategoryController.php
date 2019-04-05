@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Book;
-use App\Categories;
+use App\Category;
 use DB;
 
 class CategoryController extends Controller
 {
 	public function listBooksById($category_id,Request $request)
     {
-        $categories = Categories::all();
+        $categories = Category::all();
         $cate = array();
         foreach ($categories as $category) {
             if ($category->Books()->count() > 0) {
@@ -19,20 +19,25 @@ class CategoryController extends Controller
             }
         }
         $page_number = isset($request->paginate) ? $request->paginate : 10;
-        $orderby= isset($request->orderby) ? $request->orderby : 0;
+        $orderby= isset($request->orderby) ? $request->orderby: 0;
         switch ($orderby) {
-            case 1:
-            $data = Book::where('categories_id','=',$category_id)->orderBy('name','DESC')->paginate($page_number);
+            case 1:  //name Z-A
+            $data = Book::where('category_id','=',$category_id)->orderBy('name','DESC')->paginate($page_number);
             break;
-            case 2:
-            $data = Book::where('categories_id','=',$category_id)->orderBy('created_at','DESC')->paginate($page_number);
+            case 2: // newest
+            $data = Book::where('category_id','=',$category_id)->orderBy('created_at','DESC')->paginate($page_number);
             break;
-            case 3:
-            $data = Book::where('categories_id','=',$category_id)->orderBy('created_at')->paginate($page_number);
+            case 3: //oldest
+            $data = Book::where('category_id','=',$category_id)->orderBy('created_at')->paginate($page_number);
             break;
-            case 0:
-            default:
-            $data = Book::where('categories_id','=',$category_id)->orderBy('name')->paginate($page_number);
+            case 4: //rating up
+            $data = Book::withCount(['ratings as average_rating' => function($query) {$query->select(DB::raw('coalesce(avg(star_number),0)')); }])->where('category_id','=',$category_id)->orderBy('average_rating')->paginate($page_number);
+            break;
+            case 5: //rating down
+            $data = Book::withCount(['ratings as average_rating' => function($query) {$query->select(DB::raw('coalesce(avg(star_number),0)')); }])->where('category_id','=',$category_id)->orderByDesc('average_rating')->paginate($page_number);
+            break;
+            default: //name A-Z
+            $data = Book::where('category_id','=',$category_id)->orderBy('name')->paginate($page_number);
             break;
         }
 
@@ -43,25 +48,42 @@ class CategoryController extends Controller
             'data' => $data,
             'categories' => $cate,
             'page_selection' => $page_number,
-            'orderBy' => null
+            'orderby' => $orderby
         ]);
     }
 
     public function listBookPaginate(Request $request){
+        $category_id = $request->category;
         if($request->pagination == 0){
-            $pagination = Book::count();
+            $page_number = Category::find($category_id)->Books()->count();
         }else{
-            $pagination = $request->pagination;
+            $page_number = $request->pagination;
         }
-        if ($request->orderBy == 0) {
-            $data = Book::where('categories_id','=',$request->category)->orderBy('name')->paginate($pagination);
-        }else{
-            $data = Book::where('categories_id','=',$request->category)->orderBy('name','DESC')->paginate($pagination);
+        $orderby= isset($request->orderby) ? $request->orderby: 0;
+        switch ($orderby) {
+            case 1:  //name Z-A
+            $data = Book::where('category_id','=',$category_id)->orderBy('name','DESC')->paginate($page_number);
+            break;
+            case 2: // newest
+            $data = Book::where('category_id','=',$category_id)->orderBy('created_at','DESC')->paginate($page_number);
+            break;
+            case 3: //oldest
+            $data = Book::where('category_id','=',$category_id)->orderBy('created_at')->paginate($page_number);
+            break;
+            case 4: //rating up
+            $data = Book::withCount(['ratings as average_rating' => function($query) {$query->select(DB::raw('coalesce(avg(star_number),0)')); }])->where('category_id','=',$category_id)->orderBy('average_rating')->paginate($page_number);
+            break;
+            case 5: //rating down
+            $data = Book::withCount(['ratings as average_rating' => function($query) {$query->select(DB::raw('coalesce(avg(star_number),0)')); }])->where('category_id','=',$category_id)->orderByDesc('average_rating')->paginate($page_number);
+            break;
+            default: //name A-Z
+            $data = Book::where('category_id','=',$category_id)->orderBy('name')->paginate($page_number);
+            break;
         }
         return view('layouts.list_book',[
-           'data' => $data,
-           'page_selection' => $pagination,
-           'orderBy' => $request->orderBy
-       ]);
+         'data' => $data,
+         'page_selection' => $page_number,
+         'orderby' => $request->orderby
+     ]);
     }
 }

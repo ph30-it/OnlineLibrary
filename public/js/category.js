@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$("form#options").submit(function( event ) {
 		event.preventDefault();
-		let orderby = $("select#orderByName-select").val();
+		let orderby = $("select#orderby-select").val();
 		let paginate = $("select#pagination-select").val();
 		let categoryId = $(this).attr("data-category-id");
 		let token = $("meta[name='csrf-token']").attr("content");
@@ -11,7 +11,7 @@ $(document).ready(function(){
 			data:{
 				'category':categoryId,
 				'pagination':paginate,
-				'orderBy':orderby,
+				'orderby':orderby,
 				'_token':token
 			},
 			success:function(data){

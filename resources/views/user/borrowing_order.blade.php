@@ -27,10 +27,11 @@ Cart
 			<li>No data available in here</li>
 		</div>
 		@else
-		<h4>Order number :{{ $order->id }}</h4>
 		<div class="alert alert-success">
-			<p>When you real complete, go to library and order new books !</p>
+			<p>When you read complete, go to library and order new books !</p>
 		</div>
+		<h4>Order number :{{ $order->id }}</h4>
+		<p>Date borrow : {{ $order->updated_at}}</p>
 		<table id="cart" class="table table-hover table-condensed">
 			<thead>
 				<tr>
@@ -40,23 +41,28 @@ Cart
 				</tr>
 			</thead>
 			<tbody>
-				
-				@foreach ($data as $book)
+				@foreach ($data as $orderdetails)
 				<tr>
 					<td>
 						<div class="row">
-							<div class="col-sm-2 hidden-xs"><img src="{{ $book->img }}" alt="..." class="img-responsive" height="100px" width="70px"/></div>
+							<div class="col-sm-2 hidden-xs"><img src="{{ $orderdetails->book->img }}" alt="..." class="img-responsive" height="100px" width="70px"/></div>
 							<div class="col-sm-10">
-								<h4><a class="nomargin" href="{{ route('book',$book->id) }}">{{ $book->name }}</a></h4>
-								<p>Describes : {{substr($book->describes,0,90)}} ...</p>
+								<h4><a class="nomargin" href="{{ route('book',$orderdetails->book->id) }}">{{ $orderdetails->book->name }}</a></h4>
+								<p>Describes : {{substr($orderdetails->book->describes,0,90)}} ...</p>
 							</div>
 						</div>
 					</td>
-					<td><a href="">{{$book->categories->name}}</a></td>
-					<td class="text-center">{{number_format($book->price)}} VND</td>
+					<td><a href="{{ route('category',$orderdetails->book->category->id) }}">{{ $orderdetails->book->category->name }}</a></td>
+					<td class="text-center">{{number_format($orderdetails->book->price)}} VND</td>
 				</tr>
 				@endforeach
 			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="2" style="font-weight: bold;text-align: right">Total :</td>
+					<td class="text-center">{{ number_format($order->price) }} VND</td>
+				</tr>
+			</tfoot>
 		</table>
 		@endif
 	</div>

@@ -17,13 +17,8 @@
 				<li class="breadcrumb-item"><a href="{{ route('home') }}">
 					<i class="fas fa-home"></i>
 				</a></li>
-<<<<<<< HEAD
-				<li class="active"><a href="{{ route('category', $book->category->id) }}">{{$book->category->name}}</a></li>
-				<li><a href="">{{$book->name}}</a></li>
-=======
-				<li class="breadcrumb-item"><a href="{{ route('category', $book->categories->id) }}">{{$book->categories->name}}</a></li>
+				<li class="breadcrumb-item"><a href="{{ route('category', $book->category->id) }}">{{$book->category->name}}</a></li>
 				<li class="breadcrumb-item active">{{$book->name}}</li>
->>>>>>> abeb917dc470c86364e0805499d234295efffa18
 			</ol>
 		</div>
 		<div class="col-12">
@@ -39,7 +34,7 @@
 		</div>
 		<div class="col-5">
 			<div class="book-cover">
-				<img src="{{asset('uploads')}}/{{$book->img}}">
+				<img src="{{$book->img}}">
 			</div>
 		</div>
 		<div class="col-7">

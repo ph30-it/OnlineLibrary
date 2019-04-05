@@ -26,28 +26,28 @@ class OrderController extends Controller
 	}
 
 	private function orderWait(){
-		$order = Order::where('status','=',1)->where('users_id','=',\Auth::user()->id)->get();
-		if(count($order) == 1){
-			$result = Order::find($order[0]->id)->Book;
-			return view('user.wait_order',['result' => 1,'order' => $order[0],'data' => $result]);
+		$order = Order::where('status','=',1)->where('user_id','=',\Auth::user()->id)->first();
+		if($order !== null){
+			$result = Order::find($order->id)->orderdetail;
+			return view('user.wait_order',['result' => 1,'order' => $order,'data' => $result]);
 		}
 		return view('user.wait_order',['result' => 0]);
 	}
 
 	private function orderConfirmed(){
-		$order = Order::where('status','=',2)->where('users_id','=',\Auth::user()->id)->get();
-		if(count($order) == 1){
-			$result = Order::find($order[0]->id)->Book;
-			return view('user.confirmed_order',['result' => 1,'order' => $order[0],'data' => $result]);
+		$order = Order::where('status','=',2)->where('user_id','=',\Auth::user()->id)->first();
+		if($order !== null){
+			$result = Order::find($order->id)->orderdetail;
+			return view('user.confirmed_order',['result' => 1,'order' => $order,'data' => $result]);
 		}
 		return view('user.confirmed_order',['result' => 0]);
 	}
 
 	private function orderBorrowing(){
-		$order = Order::where('status','=',4)->where('users_id','=',\Auth::user()->id)->get();
-		if(count($order) == 1){
-			$result = Order::find($order[0]->id)->Book;
-			return view('user.borrowing_order',['result' => 1,'order' => $order[0],'data' => $result]);
+		$order = Order::where('status','=',4)->where('user_id','=',\Auth::user()->id)->first();
+		if($order !== null){
+			$result = Order::find($order->id)->orderdetail;
+			return view('user.borrowing_order',['result' => 1,'order' => $order,'data' => $result]);
 		}
 		return view('user.borrowing_order',['result' => 0]);
 	}

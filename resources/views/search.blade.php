@@ -11,29 +11,26 @@
 <div class="row accountcontainer">
 	<div class="col-3">
 		<div id="sidebar-collapse" class="sidebar">
-			<form action="">
+			<p class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Options</p>
+			<form id="options_search">
 				<div class="form-group has-search">
 					<span class="fa fa-search form-control-feedback"></span>
-					<input type="text" class="form-control" placeholder="search">
+					<input type="text" id="keysearch" class="form-control" placeholder="search" value="">
 				</div>
 				<div class="form-group">
-					<label for="exampleformcontrolselect1">category</label>
-					<select class="form-control" id="exampleformcontrolselect1">
-						<option>All</option>
+					<label for="category-select">category</label>
+					<select class="form-control" id="category-select">
+						<option value="-1">All</option>
 						@foreach($categories as $cate)
-						<option>{{$cate->name}}</option>
+						<option value="{{$cate->id}}">{{$cate->name}}</option>
 						@endforeach
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="">Rating</label>
-					<select class="form-control" id="exampleformcontrolselect3">
-						<option>All</option>
-						<option>1.0</option>
-						<option>2.0</option>
-						<option>3.0</option>
-						<option>4.0</option>
-						<option>5.0</option>
+					<label for="">Group By</label>
+					<select class="form-control" id="groupby-select">
+						<option {{ ($orderby == 0) ? 'selected' : "" }} value="0">Rating down</option>
+						<option {{ ($orderby == 1) ? 'selected' : "" }} value="1">Rating up</option>
 					</select>
 				</div>
 				<button type="submit" class="btn btn-primary">search</button>
@@ -49,6 +46,12 @@
 		</ol>
 		@if($data != null)
 		<div id="paginate">
+			<div class="alert alert-success alert-dismissible fade show">
+				<li>Found {{$data->toArray()['total']}} results with " {{ $key }} "</li>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
 			<div class="all-products-container" id="product-container">
 				@foreach ($data as $book)
 				<div class="product-container container shadow-hover" id="#example">
@@ -58,9 +61,9 @@
 								<img src="{{$book->img}}">
 							</div>
 							<div class="rate">
-								@if(!is_null($book->ratings->avg('star_number')))
+								@if($book->average_rating > 0)
 								@php
-								$average_evalate = $book->ratings->avg('star_number');
+								$average_evalate = $book->average_rating;
 								$remain = 5  - $average_evalate;
 								@endphp
 
@@ -119,4 +122,5 @@
 
 @section('custom-js')
 <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/search.js') }}"></script>
 @endsection
