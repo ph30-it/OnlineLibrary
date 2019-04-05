@@ -307,8 +307,9 @@
 	</div>
 	
 	<br>
-	@if($count_ratings > 0)
+	
 	<div class="user-comment-container" id="user-comment-container">
+		@if($count_ratings > 0)
 		@foreach($ratings as $rating)
 		<div class="other-user-comment">
 			<div class="row">
@@ -322,15 +323,12 @@
 								<img src="{{ asset('images/default.png') }}" class="user-avatar-comment">
 								@endif
 							</div>
-							<!-- <div class="text-center" style="font-weight: bold;font-size: 1.1em">
-								{{ $rating->user->firstname }}
-							</div> -->
 						</div>
 					</div>
 				</div>
 				<div class="col-11 comment">
 					<div style="width: 100%" class="mt-2">
-						<p style="font-weight: bold">{{ $rating->user->firstname }}</p> Commented at {{ $rating->created_at }} 
+						<p style="font-weight: bold">{{ $rating->user->firstname }}</p> Commented at {{ get_timeago($rating->created_at) }} 
 					</div>
 					<div style="width: 100%;font-weight: bold" class="mt-2">
 						@php
@@ -361,15 +359,15 @@
 		</div>
 		<br>
 		@endforeach
-
 		<div style="width: 100%;display: flex;justify-content: center;align-items: center">
 			{!! $ratings->appends(request()->query())->links() !!}
 		</div>
+		@else
+		<div class="alert alert-warning">
+			<li>No Comment in this book, will be the first rating in this book !</li>
+		</div>
 	</div>
-	@else
-	<div class="alert alert-warning">
-		<li>No Comment in this book, will be the first rating in this book !</li>
-	</div>
+	
 	@endif
 </div>
 @endsection
