@@ -11,7 +11,7 @@ class OrderDetail extends Model
     protected $table = 'detail_order';
 
     protected $fillable = [
-    	'order_id', 'books_id', 'quantity', 'created_at', 'updated_at'
+    	'order_id', 'book_id', 'quantity', 'created_at', 'updated_at'
     ];
 
     public function order(){
@@ -19,6 +19,6 @@ class OrderDetail extends Model
     }
 
     public function book(){
-    	return $this->belongsTo(Book::class,'books_id');
+    	return $this->belongsTo(Book::class,'book_id');
     }
 }

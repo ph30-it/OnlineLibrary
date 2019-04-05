@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Book;
-
+use App\Rating;
+use DB;
 class HomeController extends Controller
 {
     /**
@@ -26,14 +27,21 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::all();
+        $cate = array();
+        foreach ($categories as $category) {
+            if ($category->Books()->count() > 0) {
+                array_push($cate,$category);
+            }
+        }
         $booksData = array();
-        foreach($categories as $key => $category ){
-            $book = Book::where('categories_id','=',$category->id)->take(7)->get();
-            array_push($booksData,$book);
+        $list = array();
+        for($i = 0;$i < 3;$i++){
+            $books = Book::withCount(['ratings as average_rating' => function($query) {$query->select(DB::raw('coalesce(avg(star_number),0)')); }])->where([['quantity','>',0], ['category_id','=',$cate[$i]->id]])->orderByDesc('average_rating')->take(10)->get();
+            array_push($booksData,$books);
         }
         return view('home', [
-            'categories' => $categories,
-            'books' => $booksData
+            'categories' => $cate,
+            'databooks' => $booksData
         ]);
     }
 }

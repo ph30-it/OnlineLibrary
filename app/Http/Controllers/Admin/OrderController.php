@@ -31,10 +31,10 @@ class OrderController extends Controller
         }
         DB::beginTransaction();
         try {
-            $order = Order::create(['users_id' => $request->readers]);
+            $order = Order::create(['user_id' => $request->readers]);
             foreach($data as $book_id => $quantity){
                 if($book = Book::find($book_id)){
-                    OrderDetail::create(['order_id' => $order->id,'books_id' => $book_id, 'quantity' => $quantity]);
+                    OrderDetail::create(['order_id' => $order->id,'book_id' => $book_id, 'quantity' => $quantity]);
                     $price = $book->price * $quantity;
                     $order->price += $price;
                     $order->save();
@@ -146,7 +146,7 @@ class OrderController extends Controller
 
     public function OrderByBook($id){
         if($book = Book::find($id)){
-            $details = OrderDetail::where('books_id', $id)->orderBy('id', 'ASC')->paginate(50);
+            $details = OrderDetail::where('book_id', $id)->orderBy('id', 'ASC')->paginate(50);
             return view('admin.orders.orderbybook', compact(['details', 'book']));
         }
         return redirect()->Route('Book.List');
@@ -154,7 +154,7 @@ class OrderController extends Controller
 
     public function OrderByUser($id){
         if($user = User::find($id)){
-            $orders = Order::where('users_id', $id)->orderBy('id', 'ASC')->paginate(50);
+            $orders = Order::where('user_id', $id)->orderBy('id', 'ASC')->paginate(50);
             return view('admin.orders.orderbyuser', compact(['orders', 'user']));
         }
         return redirect()->Route('Book.List');

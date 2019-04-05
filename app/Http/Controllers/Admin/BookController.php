@@ -37,7 +37,7 @@ class BookController extends Controller
             return redirect()->back()->with(['class'=>'danger','message'=>'Danh mục không tồn tại.']);
         }
         $data = $request->except('_token');
-        $data['categories_id'] = $request->category;
+        $data['category_id'] = $request->category;
         if($request->hasFile('img')){
             $file = $request->file('img');
             $filename = md5(time()).'.jpg';
@@ -72,7 +72,7 @@ class BookController extends Controller
                 return redirect()->back()->with(['class'=>'danger','message'=>'Danh mục không tồn tại.']);
             }
             $data = $request->except('_token');
-            $data['categories_id'] = $request->category;
+            $data['category_id'] = $request->category;
             if($request->hasFile('img')){
                 $file = $request->file('img');
                 $filename = ($book->img == 'default.jpg' || $book->img == NULL) ? md5(time()).'.jpg' : $book->img;

@@ -13,11 +13,12 @@
 }
 .category-list{
 	width: 100%;
-	min-height: 500px;
+	max-height: 500px;
 	overflow-y: auto;
 }
 
 .category-list li{
+	color: black;
 	transition: 1s;
 }
 
@@ -27,9 +28,6 @@
 
 .category-list li:hover{
 	background-color: #34495e;
-}
-
-.category-list li:hover a{
 	color: white;
 }
 
@@ -190,4 +188,10 @@
 }
 figure{
   position: relative;
+}
+.fas,.far{
+	display: inline !important;
+}
+.rate{
+	padding-top: 5px;
 }

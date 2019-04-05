@@ -9,18 +9,46 @@ Route::get('/home',function(){
 });
 
 Route::get('/book/{id}','BookController@showBookDetailByID')->name('book')->where('id', '[0-9]+');
+Route::post('/book/{id}','RatingController@getRatingPaginate')->name('book')->where('id', '[0-9]+');
+
 Route::get('/category/{id}','CategoryController@listBooksById')->name('category')->where('id', '[0-9]+');
+Route::post('/category/{id}','CategoryController@listBookPaginate')->name('post_category');
 
+Route::post('/newsletter','NewsletterController@subscribe')->name('newsletter_subscribe');
 
-Route::group(['prefix' => 'account'], function(){
-	Route::get('/','UserController@account')->name('account_profile');
-	Route::get('/edit','UserController@edit_show')->name('account_edit');
-	Route::post('/edit','UserController@update')->name('account_update');
+Route::get('/search/name', 'SearchController@searchByName');
+Route::get('/search', 'SearchController@index')->name('search');
+Route::post('/search', 'SearchController@index')->name('search');
+
+Route::group(['middleware' => 'auth'], function(){
+	Route::delete('/delete_rating/','RatingController@destroy')->name('delete_rating');
+	Route::post('/add_rating','RatingController@Rating')->name('add_rating');
+	Route::get('/detail', 'OrderController@detail')->name('detail_order');
+	
+	Route::group(['prefix' => 'account','middleware' => 'verified'], function(){
+		Route::get('/','UserController@account')->name('account_profile');
+		Route::get('/edit','UserController@edit_show')->name('account_edit');
+		Route::post('/edit','UserController@update')->name('account_update');
+		Route::get('/order/{status?}','OrderController@orderstatus')->name('order_by_status');
+		Route::delete('/cart_cancel','OrderController@cancel')->name('cart_cancel');
+		Route::post('/upload', 'UserController@upload')->name('upload');
+	});
+});
+
+Route::group(['prefix' => 'cart'], function(){
+	Route::get('/', 'CartController@cart')->name('cart');
+	Route::get('/add_to_cart/{id}','CartController@addToCart');
+	Route::delete('/remove_from_cart','CartController@remove')->name('remove-cart');
+	Route::get('submit','CartController@submit_cart')->name('submit_cart')->middleware('auth');
 });
 
 Route::get('logout', 'Auth\LoginController@logout', function () {
-    return abort(404);
-})->name('logout');
+	return abort(404);
+});
+
+Route::get('admin/login', 'Admin\LoginController@showLoginForm')->name('AdminLoginForm');
+Route::post('admin/login', 'Admin\LoginController@login')->name('AdminLogin');
+Route::get('admin/logout', 'Admin\LoginController@logout')->name('AdminLogout');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 	Route::get('/', 'Admin\DashboardController@index')->name('admin-home');
@@ -68,9 +96,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 	});
 
 	Route::group(['prefix' => 'comment'], function(){
-		Route::get('/list', 'Admin\CommentController@index')->name('Comment.List');
-		Route::get('/search', 'Admin\CommentController@search')->name('Comment.Search');
-		Route::delete('/deleted', 'Admin\CommentController@destroy');
+		Route::get('/list', 'Admin\RatingController@index')->name('Comment.List');
+		Route::get('/search', 'Admin\RatingController@search')->name('Comment.Search');
+		Route::delete('/deleted', 'Admin\RatingController@destroy');
 	});
 	
 });

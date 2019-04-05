@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Order;
 use App\Book;
 use App\User;
-use App\Comment;
+use App\Rating;
 use Auth;
 
 class DashboardController extends Controller
@@ -17,7 +17,7 @@ class DashboardController extends Controller
     	$orders = Order::all();
     	$books = Book::all();
     	$users = User::all();
-    	$comments = Comment::orderBy('id', 'DESC')->get();
+    	$comments = Rating::orderBy('id', 'DESC')->get();
     	return view('admin.index', compact('orders', 'books', 'users', 'comments'));
     }
 }
