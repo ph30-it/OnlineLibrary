@@ -1,3 +1,4 @@
+@if($data != null)
 <div class="alert alert-success alert-dismissible fade show">
 	<li>Found {{$data->toArray()['total']}} results with " {{ $key }} "</li>
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -59,3 +60,11 @@
 <div style="width: 100%;" class="d-flex justify-content-center">
 	{!! $data->appends(['orderby'=>$orderby])->links() !!}
 </div>
+@else
+<div class="alert alert-warning alert-dismissible fade show">
+	<li>Nothing to show, please input key to search more books !</li>
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+@endif

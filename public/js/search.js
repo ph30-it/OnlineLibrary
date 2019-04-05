@@ -5,6 +5,7 @@ $(document).ready(function(){
 		let orderby = $("select#groupby-select").val();
 		let keysearch = $("#keysearch").val();
 		let token = $("meta[name='csrf-token']").attr("content");
+		alert(token);
 		$.ajax({
 			type:'POST',
 			url:'/search/ajax',

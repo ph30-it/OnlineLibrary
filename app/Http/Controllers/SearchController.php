@@ -52,6 +52,11 @@ class SearchController extends Controller
     {
         $category_id = $request->category;
         $orderby = $request->orderby;
+        if($request->keysearch == "") return view('layouts.search_section',[
+            'key' => null,
+            'data' => null,
+            'orderby' => $orderby
+        ]);
         $books = Book::withCount(['ratings as average_rating' => function($query) {$query->select(DB::raw('coalesce(avg(star_number),0)')); }]);
         if($category_id >= 0){
             $books = $books->where('category_id','=',$category_id);
