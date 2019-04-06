@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BookRequest;
 use App\Book;
 use App\Category;
+use File;
 
 class BookController extends Controller
 {
@@ -40,12 +41,9 @@ class BookController extends Controller
         $data['category_id'] = $request->category;
         if($request->hasFile('img')){
             $file = $request->file('img');
-            $filename = '/uploads/'.md5(time()).'.jpg';
-            $file->move(public_path('/uploads/'), $filename);
+            $filename = '/images/books/'.md5(time()).'.jpg';
+            $file->move(public_path('/images/books/'), $filename);
             $data['img'] = $filename;
-        }
-        else{
-            $data['img'] = '/uploads/default.jpg';
         }
     	
     	if($book = Book::create($data)){
@@ -75,9 +73,12 @@ class BookController extends Controller
             $data['category_id'] = $request->category;
             if($request->hasFile('img')){
                 $file = $request->file('img');
-                $filename = ($book->img == 'default.jpg' || $book->img == NULL) ? md5(time()).'.jpg' : $book->img;
-                $file->move(public_path('/uploads/'), $filename);
+                $filename = '/images/books/'.md5(time()).'.jpg';
+                $file->move(public_path('/images/books/'), $filename);
                 $data['img'] = $filename;
+                if(File::exists(public_path().$book->img)) {
+                    File::delete(public_path().$book->img);
+                }
             }
             if($book->update($data)){
                 return redirect()->back()->with(['class'=>'success','message'=>'Thay đổi thành công.']);
@@ -90,6 +91,9 @@ class BookController extends Controller
         $data = $request->only('id');
         if($book = Book::find($data['id'])){
             if($book->delete()){
+                if(File::exists(public_path().$book->img)) {
+                    File::delete(public_path().$book->img);
+                }
                 return response()->json(['error' => 0, 'message' => 'Xóa sách thành công']);
             }
         }

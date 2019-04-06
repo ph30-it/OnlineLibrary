@@ -30,7 +30,7 @@
 							<div class="col-lg-3">
 								<div class="form-group">
 	                                <label for="input-file">Hình Ảnh</label>
-	                                <input type="file" id="input-file" name="img" class="dropify" data-height="275px" data-default-file="{{asset('uploads/default-avatar.jpg')}}" />
+	                                <input type="file" id="input-file" name="img" class="dropify" data-height="275px" data-default-file="{{asset('images/default.png')}}" />
 	                            </div>
 							</div>
 							<div class="col-lg-9">
