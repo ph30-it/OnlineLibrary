@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Book;
 use App\Rating;
+use App\Order;
 use Auth;
 
 class BookController extends Controller
 {
+
 	public function showBookDetailByID($id,Request $request)
 	{
 		$data = Book::find($id);
@@ -35,6 +37,10 @@ class BookController extends Controller
 		}else{
 			$ratings = $data->ratings()->where('star_number','=',$num_star)->paginate($num_comment);
 		}
+
+		$borrow_count = Order::whereHas('orderdetail' , function($query)  use ($id){
+           $query->where('book_id','=',$id);
+        })->wherein('status',[4,5])->count();
 		return view('book',[
 			'book' => $data,
 			'ratings' => $ratings,
@@ -43,7 +49,8 @@ class BookController extends Controller
 			'average_evalate' => $average_avalate,
 			'count_ratings' => $count_ratings,
 			'num_comment' => $num_comment,
-			'num_star' => $num_star
+			'num_star' => $num_star,
+			'borrow_count' => $borrow_count
 		]);
 	}
 }

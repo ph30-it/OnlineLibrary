@@ -42,7 +42,11 @@
 				<div class="book-name">
 					<b>{{$book->name}}</b>
 				</div>
-
+				<div class="book-borrow">
+					@if($borrow_count >= 1)
+					({{$borrow_count}} people borrowed this book !)
+					@endif
+				</div>
 				<hr>
 
 				<div class="book-author-detail">
@@ -85,7 +89,7 @@
 				
 				<div class="description-section">
 					Book Description:
-					<div>{{$book->describes}}</div>	
+					<div>{{$book->describes}}</div>
 				</div>
 			</div>
 		</div>
