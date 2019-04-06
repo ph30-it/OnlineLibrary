@@ -16,8 +16,7 @@ $("#submit-comment").on('click',function(e){
 
 function getRatingPaginate(number_comment,number_star){
 	let token = $("meta[name='csrf-token']").attr("content");
-	let book_id = $("#book-id").val();
-
+	let book_id = $(".get-book-btt").attr("data-book-id");
 	$.ajax({
 		type:'POST',
 		url: '/book/' + book_id,
