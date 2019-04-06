@@ -15,11 +15,10 @@ class OrderController extends Controller
 			case 2:
 			return $this->orderConfirmed();
 			case 3:
-			return $this->orderCancelled();
-			case 4:
-			return $this->orderBorrowing();
 			case 5:
 			return $this->orderHistory();
+			case 4:
+			return $this->orderBorrowing();
 			default:
 			abort(404);
 		}
@@ -52,13 +51,8 @@ class OrderController extends Controller
 		return view('user.borrowing_order',['result' => 0]);
 	}
 
-	private function orderCancelled(){
-		$orders = Order::where('status','=',3)->get();
-		return view('user.cancelled_order',['orders' => $orders]);
-	}
-
 	private function orderHistory(){
-		$orders = Order::where('status','=',5)->get();
+		$orders = Order::wherein('status', [3,4,5])->orderBy('updated_at','DESC')->get();
 		return view('user.history_order',['orders' => $orders]);
 	}
 

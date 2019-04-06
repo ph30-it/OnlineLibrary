@@ -31,7 +31,7 @@ Cart
 			<p>When you read complete, go to library and order new books !</p>
 		</div>
 		<h4>Order number :{{ $order->id }}</h4>
-		<p>Date borrow : {{ $order->updated_at}}</p>
+		<p>Date borrow : {{ $order->date_borrow }}</p>
 		<table id="cart" class="table table-hover table-condensed">
 			<thead>
 				<tr>

@@ -29,6 +29,7 @@
 					<th>Price</th>
 					<th>Borrow Date</th>
 					<th>Give Back Date</th>
+					<th>Status</th>
 					<th>Note</th>
 					<th>Details</th>
 				</tr>
@@ -39,7 +40,18 @@
 					<td>{{ $order->id }}</td>
 					<td>{{ number_format($order->price)}} VND</td>
 					<td>{{ $order->date_borrow }}</td>
-					<td>{{ $order->date_give_back}}</td>
+					<td>{{ $order->date_give_back }}</td>
+					@switch($order->status)
+					@case(3)
+					<td><h5><span class="badge badge-pill badge-danger">Cancelled</span></h5></td>
+					@break
+					@case(4)
+					<td><h5><span class="badge badge-pill badge-info">Borrowing</span></h5></td>
+					@break
+					@case(5)
+					<td><h5><span class="badge badge-pill badge-success">Success</span></h5></td>
+					@break
+					@endswitch
 					<td>{{ $order->note}}</td>
 					<td><a href="javascript:detail_order({{ $order->id }})"><button type="button" class="btn btn-warning">View Details</button></a></td>
 				</tr>
@@ -55,6 +67,9 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
+						<p>Order ID: </p>
+						<p>Status : </p>
+						<p>Total : </p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -82,7 +97,6 @@
 			},
 			dataType: "html",
 			success: function(data){
-				console.log(data);
 				$('#detailModal .modal-body').html(data);
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) { 
