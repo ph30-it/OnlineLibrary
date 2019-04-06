@@ -29,7 +29,10 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::get('/','UserController@account')->name('account_profile');
 		Route::get('/edit','UserController@edit_show')->name('account_edit');
 		Route::post('/edit','UserController@update')->name('account_update');
-		Route::get('/order/{status?}','OrderController@orderstatus')->name('order_by_status');
+		Route::get('order/wait','OrderController@orderWait')->name('order_wait');
+		Route::get('order/confirmed','OrderController@orderConfirmed')->name('order_confirm');
+		Route::get('order/borrow','OrderController@orderBorrowing')->name('order_borrow');
+		Route::get('order/history','OrderController@orderHistory')->name('order_history');
 		Route::delete('/cart_cancel','OrderController@cancel')->name('cart_cancel');
 		Route::post('/upload', 'UserController@upload')->name('upload');
 	});

@@ -67,9 +67,6 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
-						<p>Order ID: </p>
-						<p>Status : </p>
-						<p>Total : </p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -95,9 +92,35 @@
 			data: {
 				id: id
 			},
-			dataType: "html",
+			dataType: "json",
 			success: function(data){
-				$('#detailModal .modal-body').html(data);
+				let show = '<div class="orderdetails"><p>OrderID: '+ data['0'].id+'</p>'
+				switch(data['0'].status){
+					case 3:
+					show += '<p>Status : <span class="btn-sm btn-danger">Cancelled<span></span></span></p>'
+					break;
+					case 4:
+					show += '<p>Status : <span class="btn-sm btn-danger">Borrow<span></span></span></p>'
+					break;
+					case 5:
+					show += '<p>Status : <span class="btn-sm btn-danger">Success<span></span></span></p>'
+					break;
+				}
+				if(data['0'].date_borrow != null){
+					show += '<p>Date Borrow: '+data['0'].date_borrow +'</p>';
+				}
+				if(data['0'].date_give_back != null){
+					show += '<p>Date Give Back: '+data['0'].date_give_back +'</p>';
+				}
+				if(data['0'].note != null){
+					show += '<p>Note: '+data['0'].note +'</p>';
+				}
+				show += '<table class="table"><thead><tr><th>Book</th><th>Price</th></tr></thead><tbody>';
+				$.each(data['1'], function( i, l ) {
+					show += '<tr><td>'+l.name+'</td><td>'+l.price+'VND</td></tr>';
+				});
+				show += '</tbody><tfoot><tr><td colspan="2">Total: '+data['2']+'VND</td></tr></tfoot></table></div>';
+				$('#detailModal .modal-body').html(show);
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) { 
 				$('#detailModal .modal-body').html("Status: " + textStatus +" <br>Error: " + errorThrown);

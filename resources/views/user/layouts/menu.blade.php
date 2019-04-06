@@ -60,10 +60,10 @@
         </div>
         <div class="block-content">
             <ul>
-                <li class="{{Request::is('account/order/1') ? 'current' : ''}}"><a href="{{ route('order_by_status',1) }}">Wait for confirmation</a></li>
-                <li class="{{Request::is('account/order/2') ? 'current' : ''}}"><a href="{{ route('order_by_status',2) }}">Confirmed</a></li>
-                <li class="{{Request::is('account/order/4') ? 'current' : ''}}"><a href="{{ route('order_by_status',4) }}">Borrowing Books</a></li>
-                <li class="{{Request::is('account/order/3') ? 'current' : ''}}"><a href="{{ route('order_by_status',5) }}">History</a></li>
+                <li class="{{Request::is('account/order/wait') ? 'current' : ''}}"><a href="{{ route('order_wait') }}">Wait for confirmation</a></li>
+                <li class="{{Request::is('account/order/confirmed') ? 'current' : ''}}"><a href="{{ route('order_confirm') }}">Confirmed</a></li>
+                <li class="{{Request::is('account/order/borrow') ? 'current' : ''}}"><a href="{{ route('order_borrow') }}">Borrowing Books</a></li>
+                <li class="{{Request::is('account/order/history') ? 'current' : ''}}"><a href="{{ route('order_history') }}">History</a></li>
             </ul>
         </div>
     </div>
