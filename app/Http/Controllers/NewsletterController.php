@@ -9,14 +9,14 @@ class NewsletterController extends Controller
 {
     public function subscribe(Request $request){
     	if(Newsletter::where('email','=',$request->email)->first()){
-			return redirect()->back()->with(['class' => 'warning', 'message' => $request->email .' have subcribed before !']);
+			return redirect()->back()->with(['class_newsletter' => 'warning', 'message' => $request->email .' have subcribed before !']);
     	}
     	$data = ['email' => $request->email,'uuid' => $this->uuid()];
     	if(Newsletter::create($data)){
-    		return redirect()->back()->with(['class' => 'success', 'message' => 'Subcribe successfully with email ' . $request->email . ', You will receive mail when library have new book !']);
+    		return redirect()->back()->with(['class_newsletter' => 'success', 'message' => 'Subcribe successfully with email ' . $request->email . ', You will receive mail when library have new book !']);
     	}
     	else{
-    		return redirect()->back()->with(['class' => 'danger', 'message' => 'Something wrong, try again later']);
+    		return redirect()->back()->with(['class_newsletter' => 'danger', 'message' => 'Something wrong, try again later']);
     	}
     }
 

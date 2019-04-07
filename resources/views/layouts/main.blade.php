@@ -83,8 +83,8 @@
 	
 	<div class="row d-flex justify-content-center">
 		<div class="col-md-9 col-11">
-			@if(session('class'))
-			<div class="alert alert-{{session('class')}} alert-dismissible fade show">
+			@if(session('class_newsletter'))
+			<div class="alert alert-{{session('class_newsletter')}} alert-dismissible fade show">
 				<li>{{session('message')}}</li>
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
