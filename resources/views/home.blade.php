@@ -111,6 +111,102 @@
 		</div>
 	</div>
 </div>
+
+<div class="top-user-container">
+	<div class="row d-flex justify-content-center">
+		<div class="col-8">
+			<div class="title">
+				<a>Top Comments</a>
+			</div>
+			<div>
+				<div class="slider-for">
+					@foreach($top_rating as $rating)
+					<div class="row d-flex justify-content-center item">
+						<div class="col-3">
+							<img class="book_rating_image" src="{{ asset($rating->book->img) }}" alt="" height="300px">
+						</div>
+						<div class="col-9">
+							<div class="row avatar_comment">
+								<div class="col-3">
+									<img src="{{ asset($rating->user->image) }}" alt="">
+								</div>
+								<div style="padding-top: 20px">
+									<div style="width: 100%" class="mt-2">
+										<p style="font-weight: bold">{{ $rating->user->firstname }}</p> Commented at {{ get_timeago($rating->created_at) }} 
+									</div>
+									<div style="width: 100%;font-weight: bold" class="mt-2">
+										@php
+										$remaining_rating = 5 - $rating->star_number;
+										@endphp
+
+										@for($i = 1; $i <= $rating->star_number; $i++)
+										<i class="fas fa-star" style="color: #f1c40f"></i>
+										@endfor
+
+										@for($i = 1; $i <= $remaining_rating; $i++)
+										<i class="fas fa-star" style="color: darkgray"></i>
+										@endfor
+
+										@if($rating->star_number == 1) <b> Angry</b>
+										@elseif ($rating->star_number == 2) <b> Disappointed</b>
+										@elseif ($rating->star_number == 3) <b> Neutral</b>
+										@elseif ($rating->star_number == 4) <b> Good</b>
+										@elseif ($rating->star_number == 5) <b> Excellent</b>
+										@endif					
+									</div>
+								</div>
+							</div>
+							<div class="col-12 text-center comment_text">
+								<p>&ldquo;{{$rating->comment}}&bdquo;</p>
+							</div>
+							<div class="col-12">
+								Book : <a href="{{ route('book',$rating->book->id) }}">{{$rating->book->name}}</a>
+							</div>
+						</div>
+					</div>
+					@endforeach
+				</div>
+
+				<div class="row d-flex justify-content-center">
+					<div class="col-10">
+						<div class="slider-nav" style="padding-top: 20px">
+							@foreach($top_rating as $rating)
+							<div class="item">
+								<img src="{{ asset($rating->user->image) }}" alt=""  class="center">
+							</div>
+							@endforeach
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="title">
+				<a>Top Users</a>
+			</div>
+			<div class="top_table">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th class="text-center">Top</th>
+							<th>Name</th>
+							<th class="text-center">Count Order</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($top_user as $key => $user)
+						<tr>
+							<td class="text-center">{{$key + 1}}</td>
+							<td>{{$user->firstname}}</td>
+							<td class="text-center">{{$user->count_order}}</td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
 @endsection
 
 @section('custom-js')

@@ -195,3 +195,48 @@ figure{
 .rate{
 	padding-top: 5px;
 }
+
+.title{
+	padding: 10px;
+	background: #e74c3c;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	color: white;
+	padding-left: 20px;
+}
+.top_table{
+	border-right: 1px solid #ecf0f1;
+	border-left: 1px solid #ecf0f1;
+}
+.avatar_comment{
+	padding-left: 30px;
+}
+.avatar_comment img{
+	border: 5px solid #cf484c;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.slider-for{
+	border-radius: 15px;
+	overflow: hidden;
+	background-color: #eeeeee;
+	margin: 10px 30px 10px 30px;
+	padding: 20px;
+}
+.slider-nav img{
+	border: 5px solid #cf484c;
+	border-radius: 50%;
+	height: 100px;
+	width: 100px;
+}
+.slick-next{
+	right: 0;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}

@@ -38,10 +38,10 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     public function Orders(){
-        return $this->hasMany('App\Order', 'users_id', 'id');
+        return $this->hasMany('App\Order', 'user_id', 'id');
     }
 
     public function Comment(){
-        return $this->hasMany('App\Comment', 'users_id', 'id');
+        return $this->hasMany('App\Comment', 'user_id', 'id');
     }
 }

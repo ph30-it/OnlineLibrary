@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Book;
 use App\Rating;
+use App\User;
 use DB;
 class HomeController extends Controller
 {
@@ -37,9 +38,17 @@ class HomeController extends Controller
             }])->where([['quantity','>',0], ['category_id','=',$cate[$i]->id]])->orderByDesc('average_rating')->take(10)->get();
             array_push($booksData,$books);
         }
+
+        $top_user = User::withCount(['Orders as count_order' => function($query) {
+            $query->select(DB::raw('coalesce(count(price),0)'));
+        }])->take(10)->get();
+        $top_rating = Rating::with('book')->whereNotNull('comment')->orderByDesc('star_number')->take(7)->get();
+
         return view('home', [
             'categories' => $cate,
-            'databooks' => $booksData
+            'databooks' => $booksData,
+            'top_user' => $top_user,
+            'top_rating' => $top_rating
         ]);
     }
 }

@@ -293,3 +293,6 @@ input[type="radio"]{
 th,td{
 	text-align: center;
 }
+.textarea {
+	width: 100%;
+}
