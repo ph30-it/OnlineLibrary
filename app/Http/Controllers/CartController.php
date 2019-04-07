@@ -19,12 +19,16 @@ class Cartcontroller extends controller
 			return -1;
 		}
 		$cart = session()->get('cart');
+		$total = session()->get('total');
 		if(isset($cart[$book_id])) return -2;
 		if (is_array($cart) && count($cart) == 5) {
 			return -3;
 		}
 		if(!$cart){
 			$cart = [];
+		}
+		if(!$total){
+			$total = 0;
 		}
 		$cart[$book_id] = [
 			"name" => $book->name,
@@ -35,16 +39,22 @@ class Cartcontroller extends controller
 			"category" => $book->category->name,
 			"des" => $book->describes
 		];
+		$total += $book->price;
 		session()->put("cart",$cart);
+		session()->put("total",$total);
 		return 1;
 	}
 
 	public function remove(request $request){
-		if($request->id){
+		$book_id = $request->id;
+		if($book_id){
 			$cart = session()->get('cart');
-			if(isset($cart[$request->id])){
-				unset($cart[$request->id]);
+			$total = session()->get('total');
+			if(isset($cart[$book_id])){
+				$total -= $cart[$book_id]['price'];
+				unset($cart[$book_id]);
 				session()->put('cart',$cart);
+				session()->put('total',$total);
 				return redirect()->back()->with(['class' => 'success', 'message' => 'Delete success.']);
 			}
 		}
@@ -53,7 +63,8 @@ class Cartcontroller extends controller
 
 	public function submit_cart(){
 		$cart = session()->get('cart');
-		if(!$cart) return redirect()->back()->with(['class' => 'danger', 'message' => 'Something wrong.']);
+		$total = session()->get('total');
+		if(!($cart || $total)) return redirect()->back()->with(['class' => 'danger', 'message' => 'Something wrong.']);
 		//Dang muon sach theo mot don hang khac
 		$ordering = Order::where('user_id','=',\Auth::user()->id)->wherein('status', [1,2,4])->get();
 		if (count($ordering) >= 1) {
@@ -76,10 +87,9 @@ class Cartcontroller extends controller
 
 		DB::beginTransaction();
 		try {
-			$order = DB::table('order')->insertGetId(['status' => 1,'price' => '0','user_id' => \Auth::user()->id,'created_at' => now(),'updated_at' => now()]);
+			$order = DB::table('order')->insertGetId(['status' => 1,'price' => $total,'user_id' => \Auth::user()->id,'created_at' => now(),'updated_at' => now()]);
 			foreach($cart as $c){
 				DB::table('detail_order')->insert(['order_id' => $order,'book_id' => $c["id"],'created_at' => now(),'updated_at' => now()]);
-				DB::table('order')->increment('price' ,$c['price']);
 			}
 			DB::commit();
 		} catch (Exception $e) {

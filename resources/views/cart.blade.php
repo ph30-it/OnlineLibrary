@@ -40,8 +40,8 @@ Cart
 		<tr>
 			<th style="width:50%">Book</th>
 			<th style="width:10%">Category</th>
-			<th style="width:15%" class="text-center">Price</th>
 			<th style="width:10%" class="text-center">Quantity</th>
+			<th style="width:15%" class="text-center">Price</th>
 			<th style="width:15%"></th>
 		</tr>
 	</thead>
@@ -58,8 +58,8 @@ Cart
 				</div>
 			</td>
 			<td><a class="nomargin" href="{{ route('category',$book['category_id']) }}">{{$book['category']}}</a></td>
-			<td class="text-center top50">{{number_format($book['price'])}} VND</td>
 			<td class="text-center">1</td>
+			<td class="text-center top50">{{number_format($book['price'])}} VND</td>
 			<td class="text-center">
 				<form id="myForm" data-book-id="{{ $book['id'] }}">
 					<button type="submit" class="btn btn-danger deletebutton">Delete</button>
@@ -91,6 +91,11 @@ Cart
 		@endforeach
 	</tbody>
 	<tfoot>
+		<tr>
+			<td colspan="2"></td>
+			<td class="text-center" style="font-weight: bold">Total :</td>
+			<td class="text-center">{{ number_format(session()->get('total')) }}VND</td>
+		</tr>
 		<tr>
 			<td><a href="{{ route('home') }}"><button class="btn center-block cart">Continue to home !</button></a></td>
 			<td colspan="2" class="hidden-xs"></td>

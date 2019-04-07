@@ -61,6 +61,7 @@ class OrderController extends Controller
 					$data = [
 						'name' => $item->book->name,
 						'price' => number_format($item->book->price),
+						'category' => $item->book->category->name,
 					];
 					return $data;
 				}),
