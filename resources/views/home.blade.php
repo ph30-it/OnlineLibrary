@@ -9,14 +9,6 @@
 @endsection
 
 @section('page-content')
-@if(session('class'))
-<div class="alert alert-{{session('class')}} alert-dismissible fade show">
-	<li>{{session('message')}}</li>
-	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		<span aria-hidden="true">&times;</span>
-	</button>
-</div>
-@endif
 
 <div class="category-container">
 	<div class="row">
@@ -54,10 +46,20 @@
 <div class="product-container">
 	<div class="row d-flex justify-content-center">
 		<div class="col-12">
-			@foreach($databooks as $books)
+			@foreach($databooks as $key => $books)
 			<div class="product-by-category-container">
 				<div class="category-name">
-					<a href="{{ route('category', $books[0]->category->id) }}">{{$books[0]->category->name}}</a>
+					@switch($key)
+					@case(0)
+					<a>Newest Books</a>
+					@break
+					@case(1)
+					<a>Top Rating Books</a>
+					@break
+					@default
+					<a href="{{ route('category', $books[0]->category->id) }}">Category : {{$books[0]->category->name}}</a>
+					@break
+					@endswitch
 				</div>
 				<div class="book-container">
 					<div class="row d-flex justify-content-center">
@@ -115,17 +117,17 @@
 <div class="top-user-container">
 	<div class="row d-flex justify-content-center">
 		<div class="col-8">
-			<div class="title">
+			<div class="title_comment">
 				<a>Top Comments</a>
 			</div>
 			<div>
 				<div class="slider-for">
 					@foreach($top_rating as $rating)
 					<div class="row d-flex justify-content-center item">
-						<div class="col-3">
-							<img class="book_rating_image" src="{{ asset($rating->book->img) }}" alt="" height="300px">
+						<div class="col-4">
+							<img class="book_rating_image" src="{{ asset($rating->book->img) }}" alt="" height="300px" style="float: right">
 						</div>
-						<div class="col-9">
+						<div class="col-8">
 							<div class="row avatar_comment">
 								<div class="col-3">
 									<img src="{{ asset($rating->user->image) }}" alt="">
@@ -156,11 +158,11 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-12 text-center comment_text">
-								<p>&ldquo;{{$rating->comment}}&bdquo;</p>
+							<div class="col-12 text-center mt-4">
+								<textarea readonly>&ldquo;{{$rating->comment}}&bdquo;</textarea>
 							</div>
 							<div class="col-12">
-								Book : <a href="{{ route('book',$rating->book->id) }}">{{$rating->book->name}}</a>
+								<p class="book_comment">Book : <a href="{{ route('book',$rating->book->id) }}">{{$rating->book->name}}</a></p>
 							</div>
 						</div>
 					</div>
@@ -181,7 +183,7 @@
 			</div>
 		</div>
 		<div class="col-4">
-			<div class="title">
+			<div class="title_comment">
 				<a>Top Users</a>
 			</div>
 			<div class="top_table">

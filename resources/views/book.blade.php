@@ -291,10 +291,10 @@
 			</div>
 			<div class="col-4">
 				<select class="browser-default custom-select custom-select-md" style="display: inline-block;" id="number-comment-select">
-					<option value="0" {{ ($num_comment == 0) ? 'selected' : "" }}>Show all comment</option>
 					<option value="5" {{ ($num_comment == 5) ? 'selected' : "" }}>5 comment</option>
 					<option value="10" {{ ($num_comment == 10) ? 'selected' : "" }}>10 comment</option>
 					<option value="15" {{ ($num_comment == 15) ? 'selected' : "" }}>15 comment</option>
+					<option value="25" {{ ($num_comment == 25) ? 'selected' : "" }}>25 comment</option>
 				</select>
 			</div>
 			<div class="col-4">
@@ -332,7 +332,7 @@
 				</div>
 				<div class="col-11 comment">
 					<div style="width: 100%" class="mt-2">
-						<p style="font-weight: bold">{{ $rating->user->firstname }}</p> Commented at {{ get_timeago($rating->created_at) }} 
+						<p style="font-weight: bold">{{ $rating->user->firstname }}</p> Commented at {{ get_timeago($rating->updated_at) }} 
 					</div>
 					<div style="width: 100%;font-weight: bold" class="mt-2">
 						@php
@@ -356,7 +356,7 @@
 					</div>
 
 					<div style="width: 100%;" class="mt-2">
-						{{ $rating->comment }}
+						<textarea readonly>{{ $rating->comment }}</textarea>
 					</div>
 				</div>
 			</div>
@@ -364,7 +364,7 @@
 		<br>
 		@endforeach
 		<div style="width: 100%;display: flex;justify-content: center;align-items: center">
-			{!! $ratings->appends(request()->query())->links() !!}
+			{!! $ratings->appends(['num_comment' => $num_comment,'num_star' => $num_star])->links() !!}
 		</div>
 		@else
 		<div class="alert alert-warning">

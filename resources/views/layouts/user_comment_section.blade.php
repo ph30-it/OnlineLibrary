@@ -17,7 +17,7 @@
 		</div>
 		<div class="col-11 comment">
 			<div style="width: 100%" class="mt-2">
-				<p style="font-weight: bold">{{ $rating->user->firstname }}</p> Commented at {{ get_timeago($rating->created_at) }} 
+				<p style="font-weight: bold">{{ $rating->user->firstname }}</p> Commented at {{ get_timeago($rating->updated_at) }} 
 			</div>
 			<div style="width: 100%;font-weight: bold" class="mt-2">
 				@php
@@ -41,7 +41,7 @@
 			</div>
 
 			<div style="width: 100%;" class="mt-2">
-				{{ $rating->comment }}
+				<textarea class="user-comment-textarea" readonly>{{ $rating->comment }}</textarea>
 			</div>
 		</div>
 	</div>
@@ -49,7 +49,7 @@
 <br>
 @endforeach
 <div style="width: 100%;display: flex;justify-content: center;align-items: center">
-	{!! $data->appends(request()->query())->links() !!}
+	{!! $data->appends(['num_comment' => $num_comment,'num_star' => $num_star])->links() !!}
 </div>
 @else
 <div class="alert alert-warning">

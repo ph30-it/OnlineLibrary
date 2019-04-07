@@ -80,9 +80,17 @@
 		</div>
 	</div>
 	<hr>
-
+	
 	<div class="row d-flex justify-content-center">
 		<div class="col-md-9 col-11">
+			@if(session('class'))
+			<div class="alert alert-{{session('class')}} alert-dismissible fade show">
+				<li>{{session('message')}}</li>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			@endif
 			@yield('page-content')
 		</div>
 	</div>
