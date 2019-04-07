@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Category;
 use App\Order;
+use App\OrderDetail;
 
 class Book extends Model
 {
@@ -15,7 +16,7 @@ class Book extends Model
     ];
 
     public function orderdetail(){
-        return $this->hasMany('App\OrderDetail', 'books_id', 'id');
+        return $this->hasMany(OrderDetail::class, 'book_id', 'id');
     }
     
     public function Category(){
@@ -23,7 +24,7 @@ class Book extends Model
     }
 
     public function Order(){
-        return $this->belongstoMany(Order::class, 'detail_order', 'order_id', 'book_id');
+        return $this->belongstoMany(Order::class, 'detail_order', 'book_id', 'order_id');
     }
 
     public function ratings(){

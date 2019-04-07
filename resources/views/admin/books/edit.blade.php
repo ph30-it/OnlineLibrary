@@ -66,7 +66,7 @@
                                         <label>Danh mục <font color="red">*</font></label>
                                         <select name="category" class="form-control">
                                             @foreach($categories as $category)
-                                            <option value="{{$category->id}}" {{$book->categories_id == $category->id ? 'selected' : ''}}>{{ $category->name }}</option>
+                                            <option value="{{$category->id}}" {{$book->category_id == $category->id ? 'selected' : ''}}>{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('category'))

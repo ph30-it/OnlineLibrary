@@ -26,7 +26,8 @@ class orderRequest extends FormRequest
         return [
             'readers' => 'required',
             'book.*.id' => 'required',
-            'book.*.quantity' => 'min:1'
+            'book.*.quantity' => 'min:1',
+            'book' => 'required'
         ];
     }
 
@@ -34,7 +35,8 @@ class orderRequest extends FormRequest
         return [
             'readers.required' => 'Độc giả không được trống',
             'book.*.id.required' => 'Vui lòng chọn sách',
-            'book.*.quantity.min' => 'Số lượng tối thiểu là 1'
+            'book.*.quantity.min' => 'Số lượng tối thiểu là 1',
+            'book.required' => 'Vui lòng thêm sách'
         ];
     }
 }

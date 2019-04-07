@@ -90,11 +90,18 @@ class BookController extends Controller
     public function destroy(Request $request){
         $data = $request->only('id');
         if($book = Book::find($data['id'])){
-            if($book->delete()){
-                if(File::exists(public_path().$book->img)) {
-                    File::delete(public_path().$book->img);
+            $check = $book->whereHas('Order', function($query){
+                return $query->where('status', 2)->orWhere('status', 4);
+            })->count();
+            if($check < 1){
+                if($book->delete()){
+                    if(File::exists(public_path().$book->img)) {
+                        File::delete(public_path().$book->img);
+                    }
+                    return response()->json(['error' => 0, 'message' => 'Xóa sách thành công']);
                 }
-                return response()->json(['error' => 0, 'message' => 'Xóa sách thành công']);
+            }else{
+                return response()->json(['error' => 1, 'message' => 'Sách đang có đơn hàng chưa được trã']);
             }
         }
         return response()->json(['error' => 1, 'message' => 'Không tìm thấy sách']);
