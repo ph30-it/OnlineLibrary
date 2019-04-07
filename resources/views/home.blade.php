@@ -134,7 +134,7 @@
 								</div>
 								<div style="padding-top: 20px">
 									<div style="width: 100%" class="mt-2">
-										<p style="font-weight: bold">{{ $rating->user->firstname }}</p> Commented at {{ get_timeago($rating->created_at) }} 
+										<p style="font-weight: bold">{{ $rating->user->firstname }}</p> Commented at {{ get_timeago($rating->updated_at) }} 
 									</div>
 									<div style="width: 100%;font-weight: bold" class="mt-2">
 										@php
@@ -184,7 +184,7 @@
 		</div>
 		<div class="col-4">
 			<div class="title_comment">
-				<a>Top Users</a>
+				<a>Top Users In {{ date("m") }} - {{ date("Y")}}</a>
 			</div>
 			<div class="top_table">
 				<table class="table table-striped">

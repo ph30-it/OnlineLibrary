@@ -52,7 +52,7 @@ class HomeController extends Controller
         
 
         $top_user = User::withCount(['Orders as count_order' => function($query) {
-            $query->select(DB::raw('coalesce(count(price),0)'));
+            $query->select(DB::raw('coalesce(count(price),0)'))->wherein('status',[4,5])->whereYear('created_at', '=', date("Y"))->whereMonth('created_at', '=', date("m"));
         }])->take(10)->get();
 
         $top_rating = Rating::with('book')->whereNotNull('comment')->orderByDesc('star_number')->take(7)->get();

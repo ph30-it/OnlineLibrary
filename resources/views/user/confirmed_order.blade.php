@@ -32,7 +32,16 @@ Cart
 		<div class="alert alert-success">
 			<p>You must go to library get the book in 24h !</p>
 		</div>
-		<div id="DateCountdown" data-date="{{date("Y-m-d H:i:s", strtotime('+24 hours', strtotime($order->updated_at)))}}" style="width: 100%;"></div>
+		@php
+		$date = date("Y-m-d H:i:s", strtotime('+24 hours', strtotime($order->created_at)))
+		@endphp
+		@if($date <= now())
+		<div class="alert alert-danger">
+			<p>Your order has been overdue, your order can be cancel by admin!</p>
+		</div>
+		@else
+		<div id="DateCountdown" data-date="{{$date}}" style="width: 100%;"></div>
+		@endif
 		<table id="cart" class="table table-hover table-condensed">
 			<thead>
 				<tr>
