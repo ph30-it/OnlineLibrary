@@ -57,7 +57,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body easypiechart-panel">
 					<h4>Đơn hàng chưa duyệt</h4>
-					<div class="easypiechart" id="easypiechart-orange" data-percent="{!!percent($orders->count(), 1)!!}" ><span class="percent">{!!percent($orders->count(), $orders->where('status', '=', '1')->count())!!}%</span></div>
+					<div class="easypiechart" id="easypiechart-orange" data-percent="{!!percent($orders->count(), $orders->where('status', 1)->count())!!}" ><span class="percent">{!!$orders->where('status', 1)->count()!!}/{!!$orders->count()!!}</span></div>
 				</div>
 			</div>
 		</div>
@@ -65,7 +65,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body easypiechart-panel">
 					<h4>Đơn hàng đang mượn</h4>
-					<div class="easypiechart" id="easypiechart-blue" data-percent="{!!percent($orders->count(), $orders->where('status', '=', '4')->count())!!}" ><span class="percent">{!!percent($orders->count(), $orders->where('status', '=', '4')->count())!!}%</span></div>
+					<div class="easypiechart" id="easypiechart-blue" data-percent="{!!percent($orders->count(), $orders->where('status', 4)->count())!!}" ><span class="percent">{!!$orders->where('status', 4)->count()!!}/{!!$orders->count()!!}</span></div>
 				</div>
 			</div>
 		</div>
@@ -73,7 +73,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body easypiechart-panel">
 					<h4>Đơn hàng đã trã</h4>
-					<div class="easypiechart" id="easypiechart-teal" data-percent="{!!percent($orders->count(), $orders->where('status', '=', '5')->count())!!}" ><span class="percent">{!!percent($orders->count(), $orders->where('status', '=', '5')->count())!!}%</span></div>
+					<div class="easypiechart" id="easypiechart-teal" data-percent="{!!percent($orders->count(), $orders->where('status', 5)->count())!!}" ><span class="percent">{!!$orders->where('status', 5)->count()!!}/{!!$orders->count()!!}</span></div>
 				</div>
 			</div>
 		</div>
@@ -81,7 +81,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body easypiechart-panel">
 					<h4>Đơn hàng bị hủy</h4>
-					<div class="easypiechart" id="easypiechart-red" data-percent="{!!percent($orders->count(), $orders->where('status', '=', '3')->count())!!}" ><span class="percent">{!!percent($orders->count(), $orders->where('status', '=', '3')->count())!!}%</span></div>
+					<div class="easypiechart" id="easypiechart-red" data-percent="{!!percent($orders->count(), $orders->where('status', 3)->count())!!}" ><span class="percent">{!!$orders->where('status', 3)->count()!!}/{!!$orders->count()!!}</span></div>
 				</div>
 			</div>
 		</div>

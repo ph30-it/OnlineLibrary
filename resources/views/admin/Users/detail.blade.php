@@ -28,7 +28,7 @@
 						<div class="col-lg-3">
 							<div class="form-group">
                                 <label for="input-file">Hình Ảnh</label>
-                                <input type="file" id="input-file" name="img" class="dropify" data-height="275px" data-default-file="{{asset('uploads')}}/{{ $user->image }}" disabled="" />
+                                <input type="file" id="input-file" name="img" class="dropify" data-height="275px" data-default-file="{{ ($user->image == null) ? asset('images/default.png') : asset($user->image) }}" disabled="" />
                             </div>
 						</div>
 						<div class="col-lg-9">

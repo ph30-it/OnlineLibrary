@@ -224,6 +224,54 @@ $(document).ready(function(){
 		}, function(){});
 	});
 
+	// report Order
+	$('.order-report').on('click', function(){
+		var obj = $(this);
+		var DetailID = $(obj).attr('data-id');
+		$('#book-price').val('');
+		$('#note').val('');
+		alertify.confirm('Báo Mất', '<lable>Tiền phạt:</lable><input class="form-control" id="book-price" type="number" min="0" placeholder="Giá tiền phạt"><lable>Ghi chú:</lable><input class="form-control" id="note" type="text" placeholder="Ghi chú thêm...">', function(){
+			var price = $('#book-price').val();
+			var note = $('#note').val();
+			if(price !== ''){
+				$.post(api_domain+'/lost-books/add', {_token: api_token, id:DetailID, price: price, note: note}, function(data){
+					if(data.error == 0){
+						alertify.success('Đã báo cáo');
+					}
+					else{
+						alertify.error(data.message);
+					}
+					$(obj).attr('class', 'btn btn-sm btn-info');
+					$(obj).text('Đã báo cáo');
+					$(obj).attr('disabled', '');
+				}, 'json')
+			}
+			
+		}, function(){});
+	});
+
+	//report remove
+	$('.report-remove').on('click', function(){
+		var lostID = $(this).attr('data-id');
+		alertify.confirm('Xác nhận', 'Độc giả đã trã sách?', function(){
+			$.ajax({
+				url: api_domain+'/lost-books/deleted',
+				method: 'DELETE',
+				data: {
+					id: lostID,
+					_token: api_token
+				},
+				success: function(data){
+					if(data.error == 0){
+						$('[data-row='+lostID+']').remove();
+					}else{
+						alertify.success(message);
+					}
+				}
+			});
+		}, function(){});
+	});
+
 
 	//received book
 	$('.received-book').on('click', function(){
