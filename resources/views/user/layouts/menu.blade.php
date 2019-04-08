@@ -51,6 +51,7 @@
             <ul>
                 <li class="{{Request::is('account') ? 'current' : ''}}"><a href="{{ route('account_profile') }}">Info Account</a></li>
                 <li class="{{Request::is('account/edit') ? 'current' : ''}}"><a href="{{ route('account_edit') }}" >Edit Account</a></li>
+                <li class="{{Request::is('account/napthe') ? 'current' : ''}}"><a href="{{ route('napthe') }}" >Nap The</a></li>
             </ul>
         </div>
     </div>

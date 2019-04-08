@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::get('order/history','OrderController@orderHistory')->name('order_history');
 		Route::delete('/cart_cancel','OrderController@cancel')->name('cart_cancel');
 		Route::post('/upload', 'UserController@upload')->name('upload');
+		Route::get('/napthe','NapTheController@index')->name('napthe');
+		Route::post('/napthe','NapTheController@napthe')->name('napthe');
 	});
 });
 

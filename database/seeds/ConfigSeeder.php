@@ -12,10 +12,10 @@ class ConfigSeeder extends Seeder
      */
     public function run()
     {
-        $data = [
-        	'name' => 'price_per_day',
-        	'value' => 10000
-        ];
-        Config::create($data);
+        //default need to run webside
+        Config::create(['name' => 'price_per_day','value' => 10000]);
+        Config::create(['name' => 'merchant_id','value' => 'xxxxx']);
+        Config::create(['name' => 'api_user','value' => 'xxxxx']);
+        Config::create(['name' => 'api_password','value' => 'xxxxx']);
     }
 }

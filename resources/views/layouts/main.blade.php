@@ -150,11 +150,11 @@
 					<p>
 						<a href="{{ route('cart') }}">Cart</a>
 					</p>
-					<!-- <p>
-						<a href="#!">Shipping Rates</a>
-					</p>
 					<p>
-						<a href="#!">Help</a>
+						<a href="{{ route('contact_us') }}">Contact Us</a>
+					</p>
+					<!--<p>
+						<a href="#!">Help</a> //TODO : about us
 					</p> -->
 				</div>
 
