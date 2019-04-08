@@ -38,7 +38,7 @@ Cart
 			<p>Wait admin check your order in 24h!</p>
 		</div>
 		@php
-		$date = date("Y-m-d H:i:s", strtotime('+24 hours', strtotime($order->created_at)))
+		$date = date("Y-m-d H:i:s", strtotime('+24 hours', strtotime($order->updated_at)))
 		@endphp
 		@if($date <= now())
 		<div class="alert alert-danger">
