@@ -37,36 +37,36 @@
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label for="input-file">Hình Ảnh</label>
-                                        <input type="file" id="input-file" name="img" class="dropify" data-height="364px" data-default-file="{{asset('uploads')}}/{{ $book->img }}" />
+                                        <input type="file" id="input-file" name="img" class="dropify" data-height="364px" data-default-file="{{ ($book->img == null) ? asset('images/default.jpg') : asset($book->img) }}" accept="image/*"/>
                                     </div>
                                 </div>
                                 <div class="col-lg-9">
                                     <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                                        <label>Tên sách</label>
+                                        <label>Tên sách <font color="red">*</font></label>
                                         <input class="form-control" type="text" name="name" value="{{$book->name}}" placeholder="Tên sách (V/d: Tây du ký">
                                         @if ($errors->has('name'))
                                         <span class="text-danger">{{ $errors->first('name') }}</span>
                                         @endif
                                     </div>
                                     <div class="form-group {{ $errors->has('author') ? 'has-error' : '' }}">
-                                        <label>Tên tác giả</label>
+                                        <label>Tên tác giả <font color="red">*</font></label>
                                         <input class="form-control" type="text" name="author" value="{{$book->author}}" placeholder="Tên của tác giả (V/d: Ngô Thừa Ân)">
                                         @if ($errors->has('author'))
                                         <span class="text-danger">{{ $errors->first('author') }}</span>
                                         @endif
                                     </div>
                                     <div class="form-group {{ $errors->has('published_year') ? 'has-error' : '' }}">
-                                        <label>Năm xuất bản</label>
+                                        <label>Năm xuất bản <font color="red">*</font></label>
                                         <input class="form-control" type="text" name="published_year" value="{{$book->published_year}}" placeholder="Năm phát hành (V/d: 1950)">
                                         @if ($errors->has('published_year'))
                                         <span class="text-danger">{{ $errors->first('published_year') }}</span>
                                         @endif
                                     </div>
                                     <div class="form-group {{ $errors->has('category') ? 'has-error' : '' }}">
-                                        <label>Danh mục</label>
+                                        <label>Danh mục <font color="red">*</font></label>
                                         <select name="category" class="form-control">
                                             @foreach($categories as $category)
-                                            <option value="{{$category->id}}" {{$book->categories_id == $category->id ? 'selected' : ''}}>{{ $category->name }}</option>
+                                            <option value="{{$category->id}}" {{$book->category_id == $category->id ? 'selected' : ''}}>{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('category'))
@@ -74,14 +74,14 @@
                                         @endif
                                     </div>
                                     <div class="form-group {{ $errors->has('quantity') ? 'has-error' : '' }}">
-                                        <label>Số lượng</label>
+                                        <label>Số lượng <font color="red">*</font></label>
                                         <input class="form-control" type="number" name="quantity" min="1" value="{{$book->quantity}}">
                                         @if ($errors->has('quantity'))
                                         <span class="text-danger">{{ $errors->first('quantity') }}</span>
                                         @endif
                                     </div>
                                     <div class="form-group {{ $errors->has('price') ? 'has-error' : '' }}">
-                                        <label>Giá cho thuê</label>
+                                        <label>Giá cho thuê <font color="red">*</font></label>
                                         <input class="form-control" type="number" name="price" min="0" value="{{$book->price}}">
                                         @if ($errors->has('price'))
                                         <span class="text-danger">{{ $errors->first('price') }}</span>

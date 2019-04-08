@@ -63,6 +63,7 @@ class OrderController extends Controller
                 'note' => $order->note,
                 'book' => $order->orderdetail->map(function($item){
                     $data = [
+                        'id' => $item->id,
                         'name' => $item->book->name,
                         'quantity' => $item->quantity,
                         'bquantity' => $item->book->quantity,
@@ -119,7 +120,7 @@ class OrderController extends Controller
     public function returnBook($book){
         $book->map(function($item){
             $book = Book::find($item->book->id);
-            $book->quantity += $item->quantity;
+            $book->quantity += ($item->quantity - $item->lostbook->count() < 0) ? 0 : $item->quantity - $item->lostbook->count();
             return $book->save();
         });
     }
@@ -158,5 +159,10 @@ class OrderController extends Controller
             return view('admin.orders.orderbyuser', compact(['orders', 'user']));
         }
         return redirect()->Route('Book.List');
+    }
+
+    public function report($id){
+        $books = OrderDetail::where('order_id', $id)->orderBy('id', 'ASC')->paginate(50);
+        return view('admin.orders.report', compact(['books']));
     }
 }

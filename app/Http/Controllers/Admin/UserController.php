@@ -8,6 +8,7 @@ use App\User;
 use App\Http\Requests\UsersRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UserRequest;
+use File;
 
 class UserController extends Controller
 {
@@ -25,12 +26,9 @@ class UserController extends Controller
     	$data['password'] = bcrypt($data['password']);
         if($request->hasFile('img')){
             $file = $request->file('img');
-            $filename = md5(time()).'.jpg';
-            $file->move(public_path('/uploads/'), $filename);
+            $filename = '/images/avatars/'.md5(time()).'.jpg';
+            $file->move(public_path('/images/avatars/'), $filename);
             $data['image'] = $filename;
-        }
-        else{
-            $data['image'] = 'default.jpg';
         }
     	if($user = User::create($data)){
     		return redirect()->route('User.Show', $user->id)->with(['class' => 'success', 'message' => 'Thêm thành viên thành công.']);
@@ -49,15 +47,20 @@ class UserController extends Controller
     	$data = $request->except('_token', 'email');
     	if($user = User::find($id)){
             $data['password'] = isset($data['password']) ? bcrypt($data['password']) : $user->password;
-            if($request->hasFile('img')){
-                $file = $request->file('img');
-                $filename = ($user->image == 'avatar-default.jpg' || $user->image == NULL) ? md5(time()).'.jpg' : $user->image;
-                $file->move(public_path('/uploads/'), $filename);
+            if($request->hasFile('img')) {
+                $file = request()->file('img');
+                $filename = '/images/avatars/'.md5(time()).'.jpg';
+                $file->move(public_path('/images/avatars/'), $filename);
                 $data['image'] = $filename;
+                if(File::exists(public_path().$user->image)) {
+                    File::delete(public_path().$user->image);
+                }
             }
-    		if($user->update($data)){
-    			return redirect()->route('User.Show', $user->id)->with(['class' => 'success', 'message' => 'Thay đổi thông tin thành viên thành công.']);
-			}
+            if ($user->update($data)) {
+                return redirect()->route('User.Show', $user->id)->with(['class' => 'success', 'message' => 'Thay đổi thông tin thành viên thành công.']);
+            }else{
+                return redirect()->route('User.Show', $user->id)->with(['class' => 'danger', 'message' => 'Lỗi, thử lại sau.']);
+            }
     	}
     	return redirect()->route('User.List');
     }
@@ -73,6 +76,9 @@ class UserController extends Controller
         $data = $request->only('id');
         if($user = User::find($data['id'])){
             if($user->delete()){
+                if(File::exists(public_path().$user->image)) {
+                    File::delete(public_path().$user->image);
+                }
                 return response()->json(['error' => 0, 'message' => 'Xóa thành viên thành công']);
             }
         }

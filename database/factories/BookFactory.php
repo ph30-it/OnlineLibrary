@@ -8,7 +8,7 @@ $factory->define(Book::class, function (Faker $faker) {
 	$ids= Category::pluck('id'); 
 	return[
 		'name' => $faker->word,
-		'img' => 'https://images.penguinrandomhouse.com/cover/9780307806581',
+		'img' => '/images/default.jpg',
 		'author' => $faker->name,
 		'published_year' => $faker->year($max = 'now'),
 		'describes' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
