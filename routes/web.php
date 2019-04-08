@@ -15,6 +15,8 @@ Route::get('/category/{id}','CategoryController@listBooksById')->name('category'
 Route::post('/category/{id}','CategoryController@listBookPaginate')->name('post_category');
 
 Route::post('/newsletter','NewsletterController@subscribe')->name('newsletter_subscribe');
+Route::get('/contact_us','ContactUsController@index')->name('contact_us');
+Route::post('/contact_us','ContactUsController@write_contact')->name('contact_us_post');
 
 Route::get('/search/name', 'SearchController@searchByName');
 Route::get('/search', 'SearchController@index')->name('search');
