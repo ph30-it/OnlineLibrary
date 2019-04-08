@@ -94,12 +94,19 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 		Route::delete('/deleted', 'Admin\OrderController@destroy');
 		Route::get('/book/{id}', 'Admin\OrderController@OrderByBook')->name('Order.Book');
 		Route::get('/user/{id}', 'Admin\OrderController@OrderByUser')->name('Order.User');
+		Route::get('/report/{id}', 'Admin\OrderController@report')->name('Order.Report');
 	});
 
 	Route::group(['prefix' => 'comment'], function(){
 		Route::get('/list', 'Admin\RatingController@index')->name('Comment.List');
 		Route::get('/search', 'Admin\RatingController@search')->name('Comment.Search');
 		Route::delete('/deleted', 'Admin\RatingController@destroy');
+	});
+
+	Route::group(['prefix' => 'lost-books'], function(){
+		Route::post('/add', 'Admin\LostBookController@store');
+		Route::get('/list', 'Admin\LostBookController@index')->name('LostBook.List');
+		Route::delete('/deleted', 'Admin\LostBookController@destroy');
 	});
 	
 });

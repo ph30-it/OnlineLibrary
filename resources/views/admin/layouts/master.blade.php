@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Lumino - Widgets</title>
+	<title>Online Library - Administrator</title>
 	<link href="{{ asset('admin_assets/css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('admin_assets/css/font-awesome.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('admin_assets/css/datepicker3.css') }}" rel="stylesheet">
@@ -92,7 +92,7 @@
 					</a></li>
 				</ul>
 			</li>
-			
+			<li><a href="{{ route('LostBook.List') }}"><em class="fa fa-book">&nbsp;</em> Lost Books</a></li>
 			<li><a href="{{ route('Comment.List') }}"><em class="fa fa-comment">&nbsp;</em> Comments</a></li>
 			<li><a href="{{route('logout')}}"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
