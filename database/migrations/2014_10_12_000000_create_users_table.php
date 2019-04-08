@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use DB;
 
 class CreateUsersTable extends Migration
 {
@@ -23,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('image')->nullable();
-            $table->dateTime('account_expiry_date');
+            $table->dateTime('account_expiry_date')->default(DB::raw('CURRENT_TIMESTAMP'));;
             $table->integer('roles')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
