@@ -97,6 +97,7 @@ class Cartcontroller extends controller
 			throw new Exception($e->getMessage());
 		}
 		session()->forget('cart');
+		session()->forget('total');
 		return redirect()->back()->with(['class' => 'success', 'message' => 'Your cart is submited, wait for admin check and go to library to get book !']);
 	}
 }
