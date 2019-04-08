@@ -1,4 +1,21 @@
 $(document).ready(function(){
+	// update-expiry
+	$('.update-expiry').on('click', function(){
+		var userID = $(this).attr('data-id');
+		alertify.prompt('Gia hạn tài khoản', 'Số tiền gia hạn', '0', function(evt, price){
+			if(price > 0){
+				$.post(api_domain+'/users/update-expiry', {_token:api_token, id:userID,price:price}, function(data){
+					if(data.error == 0){
+						alertify.success('Gia hạn thành công');
+					}
+					else{
+						alertify.error(data.message);
+					}
+				}, 'json');
+			}
+		}, function(){});
+	});
+
 	// add Category
 	$('.category-add').find('.btn-add').on('click', function(){
 		var categoryname = $('.category-add input:first').val();

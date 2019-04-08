@@ -68,6 +68,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 		Route::get('/search', 'Admin\UserController@search')->name('User.Search');
 		Route::get('/create', 'Admin\UserController@create')->name('User.Create');
 		Route::post('/create', 'Admin\UserController@store')->name('User.Store');
+		Route::post('/update-expiry', 'Admin\UserController@UpdateExpiry');
 	});
 
 	Route::group(['prefix' => 'category'], function(){

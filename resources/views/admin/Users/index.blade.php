@@ -37,13 +37,14 @@
                                 <th>Email</th>
                                 <th>Số Điện Thoại</th>
                                 <th>Chức Vụ</th>
+                                <th>Gia hạn</th>
                                 <th>Chi tiết/Xóa</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if($users->count() < 1)
                             <tr>
-                                <td colspan="6">Không có thành viên nào</td>
+                                <td colspan="7">Không có thành viên nào</td>
                             </tr>
                             @endif
                             @foreach($users as $user)
@@ -53,6 +54,7 @@
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->phone}}</td>
                                 <td>{{$user->roles == 1 ? 'Quản lý' : 'Thành viên'}}</td>
+                                <td><a href="javascript:void(0);" class="btn btn-sm btn-info update-expiry" data-id="{{$user->id}}">Gia hạn</a></td>
                                 <td>
                                     <a href="{{ route('User.Show', $user->id) }}" class="btn btn-sm btn-primary">Xem chi tiết</a>
                                     <a href="javascript:void(0);" class="btn btn-sm btn-danger user-remove" data-id="{{$user->id}}">Xóa</a>

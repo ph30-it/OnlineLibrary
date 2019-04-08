@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
 use App\Http\Requests\UsersRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UserRequest;
+use App\User;
+use App\Config;
+use Validator;
 use File;
 
 class UserController extends Controller
@@ -63,6 +65,31 @@ class UserController extends Controller
             }
     	}
     	return redirect()->route('User.List');
+    }
+
+    public function UpdateExpiry(request $request){
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'price' => 'integer|min:0'
+        ],[
+            'id.required' => 'Thành viên không được trống',
+            'price.min' => 'Số tiền gia hạn tối thiểu là 0đ'
+        ]);
+        if($validator->passes()){
+            $config = Config::where('name', 'price_per_day')->first();
+            $price_per_day = ($config !== null) ? $config->value : 0;
+            if($user = User::find($request->id)){
+                $days = $request->price/$price_per_day;
+                $user->account_expiry_date = date("Y-m-d H:i:s", strtotime('+'.$days.' day', strtotime($user->account_expiry_date)));
+                if($user->save()){
+                    return response()->json(['error' => 0, 'message' => 'Đã gia hạn thành công']);
+                }
+            }
+            return response()->json(['error' => 1, 'message' => 'Lỗi, thử lại sau']);
+        }
+        else{
+            return response()->json(['error' => 1, 'message' => $validator->errors()->first()]);
+        }
     }
 
     public function show($id){
