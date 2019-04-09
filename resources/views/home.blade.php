@@ -174,7 +174,11 @@
 						<div class="slider-nav" style="padding-top: 20px">
 							@foreach($top_rating as $rating)
 							<div class="item">
+								@if($rating->user->image !== null)
 								<img src="{{ asset($rating->user->image) }}" alt=""  class="center">
+								@else
+								<img src="{{ asset('images/default.png') }}" alt=""  class="center">
+								@endif
 							</div>
 							@endforeach
 						</div>
