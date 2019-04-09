@@ -36,7 +36,8 @@ class SocialAuthController extends Controller
         $user = Socialite::driver($provider)->user();
         $authUser = $this->findUser($user, $provider);
         if ($authUser == false) {
-        	return redirect()->route('register',['data' => $user]);//todo: 
+            $data = ['email' => $user->email,'firstname' => $user->user['family_name'],'lastname' => $user->user['given_name']];
+        	return redirect()->route('register',$data);
         }
         Auth::login($authUser, true);
         return Redirect::to(Session::get('pre_url'));

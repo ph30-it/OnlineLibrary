@@ -18,7 +18,7 @@
                     <labe>
                         <i class="required">(*)</i><i class="far fa-envelope"></i>E-Mail
                     </label>
-                    <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus placeholder="Your E-Mail">
+                    <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ (isset($data->email)) ? $data->email : old('email') }}" required autofocus placeholder="Your E-Mail">
 
                     @if ($errors->has('email'))
                     <span class="invalid-feedback" role="alert">
@@ -61,7 +61,7 @@
 
                 <div class="form-group">
                     <label><i class="required">(*)</i><i class="far fa-id-badge"></i>LastName</label>
-                    <input id="lastname" type="text" class="form-control" name="lastname" required placeholder="Your LastName" value="{{ old('lastname') }}">
+                    <input id="lastname" type="text" class="form-control" name="lastname" required placeholder="Your LastName" value="{{( isset($data->lastname)) ? $data->lastname :  old('lastname') }}">
                     @if ($errors->has('lastname'))
                     <span class="invalid-feedback" role="alert" style="display: block">
                         <strong>{{ $errors->first('lastname') }}</strong>
@@ -71,7 +71,7 @@
 
                 <div class="form-group">
                     <label><i class="required">(*)</i><i class="fas fa-id-badge"></i>FirstName</label>
-                    <input id="firstname" type="text" class="form-control" name="firstname" required placeholder="Your FirstName" value="{{ old('firstname') }}">
+                    <input id="firstname" type="text" class="form-control" name="firstname" required placeholder="Your FirstName" value="{{ (isset($data->firstname)) ? $data->firstname : old('firstname') }}">
                     @if ($errors->has('firstname'))
                     <span class="invalid-feedback" role="alert" style="display: block">
                         <strong>{{ $errors->first('firstname') }}</strong>
