@@ -98,13 +98,13 @@
 					$("#submit_napthe").val("Loadings...");
 				},
 				success:function(data){
-					console.log(data.code);
-					if(data.code == 0) {
-						$("#msg_napthe").html(data.msg);
+					if(data.status == 0) {
+						$("#fnapthe").reset();
+						$("#msg_napthe").html(data.message);
 						$("#message").show();
 					}
 					else {
-						$("#msg_napthe").html(data.msg);
+						$("#msg_napthe").html(data.message);
 						$("#message").show();
 					}
 					$("#submit_napthe").val("Submit");

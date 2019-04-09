@@ -29,3 +29,12 @@ input:focus:not([readonly]) {
   border: 1px solid #e74c3c;
   box-shadow: 0 0 0 1px #e74c3c;
 }
+
+.link{
+  font-size: 14px;
+  color: #222;  
+}
+.link:hover{
+  font-weight: bold;
+  color: #e74c3c;
+}

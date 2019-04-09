@@ -22,6 +22,9 @@ Route::get('/search/name', 'SearchController@searchByName');
 Route::get('/search', 'SearchController@index')->name('search');
 Route::post('/search', 'SearchController@searchbyajax')->name('search_ajax');
 
+Route::get('/auth/{provider}', 'SocialAuthController@redirectToProvider');
+Route::get('/auth/{provide}/callback', 'SocialAuthController@handleProviderCallback');
+
 Route::group(['middleware' => 'auth'], function(){
 	Route::delete('/delete_rating/','RatingController@destroy')->name('delete_rating');
 	Route::post('/add_rating','RatingController@Rating')->name('add_rating');

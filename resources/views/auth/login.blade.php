@@ -47,10 +47,13 @@
                 <div class="form-group form-button">
                     <button  type="submit" name="signin" id="signin" class="btn btn-default btn-cons">Login</button>
                     @if (Route::has('password.request'))
-                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                    <a class="btn btn-link link" href="{{ route('password.request') }}">
                         {{ __('Forgot Your Password?') }}
                     </a>
                     @endif
+                    <a class="btn btn-link link" href="{{ URL::to('auth/google') }}">
+                        <i class="fab fa-google"></i> Đăng nhập bằng Google
+                    </a>
                 </div>
             </form>
         </div>
