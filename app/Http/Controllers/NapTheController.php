@@ -41,9 +41,9 @@ class NapTheController extends Controller
 				'user_id' => Auth::user()->id
 			];
 			if($user->save()){
-				$data['message'] => "Nạp thẻ thành công mệnh giá " .  $result->info_card. " tài khoản gia hạn thành công !";
+				$data['message'] = "Nạp thẻ thành công mệnh giá " .  $result->info_card. " tài khoản gia hạn thành công !";
 			}else{
-				$data['message'] => "Nạp thẻ thành công mệnh giá " .  $result->info_card. " ,nhưng lỗi database chưa cộng ngày được , vui lòng liên hệ admin để được hỗ trợ !";
+				$data['message'] = "Nạp thẻ thành công mệnh giá " .  $result->info_card. " ,nhưng lỗi database chưa cộng ngày được , vui lòng liên hệ admin để được hỗ trợ !";
 			}
 			
 		}else{
