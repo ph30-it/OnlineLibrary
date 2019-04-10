@@ -6,6 +6,7 @@ Cart
 
 @section('custom-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/user.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/TimeCircles.css') }}">
 @endsection
 
 @section('page-content')
@@ -30,6 +31,16 @@ Cart
 		<div class="alert alert-success">
 			<p>When you read complete, go to library and order new books !</p>
 		</div>
+		@php
+		$date = Auth::user()->account_expiry_date;
+		@endphp
+		@if($date <= now())
+		<div class="alert alert-danger">
+			<p>Your account has been expiry, please go to library to give back book or enewed your account!</p>
+		</div>
+		@else
+		<div id="DateCountdown" data-date="{{$date}}" style="width: 100%;"></div>
+		@endif
 		<h4>Order number :{{ $order->id }}</h4>
 		<p>Date borrow : {{ $order->date_borrow }}</p>
 		<table id="cart" class="table table-hover table-condensed">
@@ -67,4 +78,38 @@ Cart
 		@endif
 	</div>
 </div>
+@endsection
+
+@section('custom-js')
+<script type="text/javascript" src="{{ asset('js/TimeCircles.js') }}"></script>
+<script>
+	$("#DateCountdown").TimeCircles({
+		"animation": "smooth",
+		"bg_width": 1.2,
+		"fg_width": 0.1,
+		"circle_bg_color": "#60686F",
+		"time": {
+			"Days": {
+				"text": "Days",
+				"color": "#FFCC66",
+				"show": true
+			},
+			"Hours": {
+				"text": "Hours",
+				"color": "#99CCFF",
+				"show": true
+			},
+			"Minutes": {
+				"text": "Minutes",
+				"color": "#BBFFBB",
+				"show": true
+			},
+			"Seconds": {
+				"text": "Seconds",
+				"color": "#FF9999",
+				"show": true
+			}
+		}
+	});
+</script>
 @endsection

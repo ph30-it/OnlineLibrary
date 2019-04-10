@@ -70,12 +70,6 @@ p{
 	color: white;
 }
 
-@media only screen and (max-width: 768px){
-	.header-top{
-		display: none;
-	}
-}
-
 .header-middle{
 	padding-bottom: 10px;
 }
@@ -265,4 +259,47 @@ footer .mt-3{
 }
 .search-results-dropdown a{
 	font-size: 120%;
+}
+.news_sletter{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 120px;
+}
+@media only screen and (max-width: 576px){
+	body{
+		font-size: 85%;	
+	}
+
+	.header-top{
+		display: none;
+	}
+
+	footer .title{
+		width: 100%;
+		padding-bottom: 10px;
+		margin-bottom: 10px;
+	}
+	.news_sletter{
+		height: 120px;
+	}
+}
+
+@media only screen and (min-width: 577) and (max-width: 769px){
+	body{
+		font-size: 90%;	
+	}
+
+	.header-top{
+		display: none;
+	}
+
+	footer .title{
+		width: 70%;
+		padding-bottom: 10px;
+		margin-bottom: 10px;
+	}
+	.news_sletter{
+		height: 150px;
+	}
 }

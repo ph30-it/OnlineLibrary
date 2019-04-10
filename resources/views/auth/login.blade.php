@@ -52,7 +52,7 @@
                     </a>
                     @endif
                     <a class="btn btn-link link" href="{{ URL::to('auth/google') }}">
-                        <i class="fab fa-google"></i> Đăng nhập bằng Google
+                        <i class="fab fa-google"></i> Login with Google Account
                     </a>
                 </div>
             </form>

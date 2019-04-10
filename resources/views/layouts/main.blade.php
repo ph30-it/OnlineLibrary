@@ -17,7 +17,7 @@
 <body>
 	<div class="header-top">
 		<div class="row justify-content-center">
-			<div class="col-md-9 col-11">
+			<div class="col-11 col-xl-9">
 				<div class="d-sm-flex justify-content-between">
 					<ul>
 						<li><a href="tel:+01432152323"><span class="align-middle"><i class="fas fa-mobile-alt"></i></span>+01432152323</a></li>
@@ -49,14 +49,15 @@
 			</div>
 		</div>
 	</div>
+
 	<div class="header-middle">
 		<div class="row justify-content-center">
-			<div class="col-md-9 col-11">
+			<div class="col-11 col-xl-10">
 				<div class="row">
-					<div class="col-md-3 col-2">
-						<a href="{{ route('home') }}"><img src="{{ asset('images/logo.png') }}" alt="" height="100px"></a>
+					<div class="col-12 col-xl-3">
+						<a href="{{ route('home') }}"><img src="{{ asset('images/logo.png') }}" alt="" height="100px" style="display:block;margin: 0 auto;"></a>
 					</div>
-					<div class="col-md-7 col-sm-7">
+					<div class="col-12 col-md-10 col-xl-6">
 						<div class="wrap">
 							<div class="search">
 								<form class="input-group" action="{{ route('search') }}" method="get">
@@ -68,7 +69,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-2 col-sm-3 cartt">
+					<div class="d-none d-md-block col-md-2 col-xl-3 cartt">
 						@if(!session()->get('cart'))
 						<a href="{{ route('cart') }}"><i class="fas fa-shopping-cart carticon"></i>Cart : <p class="cartnumber">0</p></a>
 						@else
@@ -82,7 +83,7 @@
 	<hr>
 	
 	<div class="row d-flex justify-content-center">
-		<div class="col-md-9 col-11">
+		<div class="col-11 col-xl-9">
 			@if(session('class_newsletter'))
 			<div class="alert alert-{{session('class_newsletter')}} alert-dismissible fade show">
 				<li>{{session('message')}}</li>
@@ -98,72 +99,57 @@
 	<!-- Footer -->
 	<footer class="page-footer font-small unique-color-dark">
 		<div style="background-color: #e74c3c;">
-			<div class="container">
-				<div class="row" style="display: flex;justify-content: center;align-items: center;height: 120px">
-					<div class="col-10">
-						<div class="row">
-							<div class="col-md-5 col-12">
-								<p class="h2 text-white">Sign up for our newsletter</p>
-							</div>
-							<div class="col-md-7">
-								<form class="input-group" method="post" action="{{ route('newsletter_subscribe') }}">
-									@csrf
-									<input type="email" class="form-control" name="email" value="Input your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-									<button class="btn btn-default" type="submit">Submit</button> 
-								</form>
-							</div>
+			<div class="row justify-content-center news_sletter">
+				<div class="col-11 col-md-8">
+					<div class="row">
+						<div class="col-12 col-md-5">
+							<p class="h3 text-white text-center">Sign up for our newsletter</p>
+						</div>
+						<div class="col-12 col-md-7">
+							<form class="input-group" method="post" action="{{ route('newsletter_subscribe') }}">
+								@csrf
+								<input type="email" class="form-control" name="email" value="Input your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
+								<button class="btn btn-default" type="submit">Submit</button> 
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="container text-center text-md-left mt-5">
-			<div class="row mt-3">
-				<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-					<h6 class="text-uppercase font-weight-bold title">Online Library</h6>
-					<p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
-					adipisicing elit.</p>
-				</div>
+		<div class="row justify-content-center mt-5 text-center text-md-left">
+			<div class="col-11 col-md-8 mb-4">
+				<div class="row justify-content-center">
+					<div class="col-12 col-md-6 col-xl-3 mx-auto mb-4">
+						<h6 class="text-uppercase font-weight-bold title">Online Library</h6>
+						<p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
+						adipisicing elit.</p>
+					</div>
 
-				<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-					<h6 class="text-uppercase font-weight-bold title">Products</h6>
-					<!-- <p>
-						<a href="#!">MDBootstrap</a>
-					</p>
-					<p>
-						<a href="#!">MDWordPress</a>
-					</p>
-					<p>
-						<a href="#!">BrandFlow</a>
-					</p>
-					<p>
-						<a href="#!">Bootstrap Angular</a>
-					</p> -->
-				</div>
+					<div class="d-none d-md-block col-md-6  col-xl-3 mx-auto mb-4">
+						<h6 class="text-uppercase font-weight-bold title"">Products</h6>
+					</div>
 
-				<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-					<h6 class="text-uppercase font-weight-bold title">Useful links</h6>
-					<p>
-						<a href="{{ route('account_profile') }}">Your Account</a>
-					</p>
-					<p>
-						<a href="{{ route('cart') }}">Cart</a>
-					</p>
-					<p>
-						<a href="{{ route('contact_us') }}">Contact Us</a>
-					</p>
-					<!--<p>
-						<a href="#!">Help</a> //TODO : about us
-					</p> -->
-				</div>
+					<div class="d-none d-md-block col-md-6 col-xl-3 mx-auto mb-4">
+						<h6 class="text-uppercase font-weight-bold title">Useful links</h6>
+						<p>
+							<a href="{{ route('account_profile') }}">Your Account</a>
+						</p>
+						<p>
+							<a href="{{ route('cart') }}">Cart</a>
+						</p>
+						<p>
+							<a href="{{ route('contact_us') }}">Contact Us</a>
+						</p>
+					</div>
 
-				<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-					<h6 class="text-uppercase font-weight-bold title">Contact</h6>
-					<p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-					<p><i class="fas fa-envelope mr-3"></i> info@example.com</p>
-					<p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-					<p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+					<div class="col-12 col-md-6 col-xl-3 mx-auto mb-4">
+						<h6 class="text-uppercase font-weight-bold title">Contact</h6>
+						<p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+						<p><i class="fas fa-envelope mr-3"></i> info@example.com</p>
+						<p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+						<p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+					</div>
 				</div>
 			</div>
 		</div>

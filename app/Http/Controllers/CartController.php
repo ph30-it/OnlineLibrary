@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Book;
 use App\Order;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class Cartcontroller extends controller
 {
@@ -84,7 +85,9 @@ class Cartcontroller extends controller
 			}
 			return redirect()->back()->with(['class' => 'warning', 'message' => $message]);
 		}
-
+		if(Auth::user()->account_expiry_date < now()){
+			return redirect()->back()->with(['class' => 'danger', 'message' => "Can't submit cart because your account has been expiry"]);
+		}
 		DB::beginTransaction();
 		try {
 			$order = DB::table('order')->insertGetId(['status' => 1,'price' => $total,'user_id' => \Auth::user()->id,'created_at' => now(),'updated_at' => now()]);
