@@ -474,6 +474,28 @@ $(document).ready(function(){
 			})
 		}, function(){});
 	});
+
+	$('.slider-remove').on('click', function(){
+		var id = $(this).attr('data-id');
+		alertify.confirm('Xác nhận', 'Bạn chắc chắn muốn xóa Slider này?', function(){
+			$.ajax({
+				url: api_domain+'/slider/deleted',
+				method: 'DELETE',
+				data: {
+					_token: api_token,
+					id: id
+				},
+				success: function(data){
+					if(data.error == 0){
+						$('[data-row='+id+']').remove();
+					}
+					else{
+						alertify.error(data.message);
+					}
+				}
+			})
+		}, function(){});
+	});
 });
 jQuery(document).delegate('a.add-record', 'click', function(e) {
 	e.preventDefault();    

@@ -133,5 +133,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 		Route::get('/search', 'Admin\LogcardController@search')->name('Transaction.Search');
 		Route::delete('/deleted', 'Admin\LogcardController@destroy');
 	});
+
+	Route::group(['prefix' => 'slider'], function(){
+		Route::get('/list', 'Admin\SliderController@index')->name('Slider.List');
+		Route::get('/create', 'Admin\SliderController@create')->name('Slider.Create');
+		Route::post('/create', 'Admin\SliderController@store')->name('Slider.Store');
+		Route::get('/{id}/edit', 'Admin\SliderController@edit')->name('Slider.Edit');
+		Route::post('/{id}/edit', 'Admin\SliderController@update')->name('Slider.Update');
+		Route::get('/search', 'Admin\SliderController@search')->name('Slider.Search');
+		Route::delete('/deleted', 'Admin\SliderController@destroy');
+	});
 });
 

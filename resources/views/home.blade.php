@@ -34,9 +34,15 @@
 				<div>
 					<img src="{{ asset($image->path) }}" class="slide-item">
 					<div class="carousel-caption d-none d-md-block">
+						@if($image->title != null)
 						<h5>{{ $image->title }}</h5>
+						@endif
+						@if($image->subtitle != null)
 						<p>{{ $image->subtitle }}</p>
-						<a href="{{ $image->link }}" class="btn btn-info" role="button">{{ $image->button_title}}</a>
+						@endif
+						@if($image->button_title != null)
+						<a href="{{ $image->link }}" class="btn btn-success" role="button">{{ $image->button_title}}</a>
+						@endif
 					</div>
 				</div>
 				@endforeach
