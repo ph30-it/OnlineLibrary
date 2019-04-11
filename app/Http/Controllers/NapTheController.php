@@ -59,4 +59,9 @@ class NapTheController extends Controller
 		log_nap_the::create($data);
 		return  response()->json($data);
 	}
+
+	public function napthe_log(){
+		$result = log_nap_the::where('user_id','=',Auth::user()->id)->get();
+		return view('user.lognapthe',['datas' => $result]);
+	}
 }

@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::post('/upload', 'UserController@upload')->name('upload');
 		Route::get('/napthe','NapTheController@index')->name('napthe');
 		Route::post('/napthe','NapTheController@napthe')->name('napthe');
+		Route::get('/napthe/log','NapTheController@napthe_log')->name('napthe_log');
 	});
 });
 

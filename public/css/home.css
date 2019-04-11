@@ -13,10 +13,11 @@
 }
 .category-list{
 	width: 100%;
-	max-height: 500px;
+}
+.list-group{
+	max-height: 450px;
 	overflow-y: auto;
 }
-
 .category-list li{
 	color: black;
 	transition: 1s;
