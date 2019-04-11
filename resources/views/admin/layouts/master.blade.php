@@ -43,6 +43,18 @@
 		<div class="divider"></div>
 		<ul class="nav menu">
 			<li><a href="{{ route('admin-home') }}"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li class="parent "><a data-toggle="collapse" href="#slider-item">
+				<em class="fa fa-image">&nbsp;</em> Slider <span data-toggle="collapse" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				</a>
+				<ul class="children collapse" id="slider-item">
+					<li><a class="" href="{{ route('Slider.Create') }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> Add New Slider
+					</a></li>
+					<li><a class="" href="{{ route('Slider.List') }}">
+						<span class="fa fa-arrow-right">&nbsp;</span> List Slider
+					</a></li>
+				</ul>
+			</li>
 			<li><a href="{{ route('Category.List') }}"><em class="fa fa-folder-open">&nbsp;</em> Category</a></li>
 			<li class="parent "><a data-toggle="collapse" href="#books-item">
 				<em class="fa fa-book">&nbsp;</em> Books <span data-toggle="collapse" class="icon pull-right"><em class="fa fa-plus"></em></span>
@@ -94,6 +106,8 @@
 			</li>
 			<li><a href="{{ route('LostBook.List') }}"><em class="fa fa-book">&nbsp;</em> Lost Books</a></li>
 			<li><a href="{{ route('Comment.List') }}"><em class="fa fa-comment">&nbsp;</em> Comments</a></li>
+			<li><a href="{{ route('Transaction.List') }}"><em class="fa fa-dollar">&nbsp;</em> Transaction</a></li>
+			<li><a href="{{ route('Contact.List') }}"><em class="fa fa-envelope-square">&nbsp;</em> Contact us</a></li>
 			<li><a href="{{route('logout')}}"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->

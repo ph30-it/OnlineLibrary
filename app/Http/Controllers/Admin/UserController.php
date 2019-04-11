@@ -113,17 +113,17 @@ class UserController extends Controller
     }
 
     public function search(request $request){
-        $users = User::WhereRaw("concat(firstname, ' ', lastname) like '%$request->key%' ")->orWhere('email', 'like', "$request->key")->orWhere('phone', 'like', "$request->key")->paginate(50);
+        $users = User::WhereRaw("concat(firstname, ' ', lastname) like '%$request->key%' ")->orWhere('email', 'like', "%$request->key%")->orWhere('phone', 'like', "%$request->key%")->paginate(50);
         return view('admin.users.index', compact('users'));
     }
 
     public function apiSearch(request $request){
         $key = ($request->q !== null) ? $request->q : '';
-        $users = User::WhereRaw("concat(firstname, ' ', lastname) like '%$request->key%' ")->orWhere('email', 'like', "$request->key")->orWhere('phone', 'like', "$request->key")->get();
+        $users = User::WhereRaw("concat(firstname, ' ', lastname) like '%$key%' ")->orWhere('email', 'like', "%$key%")->orWhere('phone', 'like', "%$key%")->get();
         return response()->json($users->map(function($item){
             $data = [
                 'id' => $item->id,
-                'text' => $item->firstname.' '.$item->firstname
+                'text' => $item->firstname.' '.$item->lastname.' - '.$item->email
             ];
             return $data;
         }));
