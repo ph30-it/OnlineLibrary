@@ -127,5 +127,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 		Route::get('/search', 'Admin\ContactUsController@search')->name('Contact.Search');
 	});
 	
+	Route::group(['prefix' => 'transaction'], function(){
+		Route::get('/list', 'Admin\LogcardController@index')->name('Transaction.List');
+		Route::get('/search', 'Admin\LogcardController@search')->name('Transaction.Search');
+		Route::delete('/deleted', 'Admin\LogcardController@destroy');
+	});
 });
 
