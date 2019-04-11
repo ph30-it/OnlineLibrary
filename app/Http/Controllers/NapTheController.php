@@ -18,7 +18,7 @@ class NapTheController extends Controller
 		$config = Config::where('name', 'price_per_day')->first()->value;
 		$merchant_id = Config::where('name','=','merchant_id')->first()->value;
 		$api_user = Config::where('name','=','api_user')->first()->value;
-		$api_password = Config::where('name','=','api_password')->first();
+		$api_password = Config::where('name','=','api_password')->first()->value;
 		$pin = $request->pin;
 		$seri = $request->seri;
 		$card_type = $request->name_card;
