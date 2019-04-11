@@ -119,6 +119,29 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 		Route::get('/list', 'Admin\LostBookController@index')->name('LostBook.List');
 		Route::delete('/deleted', 'Admin\LostBookController@destroy');
 	});
+
+	Route::group(['prefix' => 'contacts'], function(){
+		Route::get('/list', 'Admin\ContactUsController@index')->name('Contact.List');
+		Route::delete('/deleted', 'Admin\ContactUsController@destroy');
+		Route::get('/show', 'Admin\ContactUsController@show');
+		Route::post('/reply', 'Admin\ContactUsController@reply');
+		Route::get('/search', 'Admin\ContactUsController@search')->name('Contact.Search');
+	});
 	
+	Route::group(['prefix' => 'transaction'], function(){
+		Route::get('/list', 'Admin\LogcardController@index')->name('Transaction.List');
+		Route::get('/search', 'Admin\LogcardController@search')->name('Transaction.Search');
+		Route::delete('/deleted', 'Admin\LogcardController@destroy');
+	});
+
+	Route::group(['prefix' => 'slider'], function(){
+		Route::get('/list', 'Admin\SliderController@index')->name('Slider.List');
+		Route::get('/create', 'Admin\SliderController@create')->name('Slider.Create');
+		Route::post('/create', 'Admin\SliderController@store')->name('Slider.Store');
+		Route::get('/{id}/edit', 'Admin\SliderController@edit')->name('Slider.Edit');
+		Route::post('/{id}/edit', 'Admin\SliderController@update')->name('Slider.Update');
+		Route::get('/search', 'Admin\SliderController@search')->name('Slider.Search');
+		Route::delete('/deleted', 'Admin\SliderController@destroy');
+	});
 });
 
