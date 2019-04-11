@@ -20,9 +20,9 @@
 	</div>
 	<div class="col-9 infocontainer">
 		<div class="alert alert-info" id="message" style="display: none;">
-			<li>
+			<p>
 				<div class="label label-danger" id="msg_napthe"></div>
-			</li>
+			</p>
 		</div>
 		<div class="row justify-content-center">
 			<div class="col-7">

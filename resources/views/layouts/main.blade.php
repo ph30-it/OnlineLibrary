@@ -86,7 +86,7 @@
 		<div class="col-11 col-xl-9">
 			@if(session('class_newsletter'))
 			<div class="alert alert-{{session('class_newsletter')}} alert-dismissible fade show">
-				<li>{{session('message')}}</li>
+				<p>{{session('message')}}</p>
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -122,49 +122,59 @@
 				<div class="row justify-content-center">
 					<div class="col-12 col-md-6 col-xl-3 mx-auto mb-4">
 						<h6 class="text-uppercase font-weight-bold title">Online Library</h6>
-						<p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
-						adipisicing elit.</p>
+						<p>Welcome to the Online Library
+						A service dedicated to students of all learning community. We provide online resources, professional support and guidance to all our students whenever, and from wherever they have chosen to study..</p>
 					</div>
 
 					<div class="d-none d-md-block col-md-6  col-xl-3 mx-auto mb-4">
-						<h6 class="text-uppercase font-weight-bold title"">Products</h6>
-					</div>
+						<h6 class="text-uppercase font-weight-bold title"> My Account</h6>
+						<p>
+							<a href="{{ route('account_profile') }}"><i class="fa fa-angle-double-right"></i> Your Account</a>
+						</p>
+						<p>
+							<a href="{{ route('cart') }}"><i class="fa fa-angle-double-right"></i> Cart</a>
+						</p>
+						<p>
+							<a href="{{ route('order_history') }}"><i class="fa fa-angle-double-right"></i> Order History</a>
+						</p>
+					</p>
+					<p>
+						<a href="{{ route('napthe') }}"><i class="fa fa-angle-double-right"></i> Nap The</a>
+					</p>
+				</div>
 
-					<div class="d-none d-md-block col-md-6 col-xl-3 mx-auto mb-4">
-						<h6 class="text-uppercase font-weight-bold title">Useful links</h6>
-						<p>
-							<a href="{{ route('account_profile') }}">Your Account</a>
-						</p>
-						<p>
-							<a href="{{ route('cart') }}">Cart</a>
-						</p>
-						<p>
-							<a href="{{ route('contact_us') }}">Contact Us</a>
-						</p>
-					</div>
+				<div class="d-none d-md-block col-md-6 col-xl-3 mx-auto mb-4">
+					<h6 class="text-uppercase font-weight-bold title">Useful links</h6>
+					<p>
+						<a href="{{ route('contact_us') }}"><i class="fa fa-angle-double-right"></i> Contact Us</a>
+					</p>
+					<p>
+						<a href="{{ route('search') }}"><i class="fa fa-angle-double-right"></i> Search</a>
+					</p>
+				</div>
 
-					<div class="col-12 col-md-6 col-xl-3 mx-auto mb-4">
-						<h6 class="text-uppercase font-weight-bold title">Contact</h6>
-						<p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-						<p><i class="fas fa-envelope mr-3"></i> info@example.com</p>
-						<p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-						<p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-					</div>
+				<div class="col-12 col-md-6 col-xl-3 mx-auto mb-4">
+					<h6 class="text-uppercase font-weight-bold title">Contact</h6>
+					<p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+					<p><i class="fas fa-envelope mr-3"></i> info@example.com</p>
+					<p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+					<p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
 				</div>
 			</div>
 		</div>
-		<div class="footer-copyright text-center py-3">© 2019 Copyright:
-			<a href="{{ route('home') }}"> OnlineLibrary.com</a>
-		</div>
-	</footer>
+	</div>
+	<div class="footer-copyright text-center py-3">© 2019 Copyright:
+		<a href="{{ route('home') }}"> OnlineLibrary.com</a>
+	</div>
+</footer>
 
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-	<!-- Custom JS-->
-	<script type="text/javascript" src="{{ asset('js/search_main.js') }}"></script>
-	@yield('custom-js')	
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+<!-- Custom JS-->
+<script type="text/javascript" src="{{ asset('js/search_main.js') }}"></script>
+@yield('custom-js')	
 </body>
 </html>

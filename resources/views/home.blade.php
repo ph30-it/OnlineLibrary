@@ -14,8 +14,9 @@
 	<div class="row">
 		<div class="col-lg-3 col-sm-12col-12">
 			<div class="category-list">
+				<p class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Categories</p>
 				<ul class="list-group">
-					<li class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Categories</li>
+					
 					@foreach($categories as $category)
 					<a href="{{ route('category', $category->id) }}">
 						<li class="list-group-item cat-item">
@@ -29,13 +30,14 @@
 		</div>
 		<div class="col-lg-9 d-none d-lg-block">
 			<div class="picture-slider-container">
-				@foreach(glob('images/sliders/*.{jpg,png,gif}', GLOB_BRACE) as $file)
+				@foreach($ImageSlider as $image)
 				<div>
-					<img src="{{ asset($file) }}" class="slide-item">
-					<!-- <div class="carousel-caption d-none d-md-block">
-						<h5>MORE BOOK FOR YOU.</h5>
-						<p>Have Fun !</p>
-					</div> -->
+					<img src="{{ asset($image->path) }}" class="slide-item">
+					<div class="carousel-caption d-none d-md-block">
+						<h5>{{ $image->title }}</h5>
+						<p>{{ $image->subtitle }}</p>
+						<a href="{{ $image->link }}" class="btn btn-info" role="button">{{ $image->button_title}}</a>
+					</div>
 				</div>
 				@endforeach
 			</div>
