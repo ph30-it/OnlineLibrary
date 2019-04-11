@@ -94,6 +94,7 @@
 			</li>
 			<li><a href="{{ route('LostBook.List') }}"><em class="fa fa-book">&nbsp;</em> Lost Books</a></li>
 			<li><a href="{{ route('Comment.List') }}"><em class="fa fa-comment">&nbsp;</em> Comments</a></li>
+			<li><a href="{{ route('Contact.List') }}"><em class="fa fa-envelope-square">&nbsp;</em> Contact us</a></li>
 			<li><a href="{{route('logout')}}"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->

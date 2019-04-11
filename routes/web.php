@@ -118,6 +118,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 		Route::get('/list', 'Admin\LostBookController@index')->name('LostBook.List');
 		Route::delete('/deleted', 'Admin\LostBookController@destroy');
 	});
+
+	Route::group(['prefix' => 'contacts'], function(){
+		Route::get('/list', 'Admin\ContactUsController@index')->name('Contact.List');
+		Route::delete('/deleted', 'Admin\ContactUsController@destroy');
+		Route::get('/show', 'Admin\ContactUsController@show');
+		Route::post('/reply', 'Admin\ContactUsController@reply');
+		Route::get('/search', 'Admin\ContactUsController@search')->name('Contact.Search');
+	});
 	
 });
 

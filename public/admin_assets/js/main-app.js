@@ -387,6 +387,71 @@ $(document).ready(function(){
 		},function(){});
 	});
 
+	$('.contact-remove').on('click', function(){
+		var contactID = $(this).attr('data-id');
+		alertify.confirm('Xác nhận', 'Bạn chắc chắn muốn bỏ qua?', function(){
+			$.ajax({
+				url: api_domain+'/contacts/deleted',
+				method: 'DELETE',
+				data: {
+					_token: api_token,
+					id: contactID
+				},
+				success: function(data){
+					if(data.error == 0){
+						$('[data-row='+contactID+']').remove();
+					}
+					else{
+						alertify.error(data.message);
+					}
+				}
+			});
+		}, function(){});
+	});
+
+	$('.contact-reply').on('click', function(){
+		var contactID = $(this).attr('data-id');
+		$.get(api_domain+'/contacts/show', {id:contactID}, function(data){
+			var html = '<p>Người gửi: <b>'+data.data.name+'</b></p>'+
+				'<p>Email: <b>'+data.data.email+'</b></p>'+
+				'<p>Thời gian: <b>'+data.data.created_at+'</b></p>'+
+				'<div class="well">'+
+					'<p>'+data.data.message+'</p>'+
+				'</div>'+
+				'<textarea class="form-control message" rows="3" placeholder="Nhập câu trả lời..."></textarea><br/>'+
+				'<div class="pull-right">'+
+					'<a href="javascript:void(0);" class="btn btn-sm btn-primary reply-push" data-id="'+contactID+'">Send</a>'+
+				'</div>';
+				$('#reply-Contact').find('.panel-body').html(html);
+    			$('#reply-Contact').modal('show');
+		});
+	});
+
+	$('#reply-Contact').delegate('.reply-push', 'click', function(){
+		$(this).prop("disabled",true);
+		$(this).text("Đang gửi");
+		var contactID = $(this).attr('data-id');
+		var message = $('#reply-Contact').find('.message').val();
+		if(message !== ''){
+			$.post(api_domain+'/contacts/reply', {_token:api_token,id:contactID,message:message},function(data){
+				if(data.error == 0){
+					$('#reply-Contact').modal('hide');
+					$('[data-row='+contactID+']').remove();
+					alertify.success('Đã gửi phản hồi');
+				}
+				else{
+					$(this).prop("disabled",false);
+					$(this).text("Send");
+					alertify.error(data.message);
+				}
+			});
+		}
+		else{
+			$(this).prop("disabled",false);
+			$(this).text("Send");
+			alertify.error('Nội dung không được bỏ trống');
+		}
+	});
 });
 jQuery(document).delegate('a.add-record', 'click', function(e) {
 	e.preventDefault();    
