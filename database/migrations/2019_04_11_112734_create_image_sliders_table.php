@@ -16,10 +16,10 @@ class CreateImageSlidersTable extends Migration
         Schema::create('image_sliders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('path');
-            $table->string('title');
-            $table->string('subtitle');
-            $table->string('link');
-            $table->string('button_title');
+            $table->string('title')->nullable();
+            $table->string('subtitle')->nullable();
+            $table->string('link')->nullable();
+            $table->string('button_title')->nullable();
             $table->timestamps();
         });
     }
