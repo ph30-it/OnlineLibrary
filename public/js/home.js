@@ -1,11 +1,4 @@
 $(document).ready(function(){
-	$(".picture-slider-container").slick({
-		slidesToShow:1,
-		slidesToScroll:1,
-		autoplay: true,
-		autoplaySpeed: 1500,
-		arrows: false,
-	});
 	$(".book-list").slick({
 		slidesToShow:5,
 		slidesToScroll:2,

@@ -29,23 +29,45 @@
 			</div>
 		</div>
 		<div class="col-lg-9 d-none d-lg-block">
-			<div class="picture-slider-container">
-				@foreach($ImageSlider as $image)
-				<div>
-					<img src="{{ asset($image->path) }}" class="slide-item">
-					<div class="carousel-caption d-none d-md-block">
-						@if($image->title != null)
-						<h5>{{ $image->title }}</h5>
-						@endif
-						@if($image->subtitle != null)
-						<p>{{ $image->subtitle }}</p>
-						@endif
-						@if($image->button_title != null)
-						<a href="{{ $image->link }}" class="btn btn-success" role="button">{{ $image->button_title}}</a>
-						@endif
+			<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+				<ol class="carousel-indicators">
+					<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+					@for($i = 1;$i <= count($ImageSlider) - 1;$i++)
+					<li data-target="#carouselExampleIndicators" data-slide-to="{{$i}}"></li>
+					@endfor
+				</ol>
+				<div class="carousel-inner">
+					@php
+					$i = 0;
+					@endphp
+					@foreach($ImageSlider as $image)
+					<div class="carousel-item {{($i == 0) ? 'active' : ''}}">
+						<img class="d-block w-100" src="{{ asset($image->path) }}" alt="Second slide" height="500">
+						<div class="carousel-caption d-none d-md-block">
+							@if($image->title != null)
+							<h4>{{ $image->title }}</h4>
+							@endif
+							@if($image->subtitle != null)
+							<p>{{ $image->subtitle }}</p>
+							@endif
+							@if($image->button_title != null)
+							<a href="{{ $image->link }}" class="btn btn-success" role="button">{{ $image->button_title}}</a>
+							@endif
+						</div>
 					</div>
+					@php
+					$i = 1;
+					@endphp
+					@endforeach
 				</div>
-				@endforeach
+				<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
 			</div>
 		</div>
 	</div>
