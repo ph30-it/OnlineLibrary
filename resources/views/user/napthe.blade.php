@@ -99,7 +99,6 @@
 				},
 				success:function(data){
 					if(data.status == 0) {
-						$("#fnapthe").reset();
 						$("#msg_napthe").html(data.message);
 						$("#message").show();
 					}
