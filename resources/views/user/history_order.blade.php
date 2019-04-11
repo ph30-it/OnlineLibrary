@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('page-title','Edit Account')
+@section('page-title','History Order')
 
 @section('custom-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/user.css') }}">

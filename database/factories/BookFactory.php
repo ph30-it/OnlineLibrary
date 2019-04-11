@@ -5,9 +5,9 @@ use App\Book;
 use App\Category;
 
 $factory->define(Book::class, function (Faker $faker) {
-	$ids= Category::pluck('id'); 
+	$ids = Category::pluck('id');
 	return[
-		'name' => $faker->word,
+		'name' => $faker->word . ' ' . $faker->numberBetween($min = 0, $max = 9999),
 		'img' => '/images/default.jpg',
 		'author' => $faker->name,
 		'published_year' => $faker->year($max = 'now'),

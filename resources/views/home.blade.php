@@ -14,8 +14,9 @@
 	<div class="row">
 		<div class="col-lg-3 col-sm-12col-12">
 			<div class="category-list">
+				<p class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Categories</p>
 				<ul class="list-group">
-					<li class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Categories</li>
+					
 					@foreach($categories as $category)
 					<a href="{{ route('category', $category->id) }}">
 						<li class="list-group-item cat-item">

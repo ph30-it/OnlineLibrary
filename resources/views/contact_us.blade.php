@@ -57,7 +57,7 @@
 <div class="container contact-form">
 	@if(session('class_contact'))
 	<div class="alert alert-{{session('class_contact')}} alert-dismissible fade show">
-		<li>{{session('message')}}</li>
+		<p>{{session('message')}}</p>
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>

@@ -11,10 +11,10 @@
 @section('page-content')
 <div class="product-container">
 	<div class="row justify-content-center">
-		<div class="d-none d-md-block d-sm-3">
+		<div class="col-3">
 			<div class="category-list">
+				<p class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Categories</p>
 				<ul class="list-group">
-					<li class="list-group-item cat-item text-left" style="background-color: #e74c3c;color: white">Categories</li>
 					@foreach($categories as $category)
 					<a href="{{ route('category', $category->id) }}">
 						<li class="list-group-item cat-item">
@@ -53,7 +53,7 @@
 				</form>
 			</div>
 		</div>
-		<div class="col-11 col-sm-9">
+		<div class="col-9">
 			<div>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">
