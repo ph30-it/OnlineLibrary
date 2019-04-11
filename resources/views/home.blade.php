@@ -30,13 +30,14 @@
 		</div>
 		<div class="col-lg-9 d-none d-lg-block">
 			<div class="picture-slider-container">
-				@foreach(glob('images/sliders/*.{jpg,png,gif}', GLOB_BRACE) as $file)
+				@foreach($ImageSlider as $image)
 				<div>
-					<img src="{{ asset($file) }}" class="slide-item">
-					<!-- <div class="carousel-caption d-none d-md-block">
-						<h5>MORE BOOK FOR YOU.</h5>
-						<p>Have Fun !</p>
-					</div> -->
+					<img src="{{ asset($image->path) }}" class="slide-item">
+					<div class="carousel-caption d-none d-md-block">
+						<h5>{{ $image->title }}</h5>
+						<p>{{ $image->subtitle }}</p>
+						<a href="{{ $image->link }}" class="btn btn-info" role="button">{{ $image->button_title}}</a>
+					</div>
 				</div>
 				@endforeach
 			</div>

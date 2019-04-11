@@ -7,6 +7,7 @@ use App\Category;
 use App\Book;
 use App\Rating;
 use App\User;
+use App\ImageSlider;
 use DB;
 class HomeController extends Controller
 {
@@ -56,12 +57,13 @@ class HomeController extends Controller
         }])->take(10)->get();
 
         $top_rating = Rating::with('book')->whereNotNull('comment')->orderByDesc('star_number')->take(7)->get();
-
+        $ImageSlider = ImageSlider::all();
         return view('home', [
             'categories' => $cate,
             'databooks' => $booksData,
             'top_user' => $top_user,
             'top_rating' => $top_rating,
+            'ImageSlider' => $ImageSlider
         ]);
     }
 }
