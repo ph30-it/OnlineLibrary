@@ -34,7 +34,11 @@
 		</div>
 		<div class="col-5">
 			<div class="book-cover">
+				@if($book->img == null)
+				<img src="{{ asset('images/default.jpg') }}">
+				@else
 				<img src="{{$book->img}}">
+				@endif
 			</div>
 		</div>
 		<div class="col-7">

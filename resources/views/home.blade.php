@@ -97,7 +97,13 @@
 							@foreach ($books as $book)
 							<div class="book-item">
 								<figure class="book-cover">
-									<a href="{{ route('book',$book->id) }}"><img src="{{ $book->img }}" alt="Book Image" hr></a>
+									<a href="{{ route('book',$book->id) }}">
+										@if($book->img == null)
+										<img src="{{ asset('images/default.jpg') }}"  alt="Book Image" hr>
+										@else
+										<img src="{{$book->img}}" alt="Book Image" hr>
+										@endif
+									</a>
 								</figure>
 
 								<div class="book-info">

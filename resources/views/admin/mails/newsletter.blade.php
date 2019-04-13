@@ -50,8 +50,12 @@
 <div class="container middle">
 	<h1>Online Library</h1>
 	<div class="book-new">
-		<img class="thumb" src="{{asset("uploads/$img")}}">
-		<a href="{{url("book/$id")}}" class="btn-buy">Xem ngay</a>
+		@if($img == null)
+		<img class="thumb" src="http://localhost:8000/images/default.jpg">
+		@else
+		<img class="thumb" src="http://localhost:8000/{{ $img }}">
+		@endif
+		<a href="http://localhost:8000/book/{{$id}}" class="btn-buy">Xem ngay</a>
 		<p class="title">{{$name}}</p>
 	</div>
 	<div class="footer">
